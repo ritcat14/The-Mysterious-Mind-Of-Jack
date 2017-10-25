@@ -39,8 +39,8 @@ public class Main implements Runnable {
     
     public static void main(String[] args) {
         // Main method
-        Main m = new Main();
-        m.start();
+        Main m = new Main(); // Create the game object
+        m.start(); // Start the main thread
     }
     
 }
