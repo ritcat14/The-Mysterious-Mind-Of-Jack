@@ -1,15 +1,12 @@
 import graphics.GameCanvas;
-
-import java.awt.Canvas;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 
 /*
  * The main game class. This is where the application begins.
  */
 
-public class Main extends Canvas implements Runnable {
+public class Main implements Runnable {
     
     private Thread t;
     private boolean running = false;
@@ -40,7 +37,7 @@ public class Main extends Canvas implements Runnable {
     }
     
     public void render() { // Draw the game
-        canvas.draw();
+    
     }
     
     @Override
@@ -57,7 +54,7 @@ public class Main extends Canvas implements Runnable {
         m.frame = new JFrame("Game");
         m.frame.setResizable(false);
         m.frame.setUndecorated(true);
-        m.frame.add(m);
+        m.frame.add(m.canvas);
         
         m.frame.pack();
         m.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
