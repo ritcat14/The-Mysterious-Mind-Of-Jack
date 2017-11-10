@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 /*
  * The main game class. This is where the application begins.
+ * 
  */
 
 public class Main implements Runnable {

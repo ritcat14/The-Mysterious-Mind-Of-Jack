@@ -15,6 +15,8 @@ package entities;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 public class Entity {
     
     protected int x, y, width, height;
@@ -25,7 +27,20 @@ public class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.image = getImage(file);
     }
+    
+    public BufferedImage getImage(String path) {
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(Entity.class.getResourceAsStream(path + ".png"));
+		} catch (Exception e) {
+			System.err.println("Cannot read file: " + path);
+			System.err.println(Thread.currentThread().getName() + ":");
+			e.printStackTrace();
+		}
+		return image;
+	}
 
     public Entity(int x, int y, int width, int height, BufferedImage image) {
         this.x = x;

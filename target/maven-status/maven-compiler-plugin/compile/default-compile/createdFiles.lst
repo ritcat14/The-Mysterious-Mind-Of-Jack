@@ -1,3 +1,4 @@
 graphics/GameCanvas.class
 Main.class
 entities/Entity.class
+entities/Enemy.class
