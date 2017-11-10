@@ -1,5 +1,9 @@
 import graphics.GameCanvas;
+import handler.StateHandler;
+import handler.StateHandler.States;
+
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 /*
@@ -18,12 +22,14 @@ public class Main implements Runnable {
     
     public Main() {
         canvas = new GameCanvas(WIDTH, HEIGHT);
+        new StateHandler(WIDTH, HEIGHT);
     }
     
     public synchronized void start() {
         running = true;
         t = new Thread(this, "Main");
         t.start();
+        StateHandler.changeState(States.START);
     }
     
     public synchronized void stop() {
@@ -34,11 +40,11 @@ public class Main implements Runnable {
     }
     
     public void update() { // Update game logic
-        
+        StateHandler.update();
     }
     
     public void render() { // Draw the game
-    
+        canvas.draw();
     }
     
     @Override

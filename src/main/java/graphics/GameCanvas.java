@@ -1,5 +1,7 @@
 package graphics;
 
+import handler.StateHandler;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,8 +17,7 @@ public class GameCanvas extends Canvas {
 	private int[] pixels;
 	
 	public GameCanvas(int width, int height) {
-
-        currentFrame = new BufferedImage(width, height,BufferedImage.TYPE_INT_RGB);
+        currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt)currentFrame.getRaster().getDataBuffer()).getData();
         
 		setPreferredSize(new Dimension(width, height));
@@ -32,15 +33,18 @@ public class GameCanvas extends Canvas {
 		requestFocus();
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
-            createBufferStrategy(4);
+            createBufferStrategy(3);
             return;
         }
         for (int i = 0; i < getWidth() * getHeight(); i++)
             pixels[i] = 0;
 
-        Graphics g = currentFrame.getGraphics();        
+        Graphics g = currentFrame.getGraphics();
+        
         g.setColor(Color.CYAN);
         g.fillRect(0, 0, getWidth(), getHeight());
+        
+        StateHandler.render(g);
         
         bs.getDrawGraphics().drawImage(currentFrame, 0, 0, getWidth(), getHeight(), null);
         
