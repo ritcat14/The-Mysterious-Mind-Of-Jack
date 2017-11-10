@@ -1,10 +1,10 @@
-package main.events;
+package events;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import main.events.types.KeyPressedEvent;
-import main.events.types.KeyReleasedEvent;
+import events.types.KeyPressedEvent;
+import events.types.KeyReleasedEvent;
 
 public class Keyboard implements KeyListener {
   

@@ -1,4 +1,4 @@
-package main.events;
+package events;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -6,10 +6,10 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.SwingUtilities;
 
-import main.events.types.MouseDraggedEvent;
-import main.events.types.MouseMovedEvent;
-import main.events.types.MousePressedEvent;
-import main.events.types.MouseReleasedEvent;
+import events.types.MouseDraggedEvent;
+import events.types.MouseMovedEvent;
+import events.types.MousePressedEvent;
+import events.types.MouseReleasedEvent;
 
 public class Mouse implements MouseListener, MouseMotionListener {
 	private static int mouseX = -1, mouseY = -1, mouseB = -1;

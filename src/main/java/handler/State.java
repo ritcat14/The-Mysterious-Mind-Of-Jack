@@ -2,13 +2,12 @@ package handler;
 
 import java.awt.Graphics;
 
-public abstract class State {
-    
-    public State(){
-        
-    }
+import events.EventListener;
+
+public abstract class State implements EventListener {
     
     public abstract void update();
     
     public abstract void render(Graphics g);
+    
 }

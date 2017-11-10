@@ -1,4 +1,4 @@
-package main.events;
+package events;
 
 public class EventDispatcher {
 

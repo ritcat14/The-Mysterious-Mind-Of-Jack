@@ -19,10 +19,11 @@ public class Main implements Runnable {
     private GameCanvas canvas;
     private int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
     private int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+    private StateHandler sh;
     
     public Main() {
-        canvas = new GameCanvas(WIDTH, HEIGHT);
-        new StateHandler(WIDTH, HEIGHT);
+        sh = new StateHandler(WIDTH, HEIGHT);
+        canvas = new GameCanvas(sh, WIDTH, HEIGHT);
     }
     
     public synchronized void start() {

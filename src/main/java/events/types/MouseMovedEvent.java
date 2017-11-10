@@ -1,6 +1,6 @@
-package main.events.types;
+package events.types;
 
-import main.events.Event;
+import events.Event;
 
 public class MouseMovedEvent extends Event {
 

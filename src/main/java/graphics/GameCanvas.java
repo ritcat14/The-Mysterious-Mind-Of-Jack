@@ -10,17 +10,26 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import events.Keyboard;
+import events.Mouse;
+
 public class GameCanvas extends Canvas {
 
 	private static final long serialVersionUID = 1L;
 	private static BufferedImage currentFrame;
 	private int[] pixels;
 	
-	public GameCanvas(int width, int height) {
+	public GameCanvas(StateHandler sh, int width, int height) {
         currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt)currentFrame.getRaster().getDataBuffer()).getData();
         
 		setPreferredSize(new Dimension(width, height));
+		
+		Mouse m = new Mouse(sh);
+		
+		addMouseListener(m);
+		addMouseMotionListener(m);
+		addKeyListener(new Keyboard(sh));		
 		
 		requestFocus();
 	}

@@ -2,9 +2,11 @@ package handler;
 
 import java.awt.Graphics;
 
+import events.Event;
+import events.EventListener;
 import states.*;
 
-public class StateHandler {
+public class StateHandler implements EventListener {
     
     public static int WIDTH = 0;
     public static int HEIGHT = 0;
@@ -40,5 +42,10 @@ public class StateHandler {
     
     public static void render(Graphics g){
         if (currentState != null) currentState.render(g);
+    }
+
+    @Override
+    public void onEvent(Event event) {
+        if (currentState != null) currentState.onEvent(event);
     }
 }
