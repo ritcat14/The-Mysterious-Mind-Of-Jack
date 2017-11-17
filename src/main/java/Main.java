@@ -50,10 +50,41 @@ public class Main implements Runnable {
     
     @Override
     public void run() {
-        while(running) { // Game loop
-            update();
-            render();
+        long lastTimeU = System.nanoTime();
+        long lastTimeF = System.nanoTime();
+        long timer = System.currentTimeMillis();
+        final double nsu = 1000000000.0 / 120.0;
+        final double nsf = 1000000000.0 / 60.0;
+        double deltaU = 0;
+        double deltaF = 0;
+        int frames = 0;
+        int updates = 0;
+        while (running) {
+            long nowU = System.nanoTime();
+            deltaU += (nowU - lastTimeU) / nsu;
+            lastTimeU = nowU;
+            while (deltaU >= 1) {
+                update();
+                updates++;
+                deltaU--;
+            }
+            long nowF = System.nanoTime();
+            deltaF += (nowF - lastTimeF) / nsf;
+            lastTimeF = nowF;
+            while (deltaF >= 1) {
+                render();
+                frames++;
+                deltaF--;
+            }
+            
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                frame.setTitle("FPS: " + frames + " , UPS: " + updates);
+                frames = 0;
+                updates = 0;
+            }
         }
+        stop();
     }
     
     public static void main(String[] args) {

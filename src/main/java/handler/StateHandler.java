@@ -11,8 +11,11 @@ public class StateHandler implements EventListener {
     public static int WIDTH = 0;
     public static int HEIGHT = 0;
     
+    private static int chapter = 0;
+    private static int cutscene = -1;
+    
     public static enum States {
-        START, GAME, PAUSE;
+        START, GAME, PAUSE, OPTIONS, CUTSCENE;        
     }
     
     private static State currentState;
@@ -28,12 +31,28 @@ public class StateHandler implements EventListener {
                 currentState = new Start();
                 break;
             case GAME:
-                currentState = new Game();
+                currentState = new Game(chapter);
                 break;
             case PAUSE:
-                
+                currentState = new Pause();
                 break;
+            case OPTIONS:
+                currentState = new Options();
+                break;
+            case CUTSCENE:
+            currentState = new Cutscene(cutscene);
+            break;
         }
+    }
+    
+    public static void nextChapter() {
+        chapter++;
+        changeState(States.GAME);
+    }
+    
+    public static void nextScene() {
+        cutscene++;
+        changeState(States.CUTSCENE);
     }
     
     public static void update(){

@@ -50,7 +50,7 @@ public class GameCanvas extends Canvas {
 
         Graphics g = currentFrame.getGraphics();
         
-        g.setColor(Color.CYAN);
+        g.setColor(Color.GRAY);
         g.fillRect(0, 0, getWidth(), getHeight());
         
         StateHandler.render(g);
