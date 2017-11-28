@@ -8,7 +8,7 @@ import events.Event;
 public class Chapter3 extends Chapter {
 
     public Chapter3() {
-        super(new Map());
+        super(new Map(3));
     }
 
     @Override

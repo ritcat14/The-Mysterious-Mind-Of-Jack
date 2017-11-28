@@ -8,17 +8,17 @@ import events.Event;
 public class Chapter1 extends Chapter {
 
     public Chapter1() {
-        super(new Map());
+        super(new Map(1));
     }
 
     @Override
     public void onEvent(Event event) {
-        
+        map.onEvent(event);
     }
 
     @Override
     public void update() {
-        
+        super.update();
     }
 
     @Override

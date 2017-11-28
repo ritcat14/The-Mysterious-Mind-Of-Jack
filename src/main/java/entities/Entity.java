@@ -12,66 +12,61 @@
 
 package entities;
 
+import handler.Tools;
+import handler.Vector;
+
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
-public class Entity {
+public abstract class Entity {
     
-    protected int x, y, width, height;
+    protected int width, height;
     protected BufferedImage image;
+    protected Vector pos;
     
-    public Entity(int x, int y, int width, int height, String file) {
-        this.x = x;
-        this.y = y;
+    public Entity(Vector pos, int width, int height, String file) {
         this.width = width;
         this.height = height;
-        this.image = getImage(file);
+        this.image = Tools.getImage(file);
+        this.pos = pos;
     }
-    
-    public BufferedImage getImage(String path) {
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(Entity.class.getResourceAsStream(path + ".png"));
-		} catch (Exception e) {
-			System.err.println("Cannot read file: " + path);
-			System.err.println(Thread.currentThread().getName() + ":");
-			e.printStackTrace();
-		}
-		return image;
-	}
 
-    public Entity(int x, int y, int width, int height, BufferedImage image) {
-        this.x = x;
-        this.y = y;
+    public Entity(Vector pos, int width, int height, BufferedImage image) {
+        this.pos = pos;
         this.width = width;
         this.height = height;
         this.image = image;
     }
     
-    public Entity(int x, int y, BufferedImage image) {
-        this.x = x;
-        this.y = y;
+    public Entity(Vector pos, BufferedImage image) {
+        this.pos = pos;
         this.width = image.getWidth();
         this.height = image.getHeight();
         this.image = image;
     }
     
+    public Entity(Vector pos, String file) {
+        this.image = Tools.getImage(file);
+        this.pos = pos;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
+    }
+    
+    public abstract void update();
+    
+    public abstract void render(Graphics g);
+    
     public int getWidth() { return width; }
     
     public int getHeight() { return height; }
     
-    public int getX() { return x; }
-    
-    public int getY() { return y; }
+    public Vector getPosition() { return pos; }
     
     public BufferedImage getImage() { return image; }
     
-    public void setX(int x) { this.x = x; }
+    public void setPosition(Vector pos) { this.pos = pos; }
     
-    public void setY(int y) { this.y = y; }
-    
-    public Rectangle getBounds() { return new Rectangle(x, y, width, height); } // Used primarily for collision detection
+    public Rectangle getBounds() { return new Rectangle((int)pos.x, (int)pos.y, width, height); } // Used primarily for collision detection
     
 }
