@@ -1,6 +1,7 @@
 package core;
 
 import handler.Tools;
+import handler.Vector;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,7 @@ import events.EventHandler;
 import events.EventListener;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
+import core.tiles.Tile;
 
 public class Map implements EventListener {
     
@@ -26,7 +28,7 @@ public class Map implements EventListener {
     
     public Map(int chapter) { // The ID of the chapter is required for accessing the map data
         Decoder decoder = new Decoder();
-        decoder.decode(chapter);
+        decoder.decode(this, chapter);
         tiles = decoder.getTiles();
         player = decoder.getPlayer();
         entities = decoder.getEntities();
@@ -69,6 +71,19 @@ public class Map implements EventListener {
                 return player.keyReleased((KeyReleasedEvent)event);
             }
         });
+    }
+    
+    public ArrayList<Tile> getTiles() {
+        return tiles;
+    }
+    
+    public Tile isSolid(Vector position) {
+        for (Tile t : tiles) {
+            if (t.getBounds().contains(position.getPoint())) {
+                return t;
+            }
+        }
+        return null;
     }
     
 }

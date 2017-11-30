@@ -1,5 +1,6 @@
 core/Decoder.class
 states/Pause.class
+core/tiles/Floor.class
 states/chapters/Chapter3.class
 events/types/MouseButtonEvent.class
 events/types/MousePressedEvent.class
@@ -11,9 +12,11 @@ states/Start$2.class
 core/Map$2.class
 states/chapters/Chapter.class
 entities/Entity.class
+core/tiles/Tile.class
 states/State.class
 states/Cutscene$1.class
 core/Map$1.class
+entities/Mob.class
 handler/Vector.class
 states/Cutscene.class
 events/EventHandler.class
@@ -30,7 +33,6 @@ Main.class
 events/Event$Type.class
 states/Options.class
 states/chapters/Chapter1.class
-core/Tile.class
 handler/Tools.class
 handler/StateHandler$States.class
 handler/StateHandler$1.class

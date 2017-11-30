@@ -6,6 +6,7 @@ import handler.Tools;
 import handler.Vector;
 import entities.Entity;
 import entities.Player;
+import core.tiles.*;
 
 public class Decoder {
     
@@ -15,7 +16,7 @@ public class Decoder {
     private ArrayList<Tile> tiles;
     private ArrayList<Entity> entities;
     
-    public void decode(int chapterID){
+    public void decode(Map map, int chapterID){
         entities = new ArrayList<Entity>();
         String file = "/chapters/chapter" + chapterID + "/map.gme";
         tiles = new ArrayList<Tile>();
@@ -30,12 +31,21 @@ public class Decoder {
                 j++;
             }
         }
-        for (int x = 0; x < mapWidth; x++) {
-            for (int y = 0; y < 10; y++) {
-                if (tileData[x + y * TILE_SIZE] != 0) tiles.add(new Tile(new Vector(x * TILE_SIZE, y * TILE_SIZE), tileData[x + y * TILE_SIZE], chapterID));
+        int k = 0;
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < mapWidth; x++) {
+                if (tileData[k] != 0) {
+                    int i = tileData[k];
+                    switch (i) {
+                        case 1:
+                            tiles.add(new Floor(new Vector(x * TILE_SIZE, y * TILE_SIZE), chapterID));
+                            break;
+                    }
+                }
+                k++;
             }
         }
-        player = new Player(new Vector(40, 6 * 32), "/player.png");
+        player = new Player(map, new Vector(40, 6 * 32), "/player.png");
     }
     
     public ArrayList<Tile> getTiles() {

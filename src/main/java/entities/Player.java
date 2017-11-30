@@ -6,37 +6,17 @@ import handler.Vector;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import core.Map;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
 
-public class Player extends Entity {
+public class Player extends Mob {
     
     private boolean up, down, left, right;
     private int xScroll = 0;
-    private boolean jumping = false;
-    private Vector speed = new Vector(2, 2);
-    private long t0 = 0;
-    private Vector pos0;
-    private Vector speed0;
-    private double speedJump = 3;
-    private double g = -9.81;
 
-    public Player(Vector pos, String file) {
-        super(pos, file);
-    }
-    
-    public void jump() { // implementation of gravity
-        if (!jumping) {
-            t0 = currentTime();
-            pos0=pos;
-            speed0 = speed;
-            speed0.y += speedJump;
-            jumping = true;
-        }
-    }
-    
-    private long currentTime() {
-        return System.currentTimeMillis() / 1000;
+    public Player(Map map, Vector pos, String file) {
+        super(map, pos, file);
     }
     
     public void crouch() {
@@ -49,28 +29,23 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        if (left) pos.x -= speed.x;
-        if (right) pos.x += speed.x; 
-        long t;
-        if (jumping) {
-            t = currentTime()-t0;
-            pos.y = pos0.y + speed0.y*t - g*t*t;
-            pos.x = pos0.x + speed0.x*t;
+        super.update();
+        if (up) jump();
+        if (left) {
+            speed.x -= 0.02;
+        } else if (speed.x < 0) speed.x += 0.02;
         
-            // And test that the character is not on the ground again.
-            if (pos.y + 32 > StateHandler.HEIGHT - 64) {
-                pos.y = StateHandler.HEIGHT - 96;
-                jumping = false;
-            }
-        }
+        if (right) {
+            speed.x += 0.02;
+        }else if (speed.x > 0) speed.x -= 0.02;
         
         if (pos.x < 20) {
             xScroll += 20 - pos.x;
             pos.x = 20;
         }
-        if (pos.x > StateHandler.WIDTH - 20) {
-            xScroll -= (pos.x - (StateHandler.WIDTH - 20));
-            pos.x = StateHandler.WIDTH - 20;
+        if (pos.x + width > StateHandler.WIDTH - 20) {
+            xScroll -= ((pos.x + width) - (StateHandler.WIDTH - 20));
+            pos.x = StateHandler.WIDTH - 20 - width;
         }
     }
 

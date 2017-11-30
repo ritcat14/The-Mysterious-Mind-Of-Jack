@@ -68,7 +68,7 @@ public class Cutscene extends State {
     public void render(Graphics g) {
         g.drawImage(currentFrame, 0, 0, null);
         g.setColor(Color.WHITE);
-        g.drawString("Press Space to skip", StateHandler.WIDTH - 100, StateHandler.HEIGHT - 50);
+        g.drawString("Press Space to skip", StateHandler.WIDTH - 150, StateHandler.HEIGHT - 50);
     }
     
 }

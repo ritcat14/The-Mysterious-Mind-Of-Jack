@@ -24,6 +24,7 @@ public abstract class Entity {
     protected int width, height;
     protected BufferedImage image;
     protected Vector pos;
+    protected Vector speed = new Vector();
     
     public Entity(Vector pos, int width, int height, String file) {
         this.width = width;
