@@ -14,6 +14,7 @@ public class Player extends Mob {
     
     private boolean up, down, left, right;
     private int xScroll = 0;
+    private double speed = 0.04;
 
     public Player(Map map, Vector pos, String file) {
         super(map, pos, file);
@@ -32,12 +33,12 @@ public class Player extends Mob {
         super.update();
         if (up) jump();
         if (left) {
-            speed.x -= 0.02;
-        } else if (speed.x < 0) speed.x += 0.02;
+            velocity.x -= speed;
+        } else if (velocity.x < 0) velocity.x += speed;
         
         if (right) {
-            speed.x += 0.02;
-        }else if (speed.x > 0) speed.x -= 0.02;
+            velocity.x += speed;
+        }else if (velocity.x > 0) velocity.x -= speed;
         
         if (pos.x < 20) {
             xScroll += 20 - pos.x;
@@ -52,6 +53,7 @@ public class Player extends Mob {
     @Override
     public void render(Graphics g) {
         g.drawImage(image, (int)(pos.x), (int)(pos.y), null);
+        super.render(g);
     }
     
     public boolean keyReleased(KeyReleasedEvent e) {

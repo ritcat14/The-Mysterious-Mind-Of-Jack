@@ -1,8 +1,7 @@
 /*
  * The Entity class. Used for defining in game objects.
  * 
- * @param x - the x location of the entity
- * @param y - the y location of the entity
+ * @param pos - the position (Vector) of the entity
  * @param width - the width of the entity
  * @param height - the height of the entity
  * @param image - the image (skin) of the entitiy
@@ -15,6 +14,7 @@ package entities;
 import handler.Tools;
 import handler.Vector;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -24,7 +24,7 @@ public abstract class Entity {
     protected int width, height;
     protected BufferedImage image;
     protected Vector pos;
-    protected Vector speed = new Vector();
+    protected Vector velocity = new Vector();
     
     public Entity(Vector pos, int width, int height, String file) {
         this.width = width;
@@ -56,7 +56,13 @@ public abstract class Entity {
     
     public abstract void update();
     
-    public abstract void render(Graphics g);
+    public void render(Graphics g) {
+        g.setColor(Color.BLUE);
+        g.drawRect(getRight().x, getRight().y, getRight().width, getRight().height);
+        g.drawRect(getLeft().x, getLeft().y, getLeft().width, getLeft().height);
+        g.drawRect(getTop().x, getTop().y, getTop().width, getTop().height);
+        g.drawRect(getBottom().x, getBottom().y, getBottom().width, getBottom().height);
+    }
     
     public int getWidth() { return width; }
     
@@ -69,5 +75,12 @@ public abstract class Entity {
     public void setPosition(Vector pos) { this.pos = pos; }
     
     public Rectangle getBounds() { return new Rectangle((int)pos.x, (int)pos.y, width, height); } // Used primarily for collision detection
+    
+    public Rectangle getRight() { return new Rectangle((int)(pos.x + (width - 3)), (int)(pos.y + 3), 3, height - 6);}
+    public Rectangle getLeft() { return new Rectangle((int)pos.x, (int)pos.y + 3, 3, height - 6);}
+    
+    public Rectangle getBottom() { return new Rectangle((int)pos.x + 3, (int)(pos.y + (height - 3)), width - 6, 3);}
+    
+    public Rectangle getTop() { return new Rectangle((int)pos.x + 3, (int)pos.y, width - 6, 3);}
     
 }

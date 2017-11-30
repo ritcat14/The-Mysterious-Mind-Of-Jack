@@ -7,6 +7,7 @@ import events.Event;
 import events.types.MousePressedEvent;
 import graphics.GuiButton;
 import graphics.GuiPanel;
+import handler.SoundHandler;
 import handler.StateHandler;
 import handler.StateHandler.States;
 
@@ -15,6 +16,7 @@ public class Start extends State {
     private GuiPanel mainPanel;
     
     public Start() {
+        SoundHandler.playMP3("intro.mp3");
         mainPanel = new GuiPanel(50, 50, StateHandler.WIDTH - 100, StateHandler.HEIGHT - 100, Color.GRAY);
         mainPanel.add(new GuiButton((StateHandler.WIDTH/2) - 100, 300, 200, 100, Color.DARK_GRAY, "START") {
             @Override

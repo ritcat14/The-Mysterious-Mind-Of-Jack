@@ -1,7 +1,5 @@
 package entities;
 
-import java.awt.Rectangle;
-
 import core.Map;
 import core.tiles.Tile;
 import handler.Vector;
@@ -19,20 +17,21 @@ public abstract class Mob extends Entity {
     public Mob(Map map, Vector pos, String file) {
         super(pos, file);
         this.map = map;
-        gravity = 0.02;
-        maxY = 3;
-        maxX = 3;
+        gravity = 0.04;
+        maxY = 1.5;
+        maxX = 1.5;
     }
     
     protected boolean hasHorizontalCollision() {
         for (int i = 0; i < map.getTiles().size(); i++) {
             Tile t = map.getTiles().get(i);
-            if (getBounds().intersects(t.getLeft()) && speed.x < 0) {
-                speed.x = 0;
+            if (!t.isSolid()) continue;
+            if (getLeft().intersects(t.getRight()) && velocity.x < 0) {
+                velocity.x = 0;
                 return true;
             }
-            if (getBounds().intersects(t.getRight()) && speed.x > 0) {
-                speed.x = 0;
+            if (getRight().intersects(t.getLeft()) && velocity.x > 0) {
+                velocity.x = 0;
                 return true;
             }
         }
@@ -42,14 +41,15 @@ public abstract class Mob extends Entity {
     protected boolean hasVerticalCollision() {
         for (int i = 0; i < map.getTiles().size(); i++) {
             Tile t = map.getTiles().get(i);
-            if (getBounds().intersects(t.getTop()) && speed.y > 0) {
-                speed.y = 0;
+            if (!t.isSolid()) continue;
+            if (getBounds().intersects(t.getTop()) && velocity.y > 0) {
+                velocity.y = 0;
                 canJump = true;
                 falling = false;
                 return true;
             } else falling = true;
-            if (getBounds().intersects(t.getBottom()) && speed.y < 0) {
-                speed.y = 0;
+            if (getTop().intersects(t.getBottom()) && velocity.y < 0) {
+                velocity.y = 0;
                 canJump = false;
                 falling = true;
                 return true;
@@ -59,24 +59,24 @@ public abstract class Mob extends Entity {
     }
     
     protected void move() {
-        if (speed.x > maxX) speed.x = maxX;
-        if (speed.x < -maxX) speed.x = -maxX;
-        if (!hasHorizontalCollision()) pos.add(new Vector(speed.x, 0));
-        if (!hasVerticalCollision()) pos.add(new Vector(0, speed.y));
+        if (velocity.x > maxX) velocity.x = maxX;
+        if (velocity.x < -maxX) velocity.x = -maxX;
+        if (!hasHorizontalCollision()) pos.add(new Vector(velocity.x, 0));
+        if (!hasVerticalCollision()) pos.add(new Vector(0, velocity.y));
     }
     
     protected void fall() {
         if (falling) {
-            speed.y += gravity;
-            if (speed.y > maxY) {
-                speed.y = maxY;
+            velocity.y += gravity;
+            if (velocity.y > maxY) {
+                velocity.y = maxY;
             }
         }
     }
     
     protected void jump() {
         if (canJump) {
-            speed.y -= 3;
+            velocity.y -= 3;
             canJump = false;
         }
     }
