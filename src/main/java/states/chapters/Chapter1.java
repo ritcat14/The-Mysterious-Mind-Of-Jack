@@ -4,11 +4,13 @@ import java.awt.Graphics;
 
 import core.Map;
 import events.Event;
+import handler.SoundHandler;
 
 public class Chapter1 extends Chapter {
 
     public Chapter1() {
         super(new Map(1));
+        SoundHandler.playMP3("intro.mp3");
     }
 
     @Override
