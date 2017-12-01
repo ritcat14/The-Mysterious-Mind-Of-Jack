@@ -20,6 +20,7 @@ public class GameCanvas extends Canvas {
 	private int[] pixels;
 	
 	public GameCanvas(StateHandler sh, int width, int height) {
+	    System.setProperty("sun.java2d.opengl", "true");
         currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt)currentFrame.getRaster().getDataBuffer()).getData();
         

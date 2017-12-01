@@ -16,7 +16,7 @@ public class Start extends State {
     private GuiPanel mainPanel;
     
     public Start() {
-        SoundHandler.playMP3("intro.mp3");
+        SoundHandler.loop("intro");
         mainPanel = new GuiPanel(50, 50, StateHandler.WIDTH - 100, StateHandler.HEIGHT - 100, Color.GRAY);
         mainPanel.add(new GuiButton((StateHandler.WIDTH/2) - 100, 300, 200, 100, Color.DARK_GRAY, "START") {
             @Override

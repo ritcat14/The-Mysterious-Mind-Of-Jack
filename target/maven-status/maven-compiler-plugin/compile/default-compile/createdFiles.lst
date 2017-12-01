@@ -15,6 +15,7 @@ entities/Entity.class
 core/tiles/Tile.class
 states/State.class
 states/Cutscene$1.class
+handler/SoundHandler$1.class
 core/Map$1.class
 entities/Mob.class
 handler/Vector.class
