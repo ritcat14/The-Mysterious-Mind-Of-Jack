@@ -23,7 +23,6 @@ public class Map implements EventListener {
     private ArrayList<Tile> tiles;
     private ArrayList<Entity> entities;
     private BufferedImage background;
-    private int xScroll = 0;
     private Player player;
     
     public Map(int chapter) { // The ID of the chapter is required for accessing the map data
@@ -33,11 +32,10 @@ public class Map implements EventListener {
         player = decoder.getPlayer();
         entities = decoder.getEntities();
         background = Tools.getImage("/chapters/chapter" + chapter + "/background.png");
-        entities.add(player);
     }
     
     public void update() {
-        this.xScroll = player.getxScroll();
+        player.update();
         for (Tile t : tiles) {
             t.update();
         }
@@ -47,11 +45,14 @@ public class Map implements EventListener {
     }
     
     public void render(Graphics g) {
-        g.drawImage(background, xScroll, 0, null);
+        g.drawImage(background, player.getXScroll(), 0, null);
         for (Tile t : tiles) {
+            t.setScroll(player.getXScroll(), 0);
             t.render(g);
         }
+        player.render(g);
         for (Entity e : entities) {
+            e.setScroll(player.getXScroll(), 0);
             e.render(g);
         }
     }

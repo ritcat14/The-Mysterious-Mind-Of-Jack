@@ -1,8 +1,10 @@
 package entities;
 
+import graphics.GuiBar;
 import handler.StateHandler;
 import handler.Vector;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
@@ -13,19 +15,18 @@ import events.types.KeyReleasedEvent;
 public class Player extends Mob {
     
     private boolean up, down, left, right;
-    private int xScroll = 0;
     private double speed = 0.04;
+    private GuiBar healthBar;
+    
+    private final int EDGE_DISTANCE = 100;
 
     public Player(Map map, Vector pos, String file) {
         super(map, pos, file);
+        healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 30), Color.GREEN, 200);
     }
     
     public void crouch() {
         
-    }
-    
-    public int getxScroll() {
-        return xScroll;
     }
 
     @Override
@@ -40,20 +41,21 @@ public class Player extends Mob {
             velocity.x += speed;
         }else if (velocity.x > 0) velocity.x -= speed;
         
-        if (pos.x < 20) {
-            xScroll += 20 - pos.x;
-            pos.x = 20;
+        if (pos.x < EDGE_DISTANCE) {
+            xScroll += EDGE_DISTANCE - pos.x;
+            pos.x = EDGE_DISTANCE + 1;
         }
-        if (pos.x + width > StateHandler.WIDTH - 20) {
-            xScroll -= ((pos.x + width) - (StateHandler.WIDTH - 20));
-            pos.x = StateHandler.WIDTH - 20 - width;
+        if (pos.x + width > StateHandler.WIDTH - EDGE_DISTANCE) {
+            xScroll -= ((pos.x + width) - (StateHandler.WIDTH - EDGE_DISTANCE));
+            pos.x = StateHandler.WIDTH - EDGE_DISTANCE - width - 1;
         }
+        healthBar.update();
     }
-
+    
     @Override
     public void render(Graphics g) {
-        g.drawImage(image, (int)(pos.x), (int)(pos.y), null);
         super.render(g);
+        healthBar.render(g);
     }
     
     public boolean keyReleased(KeyReleasedEvent e) {

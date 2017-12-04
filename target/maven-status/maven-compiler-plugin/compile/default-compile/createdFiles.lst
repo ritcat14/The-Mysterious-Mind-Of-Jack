@@ -6,8 +6,8 @@ events/types/MouseButtonEvent.class
 events/types/MousePressedEvent.class
 graphics/GuiPanel.class
 events/types/MouseDraggedEvent.class
-states/Options$1.class
 graphics/GuiButton$3.class
+states/Options$1.class
 states/Start$2.class
 core/Map$2.class
 states/chapters/Chapter.class
@@ -42,6 +42,7 @@ states/Game.class
 states/chapters/Chapter5.class
 events/Mouse.class
 events/types/KeyReleasedEvent.class
+graphics/GuiBar.class
 graphics/GuiButton$2.class
 graphics/GameCanvas.class
 events/Keyboard.class

@@ -27,8 +27,4 @@ public class Tile extends Entity {
         
     }
     
-    public void render(Graphics g) {
-        g.drawImage(image, (int)pos.x, (int)pos.y, width, height, null);
-    }
-    
 }

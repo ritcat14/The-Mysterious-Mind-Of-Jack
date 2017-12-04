@@ -76,7 +76,7 @@ public abstract class Mob extends Entity {
     
     protected void jump() {
         if (canJump) {
-            velocity.y -= 3;
+            velocity.y -= 3.5;
             canJump = false;
         }
     }

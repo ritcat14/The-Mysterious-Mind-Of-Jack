@@ -1,5 +1,7 @@
 package graphics;
 
+import handler.Vector;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -12,27 +14,29 @@ public class GuiPanel extends GuiComponent implements EventListener {
     protected Color colour = Color.BLACK;
     protected BufferedImage image;
     
-    public GuiPanel(int x, int y, int width, int height, Color col) {
-        super(x, y, width, height);
+    public GuiPanel(Vector pos, Vector size, Color col) {
+        super(pos, size);
         this.colour = col;
     }
     
-    public GuiPanel(int x, int y, int width, int height, BufferedImage img) {
-        super(x, y, width, height);
+    public GuiPanel(Vector pos, Vector size, BufferedImage img) {
+        super(pos, size);
         this.image = img;
     }
     
-    public GuiPanel(int x, int y, BufferedImage img) {
-        super(x, y, img.getWidth(), img.getHeight());
+    public GuiPanel(Vector pos, BufferedImage img) {
+        super(pos, new Vector(img.getWidth(), img.getHeight()));
         this.image = img;
     }
     
     @Override
     public void render(Graphics g) {
-        g.setColor(colour);
-        g.fillRect(x, y, width, height);
+        if (colour != null) {
+            g.setColor(colour);
+            g.fillRect((int)pos.x, (int)pos.y, (int)size.x, (int)size.y);
+        }
         if (image != null) {
-            g.drawImage(image, x, y, width, height, null);
+            g.drawImage(image, (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, null);
         }
         super.render(g);
     }

@@ -1,5 +1,7 @@
 package graphics;
 
+import handler.Vector;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -7,16 +9,16 @@ import java.awt.Graphics;
 public class GuiLabel extends GuiComponent {
 
     private String text;
-    private Font font = new Font("Times New Java", Font.PLAIN, 15);
+    public static Font font = new Font("Times New Java", Font.PLAIN, 15);
     private Color colour = Color.BLACK;
 
-    public GuiLabel(int x, int y, int width, int height, String text, Color col) {
-        super(x, y, width, height);
+    public GuiLabel(Vector pos, Vector size, String text, Color col) {
+        super(pos, size);
         this.colour = col;
     }
 
-    public GuiLabel(int x, int y, int width, int height, String text, Color col, Font font) {
-        super(x, y, width, height);
+    public GuiLabel(Vector pos, Vector size, String text, Color col, Font font) {
+        super(pos, size);
         this.font = font;
         this.colour = col;
     }
@@ -33,7 +35,7 @@ public class GuiLabel extends GuiComponent {
     public void render(Graphics g) {
         g.setFont(font);
         g.setColor(colour);
-        g.drawString(text, x, y);
+        g.drawString(text, (int)pos.x, (int)pos.y);
         super.render(g);
     }
     

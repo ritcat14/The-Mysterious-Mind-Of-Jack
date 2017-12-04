@@ -25,6 +25,7 @@ public abstract class Entity {
     protected BufferedImage image;
     protected Vector pos;
     protected Vector velocity = new Vector();
+    protected int xScroll, yScroll;
     
     public Entity(Vector pos, int width, int height, String file) {
         this.width = width;
@@ -54,9 +55,19 @@ public abstract class Entity {
         this.height = image.getHeight();
     }
     
+    public void setScroll(int xScroll, int yScroll) {
+        this.xScroll = xScroll;
+        this.yScroll = yScroll;
+    }
+    
     public abstract void update();
     
     public void render(Graphics g) {
+        pos.x += xScroll;
+        pos.y += yScroll;
+        xScroll = 0;
+        yScroll = 0;
+        g.drawImage(image, (int)(pos.x), (int)(pos.y), width, height, null);
         g.setColor(Color.BLUE);
         g.drawRect(getRight().x, getRight().y, getRight().width, getRight().height);
         g.drawRect(getLeft().x, getLeft().y, getLeft().width, getLeft().height);
@@ -77,10 +88,15 @@ public abstract class Entity {
     public Rectangle getBounds() { return new Rectangle((int)pos.x, (int)pos.y, width, height); } // Used primarily for collision detection
     
     public Rectangle getRight() { return new Rectangle((int)(pos.x + (width - 3)), (int)(pos.y + 3), 3, height - 6);}
+    
     public Rectangle getLeft() { return new Rectangle((int)pos.x, (int)pos.y + 3, 3, height - 6);}
     
     public Rectangle getBottom() { return new Rectangle((int)pos.x + 3, (int)(pos.y + (height - 3)), width - 6, 3);}
     
     public Rectangle getTop() { return new Rectangle((int)pos.x + 3, (int)pos.y, width - 6, 3);}
+    
+    public int getXScroll() { return xScroll;}
+    
+    public int getYScroll() { return yScroll;}
     
 }

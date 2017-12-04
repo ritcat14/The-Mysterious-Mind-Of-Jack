@@ -1,12 +1,15 @@
 package graphics;
 
+import handler.Vector;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class GuiComponent {
     
-    protected int x, y, width, height;
+    protected Vector pos;
+    protected Vector size;
     
     protected ArrayList<GuiComponent> components = new ArrayList<GuiComponent>();
     protected ArrayList<GuiComponent> componentsToAdd = new ArrayList<GuiComponent>();
@@ -15,15 +18,13 @@ public class GuiComponent {
     private boolean isUpdating = false;
     private boolean isRendering = false;
     
-    public GuiComponent(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public GuiComponent(Vector pos, Vector size) {
+        this.pos = pos;
+        this.size = size;
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y);
     }
     
     public void add(GuiComponent c) {
@@ -59,5 +60,13 @@ public class GuiComponent {
         }
         isRendering = false;
     }
+    
+    public void setX(double x) { this.pos.x = x; }
+    
+    public void setY(double y) { this.pos.y = y; }
+    
+    public void setWidth(double w) { this.size.x = w; }
+    
+    public void setHeight(double h) { this.pos.y = h; }
     
 }
