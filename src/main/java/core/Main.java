@@ -1,27 +1,38 @@
+package core;
 import graphics.GameCanvas;
+import handler.DataHandler;
 import handler.StateHandler;
 import handler.StateHandler.States;
+import handler.Tools;
 
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import entities.Player;
 
 /*
  * The main game class. This is where the application begins.
  * 
  */
 
-public class Main implements Runnable {
+public class Main implements Runnable, WindowListener {
 
+    public static JFrame       frame;
     private Thread       t;
     private boolean      running = false;
-    private JFrame       frame;
     private GameCanvas   canvas;
     private int          WIDTH   = Toolkit.getDefaultToolkit().getScreenSize().width;
     private int          HEIGHT  = Toolkit.getDefaultToolkit().getScreenSize().height;
     private StateHandler sh;
+    private int time = 0;
+    private Player player;
 
     public Main() {
+    	DataHandler.init();
         sh = new StateHandler(WIDTH, HEIGHT);
         canvas = new GameCanvas(sh, WIDTH, HEIGHT);
     }
@@ -42,7 +53,14 @@ public class Main implements Runnable {
     }
 
     public void update() { // Update game logic
+    	time++;
+    	if (time >= Integer.MAX_VALUE - 1) time = 0;
+    	this.player = StateHandler.player;
         StateHandler.update();
+        if ((time % Tools.getSecs(30) ==  0) && (player != null)) {
+        	System.out.println("Saving data");
+        	DataHandler.savePlayer(player);
+        }
     }
 
     public void render() { // Draw the game
@@ -88,18 +106,47 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         // Main method
         Main m = new Main(); // Create the game object
-        m.frame = new JFrame("Game");
-        m.frame.setResizable(false);
-        m.frame.setUndecorated(true);
-        m.frame.add(m.canvas);
+        frame = new JFrame("Game");
+        frame.setResizable(false);
+        frame.setUndecorated(true);
+        frame.add(m.canvas);
+ 
+        frame.pack();
+        frame.addWindowListener(m);
 
-        m.frame.pack();
-        m.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        m.frame.setLocationRelativeTo(null);
-        m.frame.setVisible(true);
-        m.frame.requestFocus();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.requestFocus();
         m.start();
     }
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {Player player = StateHandler.player;
+		if (player != null && StateHandler.getState().equals(States.GAME) || StateHandler.getState().equals(States.PAUSE)) {
+			int confirm = JOptionPane.showOptionDialog(null, "Would you like to save?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			if (confirm == 0) {
+				DataHandler.savePlayer(player);
+			}
+		}
+		System.exit(0);
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {}
 
 }

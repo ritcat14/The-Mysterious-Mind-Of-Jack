@@ -3,6 +3,7 @@ package core;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import handler.DataHandler;
 import handler.Tools;
 import handler.Vector;
 import entities.Entity;
@@ -18,6 +19,7 @@ public class Decoder {
     private ArrayList<Entity> entities;
     
     public void decode(Map map, int chapterID){
+    	System.out.println(chapterID);
         entities = new ArrayList<Entity>();
         String file = "/chapters/chapter" + chapterID + "/map.gme";
         tiles = new ArrayList<Tile>();
@@ -49,7 +51,17 @@ public class Decoder {
                 k++;
             }
         }
-        player = new Player(map, new Vector(40, 6 * 32), "/player.png");
+        
+        String[] data = DataHandler.readFile(DataHandler.dir + "//player.gme");
+        double x = Double.parseDouble(data[0]);
+        double y = Double.parseDouble(data[1]);
+        int health = Integer.parseInt(data[2]);
+        int xScroll = Integer.parseInt(data[3]);
+        int yScroll = Integer.parseInt(data[4]);
+        
+        player = new Player(map, new Vector(x, y), "/player.png");
+        player.setScroll(xScroll, yScroll);
+        player.setHealth(health);
     }
     
     public ArrayList<Tile> getTiles() {

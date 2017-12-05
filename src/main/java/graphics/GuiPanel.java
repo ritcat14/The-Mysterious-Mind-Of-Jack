@@ -40,6 +40,10 @@ public class GuiPanel extends GuiComponent implements EventListener {
         }
         super.render(g);
     }
+    
+    public void setImage(BufferedImage image) {
+		this.image = image;
+	}
 
     @Override
     public void onEvent(Event event) {

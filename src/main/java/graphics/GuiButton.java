@@ -21,16 +21,21 @@ public class GuiButton extends GuiPanel implements EventListener {
 
 	protected String text = "";
 	protected Color textColour = Color.BLACK;
-	protected Font font = GuiLabel.font;
+	protected Font font = GuiLabel.standard;
 	protected MediaPlayer soundPlayer;
 	protected boolean playedSound = false;
 	protected Vector textOffset = new Vector();
 
-	public GuiButton(Vector pos, Vector size, Color c, String text, Font font, Color... textCol) {
+	public GuiButton(Vector pos, Vector size, Color c, String text, Font font) {
 		super(pos, size, c);
 		this.text = text;
-		this.textColour = textCol[0];
+		this.textColour = Color.WHITE;
 		this.font = font;
+	}
+
+	public GuiButton(Vector pos, Vector size, Color c, String text) {
+		super(pos, size, c);
+		this.text = text;
 	}
 	
 	public GuiButton setTextOffset(double x, double y) {
@@ -57,12 +62,14 @@ public class GuiButton extends GuiPanel implements EventListener {
 
 	public boolean mouseMoved(MouseMovedEvent e) {
 		if (getBounds().contains(new Point(e.getX(), e.getY()))) {
+			textColour = new Color(200, 200, 200);
 		    if (!playedSound) {
 		        soundPlayer = SoundHandler.play("blip");
 		        playedSound = true;
 	        }
 		    return true;
 		}
+		textColour = Color.WHITE;
 		playedSound = false;
 		return false;
 	}

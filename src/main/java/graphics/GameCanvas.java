@@ -1,6 +1,8 @@
 package graphics;
 
 import handler.StateHandler;
+import handler.Tools;
+import states.Game;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -8,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 import events.Keyboard;
 import events.Mouse;
@@ -17,12 +18,13 @@ public class GameCanvas extends Canvas {
 
 	private static final long serialVersionUID = 1L;
 	private static BufferedImage currentFrame;
-	private int[] pixels;
+	private static Graphics g;
+	private boolean isBlurred = false;
+	private static BufferedImage blurred;
 	
 	public GameCanvas(StateHandler sh, int width, int height) {
 	    System.setProperty("sun.java2d.opengl", "true");
         currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        pixels = ((DataBufferInt)currentFrame.getRaster().getDataBuffer()).getData();
         
 		setPreferredSize(new Dimension(width, height));
 		
@@ -35,8 +37,12 @@ public class GameCanvas extends Canvas {
 		requestFocus();
 	}
 	
-	public static BufferedImage getFrame() {
-		return currentFrame;
+	public static BufferedImage getBlurredFrame() {
+		return blurred;
+	}
+	
+	public static Graphics getG() {
+		return g;
 	}
 	
 	public void draw() {
@@ -46,13 +52,19 @@ public class GameCanvas extends Canvas {
             createBufferStrategy(3);
             return;
         }
-        for (int i = 0; i < getWidth() * getHeight(); i++)
-            pixels[i] = 0;
 
         Graphics g = currentFrame.getGraphics();
-        
+        GameCanvas.g = g;
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, getWidth(), getHeight());
+        
+        if (Game.paused) {
+        	if (!isBlurred) {
+	        	StateHandler.pausedGame.render(g);
+	        	blurred = Tools.blur(currentFrame);
+	        	isBlurred = true;
+        	}
+        } else isBlurred = false;
         
         StateHandler.render(g);
         

@@ -4,11 +4,12 @@ import java.awt.Graphics;
 
 import core.Map;
 import events.Event;
+import states.Game;
 
 public class Chapter1 extends Chapter {
 
-    public Chapter1() {
-        super(new Map(1));
+    public Chapter1(Game game) {
+        super(new Map(game, 1));
     }
 
     @Override

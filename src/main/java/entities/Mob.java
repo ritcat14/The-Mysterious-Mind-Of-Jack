@@ -11,6 +11,9 @@ public abstract class Mob extends Entity {
     protected double gravity;
     protected double maxY;
     protected double maxX;
+    protected int jumpCount;
+    
+    protected int health = 200;
     
     protected Map map;
 
@@ -18,7 +21,7 @@ public abstract class Mob extends Entity {
         super(pos, file);
         this.map = map;
         gravity = 0.04;
-        maxY = 1.5;
+        maxY = 3;
         maxX = 1.5;
     }
     
@@ -83,8 +86,17 @@ public abstract class Mob extends Entity {
 
     @Override
     public void update() {
+        if(health < 0) health = 0;
         move();
         fall();
     }
+    
+    public int getHealth() {
+		return health;
+	}
+    
+    public void setHealth(int health) {
+		this.health = health;
+	}
     
 }

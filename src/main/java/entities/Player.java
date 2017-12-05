@@ -13,8 +13,8 @@ import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
 
 public class Player extends Mob {
-    
-    private boolean up, down, left, right;
+	
+    private boolean up, left, right;
     private double speed = 0.04;
     private GuiBar healthBar;
     
@@ -22,7 +22,7 @@ public class Player extends Mob {
 
     public Player(Map map, Vector pos, String file) {
         super(map, pos, file);
-        healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 30), Color.GREEN, 200);
+        healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health);
     }
     
     public void crouch() {
@@ -32,6 +32,7 @@ public class Player extends Mob {
     @Override
     public void update() {
         super.update();
+        healthBar.setValue(health);
         if (up) jump();
         if (left) {
             velocity.x -= speed;
@@ -52,6 +53,12 @@ public class Player extends Mob {
         healthBar.update();
     }
     
+    public void pause() {
+    	left = false;
+    	right = false;
+    	up = false;
+    }
+    
     @Override
     public void render(Graphics g) {
         super.render(g);
@@ -70,7 +77,6 @@ public class Player extends Mob {
             left = false;
             return true;
             case KeyEvent.VK_S:
-            down = false;
             return true;
             case KeyEvent.VK_D:
             right = false;
@@ -82,20 +88,19 @@ public class Player extends Mob {
     public boolean keyPressed(KeyPressedEvent e) {
         switch(e.getKey()) {
             case KeyEvent.VK_W:
-            up = true;
-            return true;
+	            up = true;
+	            return true;
             case KeyEvent.VK_SPACE:
-            up = true;
-            return true;
+	            up = true;
+	            return true;
             case KeyEvent.VK_A:
-            left = true;
-            return true;
+	            left = true;
+	            return true;
             case KeyEvent.VK_S:
-            down = true;
-            return true;
+	            return true;
             case KeyEvent.VK_D:
-            right = true;
-            return true;
+	            right = true;
+	            return true;
         }
         return false;
     }

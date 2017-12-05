@@ -3,8 +3,6 @@ package core.tiles;
 import handler.Tools;
 import handler.Vector;
 
-import java.awt.Graphics;
-
 import entities.Entity;
 
 public class Tile extends Entity {

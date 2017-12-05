@@ -9,7 +9,8 @@ import java.awt.Graphics;
 public class GuiLabel extends GuiComponent {
 
     private String text;
-    public static Font font = new Font("Times New Java", Font.PLAIN, 15);
+    public static Font standard = new Font("Times New Java", Font.PLAIN, 15);
+    private Font font = GuiLabel.standard;
     private Color colour = Color.BLACK;
 
     public GuiLabel(Vector pos, Vector size, String text, Color col) {
@@ -21,6 +22,7 @@ public class GuiLabel extends GuiComponent {
         super(pos, size);
         this.font = font;
         this.colour = col;
+        this.text = text;
     }
     
     public String getText() {

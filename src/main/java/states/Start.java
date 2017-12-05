@@ -8,6 +8,7 @@ import events.Event;
 import events.types.MouseMovedEvent;
 import events.types.MousePressedEvent;
 import graphics.GuiButton;
+import graphics.GuiLabel;
 import graphics.GuiPanel;
 import handler.SoundHandler;
 import handler.StateHandler;
@@ -21,9 +22,9 @@ public class Start extends State {
     
     public Start() {
         SoundHandler.loop("intro");
-        mainPanel = new GuiPanel(new Vector(50, 50), new Vector(StateHandler.WIDTH - 100, StateHandler.HEIGHT - 100), Tools.getImage("/gui/start.png"));
-        mainPanel.
-        mainPanel.add(new GuiButton(new Vector(100, 400), new Vector(90, 30), Color.BLACK, "START", new Font("Times New Java", Font.PLAIN, 25), Color.WHITE) {
+        mainPanel = new GuiPanel(new Vector(200, 100), new Vector(StateHandler.WIDTH - 400, StateHandler.HEIGHT - 200), Tools.getImage("/gui/start.png"));
+        mainPanel.add(new GuiLabel(new Vector(250, 350), new Vector(150, 60), "MAIN MENU", Color.WHITE, new Font("Times New Java", Font.PLAIN, 50)));
+        mainPanel.add(new GuiButton(new Vector(250, 450), new Vector(90, 30), null, "START", new Font("Times New Java", Font.PLAIN, 25)) {
             @Override
             public boolean mousePressed(MousePressedEvent e) {
                 if (super.mousePressed(e)) {
@@ -42,12 +43,13 @@ public class Start extends State {
                 return false;
             }
             
-        }.setTextOffset(5, 20));
-        mainPanel.add(new GuiButton(new Vector(100, 450), new Vector(110, 30), Color.BLACK, "OPTIONS", new Font("Times New Java", Font.PLAIN, 25), Color.WHITE) {
+            
+        }.setTextOffset(5, 23));
+        mainPanel.add(new GuiButton(new Vector(250, 500), new Vector(120, 30), null, "OPTIONS", new Font("Times New Java", Font.PLAIN, 25)) {
             @Override
             public boolean mousePressed(MousePressedEvent e) {
                 if (super.mousePressed(e)) {
-                    StateHandler.changeState(States.OPTIONS);
+                    StateHandler.loadOptions();
                     return true;
                 }
                 return false;
@@ -61,7 +63,9 @@ public class Start extends State {
                 } else textColour = Color.WHITE;
                 return false;
             }
-        }.setTextOffset(5, 20));
+            
+        }.setTextOffset(5, 23));
+        
     }
     
     @Override

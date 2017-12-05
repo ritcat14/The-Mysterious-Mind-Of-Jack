@@ -22,6 +22,8 @@ public class Cutscene extends State {
     private int[] times;
     private int frame = 0;
     
+    private boolean switching = false;
+    
     public Cutscene(int scene) {
         String[] lines = Tools.getData("/scenes/sceneData.gme");
         String data = lines[scene];
@@ -33,6 +35,7 @@ public class Cutscene extends State {
     private boolean keyPressed(KeyPressedEvent e) {
         switch (e.getKey()) {
             case KeyEvent.VK_SPACE:
+            	switching = true;
                 StateHandler.nextChapter();
                 return true;
         }
@@ -51,6 +54,7 @@ public class Cutscene extends State {
 
     @Override
     public void update() {
+    	if (switching) return;
         time++;
         if (time % 120 == 0) timeSec++;
         
@@ -58,6 +62,7 @@ public class Cutscene extends State {
         
         if (timeSec == times[frame]) {
             if (frame == frames.length - 1) {
+            	switching = true;
                 StateHandler.nextChapter();
             }
         frame++;

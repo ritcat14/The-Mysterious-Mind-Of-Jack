@@ -67,6 +67,6 @@ public class GuiComponent {
     
     public void setWidth(double w) { this.size.x = w; }
     
-    public void setHeight(double h) { this.pos.y = h; }
+    public void setHeight(double h) { this.size.y = h; }
     
 }

@@ -29,4 +29,9 @@ public class Vector {
         this.y += v2.y;
     }
     
+    public void clear() {
+    	this.x = 0;
+    	this.y = 0;
+    }
+    
 }

@@ -2,6 +2,7 @@ package core;
 
 import handler.Tools;
 import handler.Vector;
+import states.Game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -25,13 +26,14 @@ public class Map implements EventListener {
     private BufferedImage background;
     private Player player;
     
-    public Map(int chapter) { // The ID of the chapter is required for accessing the map data
+    public Map(Game game, int chapter) { // The ID of the chapter is required for accessing the map data
         Decoder decoder = new Decoder();
         decoder.decode(this, chapter);
         tiles = decoder.getTiles();
         player = decoder.getPlayer();
         entities = decoder.getEntities();
         background = Tools.getImage("/chapters/chapter" + chapter + "/background.png");
+        game.setPlayer(player);
     }
     
     public void update() {

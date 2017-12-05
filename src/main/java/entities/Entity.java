@@ -68,11 +68,6 @@ public abstract class Entity {
         xScroll = 0;
         yScroll = 0;
         g.drawImage(image, (int)(pos.x), (int)(pos.y), width, height, null);
-        g.setColor(Color.BLUE);
-        g.drawRect(getRight().x, getRight().y, getRight().width, getRight().height);
-        g.drawRect(getLeft().x, getLeft().y, getLeft().width, getLeft().height);
-        g.drawRect(getTop().x, getTop().y, getTop().width, getTop().height);
-        g.drawRect(getBottom().x, getBottom().y, getBottom().width, getBottom().height);
     }
     
     public int getWidth() { return width; }

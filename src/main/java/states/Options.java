@@ -1,12 +1,12 @@
 package states;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import events.Event;
 import events.types.MousePressedEvent;
 import graphics.GuiButton;
-import graphics.GuiLabel;
 import graphics.GuiPanel;
 import handler.StateHandler;
 import handler.StateHandler.States;
@@ -17,8 +17,8 @@ public class Options extends State {
     private GuiPanel mainPanel;
     
     public Options() {
-        mainPanel = new GuiPanel(new Vector(100, 100), new Vector(StateHandler.WIDTH - 200, StateHandler.HEIGHT - 200), Color.LIGHT_GRAY);
-        mainPanel.add(new GuiButton(new Vector(StateHandler.WIDTH - 450, StateHandler.HEIGHT - 350), new Vector(200, 100), Color.DARK_GRAY, "BACK", GuiLabel.font) {
+        mainPanel = new GuiPanel(new Vector(400, 400), new Vector(StateHandler.WIDTH - 800, StateHandler.HEIGHT - 800), Color.LIGHT_GRAY);
+        mainPanel.add(new GuiButton(new Vector(450, 450), new Vector(200, 100), Color.DARK_GRAY, "BACK", new Font("Times New Java", Font.BOLD, 25)) {
             @Override
             public boolean mousePressed(MousePressedEvent e) {
                 if (super.mousePressed(e)) {
@@ -26,6 +26,12 @@ public class Options extends State {
                 }
                 return false;
             }
+            
+            @Override
+            public void update() {
+            	super.update();
+            }
+            
         });
     }
 
@@ -41,6 +47,7 @@ public class Options extends State {
 
     @Override
     public void render(Graphics g) {
+    	StateHandler.startBlur.render(g);
         mainPanel.render(g);
     }
     

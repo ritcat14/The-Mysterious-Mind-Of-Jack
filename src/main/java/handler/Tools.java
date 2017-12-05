@@ -1,6 +1,9 @@
 package handler;
 
+import java.awt.Component;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 
 import javax.imageio.ImageIO;
 
@@ -37,6 +40,32 @@ public class Tools {
             e.printStackTrace();
         }
         return image;
+    }
+    
+    public static BufferedImage getScreenShot(Component component) {
+    	BufferedImage image = new BufferedImage(component.getWidth(), component.getHeight(), BufferedImage.TYPE_INT_RGB);
+    	// call the Component's paint method, using
+    	// the Graphics object of the image.
+    	component.paint(image.getGraphics()); // alternately use .printAll(..)
+    	return image;
+    }
+
+    
+    public static BufferedImage blur(BufferedImage image) {
+    	int radius = 11;
+        int size = radius * 2 + 1;
+        float weight = 1.0f / (size * size);
+        float[] data = new float[size * size];
+
+        for (int i = 0; i < data.length; i++) {
+            data[i] = weight;
+        }
+
+        Kernel kernel = new Kernel(size, size, data);
+        ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_ZERO_FILL, null);
+        //tbi is BufferedImage
+        BufferedImage i = op.filter(image, null);
+    	return i;
     }
     
     /* -------------------------------- File Handling -------------------------------- */
@@ -80,6 +109,10 @@ public class Tools {
            ints[i] = Integer.parseInt(strings[i]);
        }
        return ints;
+   }
+   
+   public static int getSecs(int time) {
+	   return time * 120;
    }
     
 }
