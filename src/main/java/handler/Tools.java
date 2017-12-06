@@ -1,6 +1,8 @@
 package handler;
 
 import java.awt.Component;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
@@ -68,6 +70,17 @@ public class Tools {
     	return i;
     }
     
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+
+        return dimg;
+    }  
+    
     /* -------------------------------- File Handling -------------------------------- */
     
     public static String[] getData(String file) {
@@ -112,7 +125,7 @@ public class Tools {
    }
    
    public static int getSecs(int time) {
-	   return time * 120;
+	   return time * 60;
    }
     
 }

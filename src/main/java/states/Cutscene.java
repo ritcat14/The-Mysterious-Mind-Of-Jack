@@ -56,7 +56,7 @@ public class Cutscene extends State {
     public void update() {
     	if (switching) return;
         time++;
-        if (time % 120 == 0) timeSec++;
+        if (time % Tools.getSecs(1) == 0) timeSec++;
         
         currentFrame = frames[frame];
         

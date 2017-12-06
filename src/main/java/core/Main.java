@@ -71,7 +71,7 @@ public class Main implements Runnable, WindowListener {
     public void run() {
         long lastTimeU = System.nanoTime();
         long timer = System.currentTimeMillis();
-        final double nsu = 1000000000.0 / 120.0;
+        final double nsu = 1000000000.0 / 60.0;
         double deltaU = 0;
         double deltaF = 0;
         int frames = 0;
@@ -127,8 +127,10 @@ public class Main implements Runnable, WindowListener {
 	public void windowClosed(WindowEvent arg0) {}
 
 	@Override
-	public void windowClosing(WindowEvent arg0) {Player player = StateHandler.player;
+	public void windowClosing(WindowEvent arg0) {
+		Player player = StateHandler.player;
 		if (player != null && StateHandler.getState().equals(States.GAME) || StateHandler.getState().equals(States.PAUSE)) {
+			if (StateHandler.getState().equals(States.GAME)) StateHandler.pause();
 			int confirm = JOptionPane.showOptionDialog(null, "Would you like to save?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (confirm == 0) {
 				DataHandler.savePlayer(player);

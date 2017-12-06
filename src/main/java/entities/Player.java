@@ -2,6 +2,7 @@ package entities;
 
 import graphics.GuiBar;
 import handler.StateHandler;
+import handler.Tools;
 import handler.Vector;
 
 import java.awt.Color;
@@ -15,13 +16,12 @@ import events.types.KeyReleasedEvent;
 public class Player extends Mob {
 	
     private boolean up, left, right;
-    private double speed = 0.04;
+    private double speed = 0.08;
     private GuiBar healthBar;
-    
     private final int EDGE_DISTANCE = 100;
 
     public Player(Map map, Vector pos, String file) {
-        super(map, pos, file);
+        super(map, pos, new Vector(32, 64), file);
         healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health);
     }
     
@@ -31,7 +31,6 @@ public class Player extends Mob {
 
     @Override
     public void update() {
-        super.update();
         healthBar.setValue(health);
         if (up) jump();
         if (left) {
@@ -40,16 +39,19 @@ public class Player extends Mob {
         
         if (right) {
             velocity.x += speed;
-        }else if (velocity.x > 0) velocity.x -= speed;
+        } else if (velocity.x > 0) velocity.x -= speed;
+        
+        if (velocity.x > 0 && velocity.x < speed) velocity.x = 0;
         
         if (pos.x < EDGE_DISTANCE) {
             xScroll += EDGE_DISTANCE - pos.x;
             pos.x = EDGE_DISTANCE + 1;
         }
-        if (pos.x + width > StateHandler.WIDTH - EDGE_DISTANCE) {
-            xScroll -= ((pos.x + width) - (StateHandler.WIDTH - EDGE_DISTANCE));
-            pos.x = StateHandler.WIDTH - EDGE_DISTANCE - width - 1;
+        if (pos.x + size.y > StateHandler.WIDTH - EDGE_DISTANCE) {
+            xScroll -= ((pos.x + size.y) - (StateHandler.WIDTH - EDGE_DISTANCE));
+            pos.x = StateHandler.WIDTH - EDGE_DISTANCE - size.y - 1;
         }
+        super.update();
         healthBar.update();
     }
     

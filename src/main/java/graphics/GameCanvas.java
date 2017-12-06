@@ -49,7 +49,7 @@ public class GameCanvas extends Canvas {
 		requestFocus();
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
-            createBufferStrategy(3);
+            createBufferStrategy(4);
             return;
         }
 
