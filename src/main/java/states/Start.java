@@ -23,8 +23,8 @@ public class Start extends State {
     public Start() {
         SoundHandler.loop("intro");
         mainPanel = new GuiPanel(new Vector(200, 100), new Vector(StateHandler.WIDTH - 400, StateHandler.HEIGHT - 200), Tools.getImage("/gui/start.png"));
-        mainPanel.add(new GuiLabel(new Vector(250, 350), new Vector(150, 60), "MAIN MENU", Color.WHITE, new Font("Times New Java", Font.PLAIN, 50)));
-        mainPanel.add(new GuiButton(new Vector(250, 450), new Vector(90, 30), null, "START", new Font("Times New Java", Font.PLAIN, 25)) {
+        mainPanel.add(new GuiLabel(new Vector(250, 250), new Vector(150, 50), "MAIN MENU", Color.WHITE, new Font("Times New Java", Font.PLAIN, 50)));
+        mainPanel.add(new GuiButton(new Vector(250, 350), new Vector(90, 25), null, "START", new Font("Times New Java", Font.PLAIN, 25)) {
             @Override
             public boolean mousePressed(MousePressedEvent e) {
                 if (super.mousePressed(e)) {
@@ -32,20 +32,11 @@ public class Start extends State {
                     return true;
                 }
                 return false;
-            }
-            
-            @Override
-            public boolean mouseMoved(MouseMovedEvent e) {
-                if (super.mouseMoved(e)) {
-                    textColour = new Color(200, 200, 200);
-                    return true;
-                } else textColour = Color.WHITE;
-                return false;
-            }
-            
+            }            
             
         }.setTextOffset(5, 23));
-        mainPanel.add(new GuiButton(new Vector(250, 500), new Vector(120, 30), null, "OPTIONS", new Font("Times New Java", Font.PLAIN, 25)) {
+        
+        mainPanel.add(new GuiButton(new Vector(250, 450), new Vector(120, 25), null, "OPTIONS", new Font("Times New Java", Font.PLAIN, 25)) {
             @Override
             public boolean mousePressed(MousePressedEvent e) {
                 if (super.mousePressed(e)) {
@@ -55,16 +46,21 @@ public class Start extends State {
                 return false;
             }
             
-            @Override
-            public boolean mouseMoved(MouseMovedEvent e) {
-                if (super.mouseMoved(e)) {
-                    textColour = new Color(200, 200, 200);
-                    return true;
-                } else textColour = Color.WHITE;
-                return false;
-            }
-            
         }.setTextOffset(5, 23));
+        
+        GuiButton exit = new GuiButton(new Vector(250, 550), new Vector(80, 25), null, "EXIT", new Font("Times New Java", Font.PLAIN, 25)) {
+        	@Override
+        	public boolean mousePressed(MousePressedEvent e) {
+        		if (super.mousePressed(e)) {
+        			System.exit(0);
+            		return true;
+        		}
+        		return false;
+        	}
+        	
+        };
+        
+        mainPanel.add(exit);
         
     }
     

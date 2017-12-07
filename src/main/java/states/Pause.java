@@ -29,17 +29,20 @@ public class Pause extends State {
     public Pause() {
     	mainPanel = new GuiPanel(new Vector(100, 200), new Vector(400, StateHandler.HEIGHT - 800));
     	mainPanel.add(new GuiLabel(new Vector(100, 280), new Vector(100, 50), "PAUSE", Color.WHITE, new Font("Times New Java", Font.BOLD, 100)));
+    	
     	mainPanel.add(new GuiButton(new Vector(100, 300), new Vector(150, 25), null, "MAIN MENU", new Font("Times New Java", Font.BOLD, 25)) {
     		@Override
     		public boolean mousePressed(MousePressedEvent e) {
     			if (super.mousePressed(e)) {
     				DataHandler.savePlayer(StateHandler.player);
+    				StateHandler.unpause();
     				StateHandler.changeState(States.START);
     				return true;
     			}
     			return false;
     		};
     	}.setTextOffset(2, 20));
+    	
     	mainPanel.add(new GuiButton(new Vector(100, 350), new Vector(150, 25), null, "RETURN", new Font("Times New Java", Font.BOLD, 25)) {
     		@Override
     		public boolean mousePressed(MousePressedEvent e) {

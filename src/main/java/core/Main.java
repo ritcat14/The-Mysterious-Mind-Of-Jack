@@ -34,6 +34,8 @@ public class Main implements Runnable, WindowListener {
     private Player player;
     
     public static int FPS = 0;
+    
+    public static Main m;
 
     public Main() {
     	DataHandler.init();
@@ -111,6 +113,7 @@ public class Main implements Runnable, WindowListener {
     public static void main(String[] args) {
         // Main method
         Main m = new Main(); // Create the game object
+        Main.m = m;
         frame = new JFrame("Game");
         frame.setResizable(false);
         frame.setUndecorated(true);

@@ -17,6 +17,7 @@ public class StateHandler implements EventListener {
     
     private static int chapter = 0;
     private static int cutscene = -1;
+    private static int playerProgress = 1;
     
     public static Player player;
     
@@ -39,8 +40,6 @@ public class StateHandler implements EventListener {
         switch (state) {
             case START:
             	StateHandler.state = state;
-            	pausedGame = null;
-            	startBlur = null;
                 currentState = new Start();
                 break;
             case GAME:
@@ -76,24 +75,24 @@ public class StateHandler implements EventListener {
     
     public static void unpause() {
     	Game.paused = false;
-    	for(int i = 0; i < 20; i++) {
-    		pausedGame.update();
-    	}
+    	for(int i = 0; i < 20; i++) pausedGame.update();
     	currentState = pausedGame;
     }
     
     public static void nextChapter() {
-        chapter++;
+        chapter = playerProgress;
         changeState(States.GAME);
     }
     
     public static void nextScene() {
-        cutscene++;
+        cutscene = playerProgress - 1;
         changeState(States.CUTSCENE);
     }
     
     public static void update() {
-        if (currentState != null) currentState.update();
+        if (currentState != null) {
+        	currentState.update();
+        }
     }
     
     public static void render(Graphics g) {

@@ -1,6 +1,5 @@
 package handler;
 
-import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -11,9 +10,12 @@ import javax.imageio.ImageIO;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 
 public class Tools {
+	
+    private static HashMap<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 	
     /* ------------------------------- Image Handling -------------------------------- */
    
@@ -36,23 +38,17 @@ public class Tools {
     
     public static BufferedImage getImage(String file) {
         BufferedImage image = null;
-        try {
-            image = ImageIO.read(Tools.class.getResourceAsStream(file));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		if (images.containsKey(file)) image = images.get(file);
+		else {
+	        try {
+	            image = ImageIO.read(Tools.class.getResourceAsStream(file));
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		}
         return image;
     }
-    
-    public static BufferedImage getScreenShot(Component component) {
-    	BufferedImage image = new BufferedImage(component.getWidth(), component.getHeight(), BufferedImage.TYPE_INT_RGB);
-    	// call the Component's paint method, using
-    	// the Graphics object of the image.
-    	component.paint(image.getGraphics()); // alternately use .printAll(..)
-    	return image;
-    }
 
-    
     public static BufferedImage blur(BufferedImage image) {
     	int radius = 11;
         int size = radius * 2 + 1;

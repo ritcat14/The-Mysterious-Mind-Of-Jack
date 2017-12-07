@@ -46,6 +46,10 @@ public class Decoder {
                         case 1:
                             tiles.add(new Floor(new Vector(x * TILE_SIZE, y * TILE_SIZE), chapterID));
                             break;
+                        default:
+                        	Tile t = new Tile(new Vector(x * TILE_SIZE, y * TILE_SIZE),i, chapterID);
+                        	t.setSolid(true);
+                        	tiles.add(t);
                     }
                 }
                 k++;
