@@ -17,7 +17,7 @@ import entities.Player;
 
 public class DataHandler {
 	
-	public static final String dir = System.getProperty("user.home") + "//TMMOJ"; 
+	public static final String dir = System.getProperty("user.home") + "//TMMOJ";
 	
 	public static void init() {
 		File file = new File(dir); // Store the directory

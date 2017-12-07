@@ -32,7 +32,7 @@ public class Start extends State {
                     return true;
                 }
                 return false;
-            }            
+            }
             
         }.setTextOffset(5, 23));
         

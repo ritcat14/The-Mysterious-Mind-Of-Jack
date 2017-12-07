@@ -22,7 +22,7 @@ public class StateHandler implements EventListener {
     public static Player player;
     
     public static State pausedGame = null;
-    public static State startBlur;
+    public static State startCopy;
     
     public static enum States {
         START, GAME, PAUSE, OPTIONS, CUTSCENE;        
@@ -62,7 +62,7 @@ public class StateHandler implements EventListener {
 	}
     
     public static void loadOptions() {
-    	startBlur = currentState;
+    	startCopy = currentState;
     	currentState = new Options();
     }
     
