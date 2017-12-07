@@ -1,7 +1,10 @@
 package handler;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
+import core.Main;
 import entities.Player;
 import events.Event;
 import events.EventListener;
@@ -36,6 +39,8 @@ public class StateHandler implements EventListener {
         switch (state) {
             case START:
             	StateHandler.state = state;
+            	pausedGame = null;
+            	startBlur = null;
                 currentState = new Start();
                 break;
             case GAME:
@@ -93,6 +98,9 @@ public class StateHandler implements EventListener {
     
     public static void render(Graphics g) {
         if (currentState != null) currentState.render(g);
+        g.setFont(new Font("Times New Java", Font.BOLD, 20));
+        g.setColor(Color.YELLOW);
+        g.drawString("" + Main.FPS, 10, 20);
     }
 
     @Override

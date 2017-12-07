@@ -32,6 +32,8 @@ public class Main implements Runnable, WindowListener {
     private StateHandler sh;
     private int time = 0;
     private Player player;
+    
+    public static int FPS = 0;
 
     public Main() {
     	DataHandler.init();
@@ -98,6 +100,7 @@ public class Main implements Runnable, WindowListener {
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
                 frame.setTitle("FPS: " + frames + " , UPS: " + updates);
+                FPS = frames;
                 frames = 0;
                 updates = 0;
             }

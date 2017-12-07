@@ -1,5 +1,6 @@
 package core;
 
+import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
 import states.Game;
@@ -83,11 +84,17 @@ public class Map implements EventListener {
     	rendering = true;
         g.drawImage(background, (int)xPosition, 0, null);
         for (Tile t : tiles) {
+            Vector pos = t.getPosition();
+            double width = t.getWidth();
+            if (pos.x + width < 0 || pos.x > StateHandler.WIDTH) continue;
             t.render(g);
         }
         player.render(g);
         for (Entity e : entities) {
-            e.render(g);
+            Vector pos = e.getPosition();
+            double width = e.getWidth();
+            if (pos.x + width < 0 || pos.x > StateHandler.WIDTH) continue;
+        	e.render(g);
         }
         rendering = false;
     }
