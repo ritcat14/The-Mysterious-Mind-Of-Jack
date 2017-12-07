@@ -23,7 +23,7 @@ public class Player extends Mob {
     public Player(Map map, Vector pos, String file, double initialOffset) {
         super(map, pos, new Vector(32, 64), file);
         healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health);
-        speed = 0.08;
+        speed = 0.8;
         this.initialOffset = initialOffset;
     }
     
