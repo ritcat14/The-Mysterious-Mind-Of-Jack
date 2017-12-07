@@ -16,13 +16,15 @@ import events.types.KeyReleasedEvent;
 public class Player extends Mob {
 	
     private boolean up, left, right;
-    private double speed = 0.08;
     private GuiBar healthBar;
     private final int EDGE_DISTANCE = 100;
+    public double initialOffset;
 
-    public Player(Map map, Vector pos, String file) {
+    public Player(Map map, Vector pos, String file, double initialOffset) {
         super(map, pos, new Vector(32, 64), file);
         healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health);
+        speed = 0.08;
+        this.initialOffset = initialOffset;
     }
     
     public void crouch() {
@@ -43,14 +45,16 @@ public class Player extends Mob {
         
         if (velocity.x > 0 && velocity.x < speed) velocity.x = 0;
         
+        if (pos.x + size.x > StateHandler.WIDTH - EDGE_DISTANCE) {
+        	map.setXPosition(-velocity.x);
+        	pos.x = StateHandler.WIDTH  - EDGE_DISTANCE - size.x;
+        }
+        
         if (pos.x < EDGE_DISTANCE) {
-            xScroll += EDGE_DISTANCE - pos.x;
-            pos.x = EDGE_DISTANCE + 1;
+        	map.setXPosition(-velocity.x);
+        	pos.x = EDGE_DISTANCE;
         }
-        if (pos.x + size.y > StateHandler.WIDTH - EDGE_DISTANCE) {
-            xScroll -= ((pos.x + size.y) - (StateHandler.WIDTH - EDGE_DISTANCE));
-            pos.x = StateHandler.WIDTH - EDGE_DISTANCE - size.y - 1;
-        }
+        
         super.update();
         healthBar.update();
     }

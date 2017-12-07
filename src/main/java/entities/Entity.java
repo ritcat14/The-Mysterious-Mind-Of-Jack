@@ -24,7 +24,7 @@ public abstract class Entity {
     protected BufferedImage image;
     protected Vector pos, size;
     protected Vector velocity = new Vector();
-    protected int xScroll, yScroll;
+    protected boolean removed = false;
     
     public Entity(Vector pos, Vector size, String file) {
         this.size = size;
@@ -50,18 +50,9 @@ public abstract class Entity {
         this.size = new Vector(image.getWidth(), image.getHeight());
     }
     
-    public void setScroll(int xScroll, int yScroll) {
-        this.xScroll = xScroll;
-        this.yScroll = yScroll;
-    }
-    
     public abstract void update();
     
     public void render(Graphics g) {
-        pos.x += xScroll;
-        pos.y += yScroll;
-        xScroll = 0;
-        yScroll = 0;
         g.drawImage(image, (int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y, null);
     }
     
@@ -85,8 +76,8 @@ public abstract class Entity {
     
     public Rectangle getTop() { return new Rectangle((int)pos.x + 3, (int)pos.y, (int)(size.y - 6), 3);}
     
-    public int getXScroll() { return xScroll;}
+    public boolean isRemoved() { return removed; }
     
-    public int getYScroll() { return yScroll;}
+    public void remove() { removed = true; }
     
 }

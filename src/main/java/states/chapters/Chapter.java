@@ -3,6 +3,7 @@ package states.chapters;
 import java.awt.Graphics;
 
 import core.Map;
+import events.Event;
 import states.State;
 
 public abstract class Chapter extends State {
@@ -21,6 +22,11 @@ public abstract class Chapter extends State {
     @Override
     public void render(Graphics g) {
         map.render(g);
+    }
+    
+    @Override
+    public void onEvent(Event event) {
+    	map.onEvent(event);
     }
     
 }

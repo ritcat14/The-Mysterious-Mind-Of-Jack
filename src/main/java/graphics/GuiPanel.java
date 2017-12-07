@@ -19,6 +19,11 @@ public class GuiPanel extends GuiComponent implements EventListener {
         this.colour = col;
     }
     
+    public GuiPanel(Vector pos, Vector size) {
+        super(pos, size);
+        this.colour = null;
+    }
+    
     public GuiPanel(Vector pos, Vector size, BufferedImage img) {
         super(pos, size);
         this.image = img;

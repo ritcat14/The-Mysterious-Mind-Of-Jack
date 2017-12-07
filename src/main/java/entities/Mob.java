@@ -13,17 +13,16 @@ public abstract class Mob extends Entity {
     
     protected boolean canJump = true;
     protected boolean falling = true;
+    protected int health = 200;
     protected double gravity;
     protected double maxY;
     protected double maxX;
+    protected double speed;
     protected int jumpCount;
     
     protected Animation animation;
     protected BufferedImage[] left = new BufferedImage[2], right = new BufferedImage[2];
-    
     protected BufferedImage[] images; // 0 - left, 1 - right 
-    
-    protected int health = 200;
     
     protected Map map;
 
@@ -113,7 +112,12 @@ public abstract class Mob extends Entity {
 
     @Override
     public void update() {
-        if(health < 0) health = 0;
+        if(health <= 0) {
+        	health = 0;
+        	remove();
+        }
+        move();
+        fall();
         if (velocity.x == 0) animation.stop();
         else {
         	if (!animation.isAnimating()) animation.animate();
@@ -124,13 +128,11 @@ public abstract class Mob extends Entity {
         
         animation.update();
         this.image = animation.getCurrentFrame();
-        move();
-        fall();
     }
     
     @Override
     public void render(Graphics g) {
-    	g.drawImage(animation.getCurrentFrame(), (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, null);
+    	g.drawImage(animation.getCurrentFrame(), (int)(pos.x), (int)pos.y, (int)size.x, (int)size.y, null);
     }
     
     public int getHealth() {
@@ -139,6 +141,10 @@ public abstract class Mob extends Entity {
     
     public void setHealth(int health) {
 		this.health = health;
+	}
+    
+    public Map getMap() {
+		return map;
 	}
     
 }

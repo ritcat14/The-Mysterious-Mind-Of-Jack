@@ -17,9 +17,9 @@ public class Decoder {
     private Player player;
     private ArrayList<Tile> tiles;
     private ArrayList<Entity> entities;
+    public int mapXPos;
     
-    public void decode(Map map, int chapterID){
-    	System.out.println(chapterID);
+    public void decode(Map map, int chapterID) {
         entities = new ArrayList<Entity>();
         String file = "/chapters/chapter" + chapterID + "/map.gme";
         tiles = new ArrayList<Tile>();
@@ -56,11 +56,9 @@ public class Decoder {
         double x = Double.parseDouble(data[0]);
         double y = Double.parseDouble(data[1]);
         int health = Integer.parseInt(data[2]);
-        int xScroll = Integer.parseInt(data[3]);
-        int yScroll = Integer.parseInt(data[4]);
+        double xOffset = Double.parseDouble(data[3]);
         
-        player = new Player(map, new Vector(x, y), "/player.png");
-        player.setScroll(xScroll, yScroll);
+        player = new Player(map, new Vector(x, y), "/player.png", xOffset);
         player.setHealth(health);
     }
     

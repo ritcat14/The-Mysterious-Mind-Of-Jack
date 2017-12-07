@@ -23,8 +23,11 @@ public class Map implements EventListener {
     
     private ArrayList<Tile> tiles;
     private ArrayList<Entity> entities;
+    private ArrayList<Entity> entitiesToRemove, entitiesToAdd;
     private BufferedImage background;
     private Player player;
+    private boolean rendering = false;
+    private double xPosition = 0;
     
     public Map(Game game, int chapter) { // The ID of the chapter is required for accessing the map data
         Decoder decoder = new Decoder();
@@ -32,31 +35,61 @@ public class Map implements EventListener {
         tiles = decoder.getTiles();
         player = decoder.getPlayer();
         entities = decoder.getEntities();
+        entitiesToRemove = new ArrayList<Entity>();
+        entitiesToAdd = new ArrayList<Entity>();
         background = Tools.getImage("/chapters/chapter" + chapter + "/background.png");
         game.setPlayer(player);
+        setXPosition(player.initialOffset);
+    }
+    
+    public void setXPosition(double x) {
+    	for (Entity e : entities) e.setPosition(e.getPosition().add(new Vector(x, 0)));
+    	for (Tile t : tiles) t.setPosition(t.getPosition().add(new Vector(x, 0)));
+    	xPosition += x;
+    	System.out.println(xPosition);
+    	
+    }
+    
+    public void add(Entity e) {
+    	entitiesToAdd.add(e);
+    }
+    
+    public void remove(Entity e) {
+    	entitiesToRemove.add(e);
+    }
+    
+    public double getX() {
+		return xPosition;
+	}
+    
+    private void clean() {
+    	entities.removeAll(entitiesToRemove);
+    	entities.addAll(entitiesToAdd);
+    	entitiesToAdd.clear();
+    	entitiesToRemove.clear();
     }
     
     public void update() {
         player.update();
-        for (Tile t : tiles) {
-            t.update();
-        }
+        for (Tile t : tiles) t.update();
         for (Entity e : entities) {
-            e.update();
+        	e.update();
+        	if (e.isRemoved()) entitiesToRemove.add(e);
         }
+        if (!rendering) clean();
     }
     
     public void render(Graphics g) {
-        g.drawImage(background, player.getXScroll(), 0, null);
+    	rendering = true;
+        g.drawImage(background, (int)xPosition, 0, null);
         for (Tile t : tiles) {
-            t.setScroll(player.getXScroll(), 0);
             t.render(g);
         }
         player.render(g);
         for (Entity e : entities) {
-            e.setScroll(player.getXScroll(), 0);
             e.render(g);
         }
+        rendering = false;
     }
 
     @Override

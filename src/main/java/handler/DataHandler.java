@@ -25,7 +25,8 @@ public class DataHandler {
 		if (!exists) { // Check if it existsFile yourFile = new File("score.txt");
 			file.mkdir();
 			// Create a blank player file
-			Object[] data = {40, 40, 200, 0, 0};
+			// x, y, health, xScroll
+			Object[] data = {105, 105, 200, 0};
 			writeToFile(dir + "//player.gme", false, data);
 		}
 		
@@ -74,7 +75,7 @@ public class DataHandler {
 	}
 	
 	public static void savePlayer(Player player) {
-		Object[] data = {player.getPosition().x, player.getPosition().y, player.getHealth(), player.getXScroll(), player.getYScroll()};
+		Object[] data = {player.getPosition().x, player.getPosition().y, player.getHealth(), player.getMap().getX()};
 		writeToFile(dir + "//player.gme", false, data);
 	}
 

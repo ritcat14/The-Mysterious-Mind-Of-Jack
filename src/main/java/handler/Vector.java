@@ -24,9 +24,10 @@ public class Vector {
         return new Point((int)x, (int)y);
     }
     
-    public void add(Vector v2) {
+    public Vector add(Vector v2) {
         this.x += v2.x;
         this.y += v2.y;
+        return this;
     }
     
     public void clear() {
