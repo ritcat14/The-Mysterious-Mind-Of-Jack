@@ -35,15 +35,19 @@ public class Player extends Mob {
     public void update() {
         healthBar.setValue(health);
         if (up) jump();
-        if (left) {
-            velocity.x -= speed;
-        } else if (velocity.x < 0) velocity.x += speed;
         
-        if (right) {
-            velocity.x += speed;
-        } else if (velocity.x > 0) velocity.x -= speed;
+        if (left) velocity.x -= speed;
+        else if (velocity.x < 0) velocity.x += speed;
         
-        if (velocity.x > 0 && velocity.x < speed) velocity.x = 0;
+        if (right) velocity.x += speed;
+        else if (velocity.x > 0) velocity.x -= speed;
+        
+        if (velocity.x > -speed && velocity.x < speed) velocity.x = 0;
+        
+        System.out.println(velocity.x);
+        
+        //if (velocity.x > 0 && velocity.x < speed) velocity.x = 0;
+        //if (velocity.x < 0 && velocity.x > -speed) velocity.x = 0;
         
         if (pos.x + size.x > StateHandler.WIDTH - EDGE_DISTANCE) {
         	map.setXPosition(-velocity.x);
