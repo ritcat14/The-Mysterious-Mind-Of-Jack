@@ -5,14 +5,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import events.Event;
-import events.types.MouseMovedEvent;
 import events.types.MousePressedEvent;
 import graphics.GuiButton;
 import graphics.GuiLabel;
 import graphics.GuiPanel;
 import handler.SoundHandler;
 import handler.StateHandler;
-import handler.StateHandler.States;
 import handler.Tools;
 import handler.Vector;
 

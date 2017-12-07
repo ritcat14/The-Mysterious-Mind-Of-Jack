@@ -5,16 +5,27 @@ import handler.StateHandler;
 import handler.Vector;
 
 public class Enemy extends Mob {
+	
+	protected int damage;
 
 	public Enemy(Map map, Vector pos, Vector size, String file) {
 		super(map, pos, size, file);
+		speed = 0.01;
+		damage = 10;
 	}
 	
 	@Override
 	public void update() {
 		Player player = StateHandler.player;
-		if (player.getPosition().x < pos.x) velocity.x += speed;
-		if (player.getPosition().x > pos.x) velocity.x -= speed;
+		if (!player.getBounds().intersects(this.getBounds())) {
+			Vector playerPos = player.getPosition();
+			if (playerPos.x < pos.x) velocity.x -= speed;
+			if (playerPos.x > pos.x) velocity.x += speed;
+		} else {
+			velocity.clear();
+			player.doDamage(damage);
+		}
+		
 		super.update();
 	}
 	
@@ -28,6 +39,14 @@ public class Enemy extends Mob {
         	jump();
         }
         if (!hasVerticalCollision()) pos.add(new Vector(0, velocity.y));
+	}
+	
+	public int getDamage() {
+		return damage;
+	}
+	
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 }

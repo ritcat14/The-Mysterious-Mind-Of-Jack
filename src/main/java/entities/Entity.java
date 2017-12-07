@@ -14,7 +14,6 @@ package entities;
 import handler.Tools;
 import handler.Vector;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

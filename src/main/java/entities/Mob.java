@@ -18,7 +18,10 @@ public abstract class Mob extends Entity {
     protected double maxY;
     protected double maxX;
     protected double speed;
-    protected int jumpCount;
+    protected int damage;
+    protected int shield;
+    protected final int MAX_SHIELD = 40;
+    protected final int MAX_HEALTH = 200;
     
     protected Animation animation;
     protected BufferedImage[] left = new BufferedImage[2], right = new BufferedImage[2];
@@ -73,14 +76,10 @@ public abstract class Mob extends Entity {
             if (!t.isSolid()) continue;
             if (getBounds().intersects(t.getTop()) && velocity.y > 0) {
                 velocity.y = 0;
-                canJump = true;
-                falling = false;
                 return true;
             } else falling = true;
             if (getTop().intersects(t.getBottom()) && velocity.y < 0) {
                 velocity.y = 0;
-                canJump = false;
-                falling = true;
                 return true;
             }
         }
@@ -112,6 +111,7 @@ public abstract class Mob extends Entity {
 
     @Override
     public void update() {
+    	canJump = (velocity.y == 0.04);
         if(health <= 0) {
         	health = 0;
         	remove();
@@ -142,6 +142,10 @@ public abstract class Mob extends Entity {
     public void setHealth(int health) {
 		this.health = health;
 	}
+    
+    public void doDamage(int damage) {
+    	this.health -= (damage - shield);
+    }
     
     public Map getMap() {
 		return map;

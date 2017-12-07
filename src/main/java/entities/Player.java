@@ -2,7 +2,6 @@ package entities;
 
 import graphics.GuiBar;
 import handler.StateHandler;
-import handler.Tools;
 import handler.Vector;
 
 import java.awt.Color;
@@ -16,15 +15,17 @@ import events.types.KeyReleasedEvent;
 public class Player extends Mob {
 	
     private boolean up, left, right;
-    private GuiBar healthBar;
+    private GuiBar healthBar, sheildBar;
     private final int EDGE_DISTANCE = 100;
     public double initialOffset;
 
     public Player(Map map, Vector pos, String file, double initialOffset) {
         super(map, pos, new Vector(32, 64), file);
-        healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health);
-        speed = 0.08;
         this.initialOffset = initialOffset;
+        shield = 5;
+        speed = 0.08;
+        healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health, MAX_HEALTH);
+        sheildBar = new GuiBar(new Vector(10, 30), new Vector(200, 10), Color.BLUE, shield, MAX_SHIELD);
     }
     
     public void crouch() {
@@ -34,6 +35,7 @@ public class Player extends Mob {
     @Override
     public void update() {
         healthBar.setValue(health);
+        sheildBar.setValue(shield);
         if (up) jump();
         
         if (left) velocity.x -= speed;
@@ -43,11 +45,6 @@ public class Player extends Mob {
         else if (velocity.x > 0) velocity.x -= speed;
         
         if (velocity.x > -speed && velocity.x < speed) velocity.x = 0;
-        
-        System.out.println(velocity.x);
-        
-        //if (velocity.x > 0 && velocity.x < speed) velocity.x = 0;
-        //if (velocity.x < 0 && velocity.x > -speed) velocity.x = 0;
         
         if (pos.x + size.x > StateHandler.WIDTH - EDGE_DISTANCE) {
         	map.setXPosition(-velocity.x);
@@ -61,6 +58,7 @@ public class Player extends Mob {
         
         super.update();
         healthBar.update();
+        sheildBar.update();
     }
     
     public void pause() {
@@ -73,6 +71,7 @@ public class Player extends Mob {
     public void render(Graphics g) {
         super.render(g);
         healthBar.render(g);
+        sheildBar.render(g);
     }
     
     public boolean keyReleased(KeyReleasedEvent e) {
