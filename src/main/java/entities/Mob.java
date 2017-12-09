@@ -20,7 +20,7 @@ public abstract class Mob extends Entity {
     protected double speed;
     protected int damage;
     protected int shield;
-    protected final int MAX_SHIELD = 40;
+    protected final int MAX_SHIELD = 100;
     protected final int MAX_HEALTH = 200;
     
     protected Animation animation;

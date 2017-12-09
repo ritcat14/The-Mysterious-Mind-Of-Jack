@@ -70,6 +70,14 @@ public class GuiComponent {
         isRendering = false;
     }
     
+    public double getX() { return pos.x; }
+    
+    public double getY() { return pos.y; }
+    
+    public double getWidth() { return size.x; }
+    
+    public double getHeight() { return size.y; }
+    
     public void setX(double x) { this.pos.x = x; }
     
     public void setY(double y) { this.pos.y = y; }

@@ -57,10 +57,10 @@ public class Decoder {
         }
         
         String[] data = DataHandler.readFile(DataHandler.dir + "//player.gme");
-        double x = Double.parseDouble(data[0]);
-        double y = Double.parseDouble(data[1]);
-        int health = Integer.parseInt(data[2]);
-        double xOffset = Double.parseDouble(data[3]);
+        double x = Double.parseDouble(data[1]);
+        double y = Double.parseDouble(data[2]);
+        int health = Integer.parseInt(data[3]);
+        double xOffset = Double.parseDouble(data[4]);
         
         player = new Player(map, new Vector(x, y), "/player.png", xOffset);
         player.setHealth(health);

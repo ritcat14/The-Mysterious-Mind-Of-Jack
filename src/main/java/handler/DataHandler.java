@@ -17,21 +17,30 @@ public class DataHandler {
 	
 	public static final String dir = System.getProperty("user.home") + "\\TMMOJ";
 	public static final String inventFile = dir + "\\inventory.gme";
-	public static final String recipeFile = dir + "\\recipes.gme";
+	public static final String recipeFile = "/items/recipes.gme";
+	public static final String version = "1.0.1";
 	
 	public static void init() {
 		File file = new File(dir); // Store the directory
 		boolean exists = file.exists();
-		if (!exists) { // Check if it existsFile yourFile = new File("score.txt");
-			file.mkdir();
-			// Create a blank player file
-			// x, y, health, xScroll
-			Object[] data = {105, 105, 200, 0};
-			writeToFile(dir + "\\player.gme", false, data);
-			Object[] data2 = {};
-			writeToFile(inventFile, false, data2);
-			writeToFile(recipeFile, false, data2);
+		if (!exists) initiate(file);
+		else {
+			String[] data = readFile(dir + "\\player.gme");
+			String version = data[0];
+			if (!version.equals(DataHandler.version)) {
+				initiate(file);
+			}
 		}
+	}
+	
+	private static void initiate(File file) {
+		file.mkdir();
+		// Create a blank player file
+		// x, y, health, xScroll
+		Object[] data = {version, 105, 105, 200, 0};
+		writeToFile(dir + "\\player.gme", false, data);
+		Object[] data2 = {"1-20-8", "2-20-9", "3-20-10"};
+		writeToFile(inventFile, false, data2);
 	}
 	
 	public static boolean exists(String file) {
@@ -93,7 +102,7 @@ public class DataHandler {
 	}
 	
 	public static void savePlayer(Player player) {
-		Object[] data = {player.getPosition().x, player.getPosition().y, player.getHealth(), player.getMap().getX()};
+		Object[] data = {version, player.getPosition().x, player.getPosition().y, player.getHealth(), player.getMap().getX()};
 		writeToFile(dir + "//player.gme", false, data);
 		Object[] invData = player.getInvent().getData();
 		writeToFile(inventFile, false, invData);

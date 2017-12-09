@@ -9,6 +9,7 @@ import entities.Item;
 import events.types.MouseMovedEvent;
 import events.types.MousePressedEvent;
 import handler.DataHandler;
+import handler.Tools;
 import handler.Vector;
 import states.Game;
 
@@ -44,7 +45,10 @@ public class Inventory extends GuiButton {
 			@Override
 			public boolean mousePressed(MousePressedEvent e) {
 				if (super.mousePressed(e)) {
-					if (input1.getItem() == null || input2.getItem() == null) return false;
+					if (input1.getItem() == null || input2.getItem() == null) {
+						System.out.println("2 Ingredients Required.");
+						return false;
+					}
 					craft();
 					return true;
 				}
@@ -54,6 +58,7 @@ public class Inventory extends GuiButton {
 
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Integer> amounts = new ArrayList<Integer>();
+		ArrayList<Integer> buttonIndices = new ArrayList<Integer>();
 		
 		data = DataHandler.readFile(DataHandler.inventFile);
 		for (int i = 0; i < data.length; i++) {
@@ -62,12 +67,12 @@ public class Inventory extends GuiButton {
 			Item item = new Item(new Vector(), ID);
 			items.add(item);
 			amounts.add(amount);
+			buttonIndices.add(Integer.parseInt(data[i].split("-")[2]));
 		}
 		int x = 0;
 		int y = 0;
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < ITEM_MAX; i++) {
 			InventButton b = new InventButton(new Vector((pos.x + (x * 50)) + 10, (pos.y + (y * 50)) + 10));
-			b.setItem(items.get(i), amounts.get(i));
 			buttons.add(b);
 			x++;
 			if (x == 8) {
@@ -75,14 +80,10 @@ public class Inventory extends GuiButton {
 				x = 0;
 			}
 		}
-		for (int i = buttons.size(); i < ITEM_MAX; i++) {
-			InventButton b = new InventButton(new Vector((pos.x + (x * 50)) + 10, (pos.y + (y * 50)) + 10));
-			buttons.add(b);
-			x++;
-			if (x == 8) {
-				y++;
-				x = 0;
-			}
+
+		for (int i = 0; i < items.size(); i++) {
+			InventButton b = (InventButton) buttons.get(buttonIndices.get(i));
+			if (b.getItem() == null) b.setItem(items.get(i), amounts.get(i));
 		}
 	}
 	
@@ -92,7 +93,7 @@ public class Inventory extends GuiButton {
 		int amount1 = input1.getAmount();
 		int amount2 = input2.getAmount();
 		// Open recipe
-		String[] data = DataHandler.readFile(DataHandler.recipeFile);
+		String[] data = Tools.getData(DataHandler.recipeFile);
 		// Search through data, comparing to our recipe
 		int item1ID = 0;
 		int item2ID = 0;
@@ -100,6 +101,7 @@ public class Inventory extends GuiButton {
 		int item1Amount = 0;
 		int item2Amount= 0;
 		int finalItemAmount = 0;
+		Item finalItem;
 		for (String s : data) {
 			String[] itemData = s.split("-");
 			item1ID = Integer.parseInt(itemData[0].split(":")[0]);
@@ -108,22 +110,39 @@ public class Inventory extends GuiButton {
 			item1Amount = Integer.parseInt(itemData[0].split(":")[1]);
 			item2Amount = Integer.parseInt(itemData[1].split(":")[1]);
 			finalItemAmount = Integer.parseInt(itemData[2].split(":")[1]);
-		}
-		Item finalItem;
-		if (item1.getID() == item1ID && item2.getID() == item2ID) {
-			// Check we have the right amount of ingredients
-			if(item1Amount <= amount1 && item2Amount <= amount2) {
-				// If we have the right amount, create the final item
-				finalItem = new Item(new Vector(), finalItemID);
-				// Remove old items
-				input1.remove(item1Amount);
-				input2.remove(item2Amount);
-				craftingOutput.setItem(finalItem, finalItemAmount);
-				// alert the user
-				
+			
+			if (item1.getID() == item1ID && item2.getID() == item2ID) {
+				// Check we have the right amount of ingredients
+				if (item1Amount <= amount1 && item2Amount <= amount2) {
+					// If we have the right amount, create the final item
+					finalItem = new Item(new Vector(), finalItemID);
+					// Remove old items
+					input1.remove(item1Amount);
+					input2.remove(item2Amount);
+					craftingOutput.setItem(finalItem, finalItemAmount);
+					// alert the user
+					System.out.println("Crafting complete!");
+					return;
+				} else {
+					System.out.println("Wrong amount of items");
+					return;
+				}
+			} else if (item1.getID() == item2ID && item2.getID() == item1ID) {
+				if (item1Amount <= amount2 && item2Amount <= amount1) {
+					finalItem = new Item(new Vector(), finalItemID);
+					input1.remove(item2Amount);
+					input2.remove(item1Amount);
+					craftingOutput.setItem(finalItem, finalItemAmount);
+					System.out.println("Crafting complete!");
+					return;
+				} else {
+					System.out.println("Wrong amount of items");
+					return;
+				}
 			}
 		}
 		// If no match, tell user
+		System.out.println("Wrong ingredients.");
 	}
 	
 	public void addItem(Item item) {
@@ -282,11 +301,17 @@ public class Inventory extends GuiButton {
 	public Object[] getData() {
 		Object[] data;
 		ArrayList<InventButton> buttonsWithItems = new ArrayList<InventButton>();
-		for (GuiComponent c : buttons) if (((InventButton)c).getItem() != null) buttonsWithItems.add((InventButton)c);
+		ArrayList<Integer> buttonIndices = new ArrayList<Integer>();
+		for (GuiComponent c : buttons) {
+			if (((InventButton)c).getItem() != null) {
+				buttonsWithItems.add((InventButton)c);
+				buttonIndices.add(buttons.indexOf(c));
+			}
+		}
 		data = new Object[buttonsWithItems.size()];
 		
 		for (int i = 0; i < buttonsWithItems.size(); i++) {
-			data[i] = buttonsWithItems.get(i).getItem().getID() + "-" + buttonsWithItems.get(i).getAmount();
+			data[i] = buttonsWithItems.get(i).getItem().getID() + "-" + buttonsWithItems.get(i).getAmount() + "-" + buttonIndices.get(i);
 		}
 		return data;
 	}

@@ -3,11 +3,13 @@ package entities;
 import graphics.GuiBar;
 import graphics.Inventory;
 import handler.StateHandler;
+import handler.Tools;
 import handler.Vector;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import core.Map;
 import events.types.KeyPressedEvent;
@@ -19,6 +21,7 @@ public class Player extends Mob {
     private GuiBar healthBar, sheildBar;
     private final int EDGE_DISTANCE = 100;
     public double initialOffset;
+    private BufferedImage h, d;
     
     private Inventory invent;
 
@@ -27,9 +30,11 @@ public class Player extends Mob {
         this.initialOffset = initialOffset;
         shield = 5;
         speed = 0.08;
-        healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health, MAX_HEALTH);
-        sheildBar = new GuiBar(new Vector(10, 30), new Vector(200, 10), Color.BLUE, shield, MAX_SHIELD);
+        healthBar = new GuiBar(new Vector(20, 30), new Vector(200, 10), Color.GREEN, health, MAX_HEALTH);
+        sheildBar = new GuiBar(new Vector(20, 50), new Vector(200, 10), Color.BLUE, shield, MAX_SHIELD);
         
+        h = Tools.getImage("/gui/health.png");
+        d = Tools.getImage("/gui/shield.png");
         
         invent = new Inventory(new Vector(0, 100));
     }
@@ -77,7 +82,9 @@ public class Player extends Mob {
     public void render(Graphics g) {
         super.render(g);
         healthBar.render(g);
+        g.drawImage(h, (int)(healthBar.getX() - 15), (int)healthBar.getY(), null);
         sheildBar.render(g);
+        g.drawImage(d, (int)(sheildBar.getX() - 15), (int)sheildBar.getY(), null);
     }
     
     public boolean keyReleased(KeyReleasedEvent e) {
