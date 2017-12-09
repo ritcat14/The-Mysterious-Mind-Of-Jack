@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import entities.Player;
 
@@ -14,7 +15,9 @@ import entities.Player;
 
 public class DataHandler {
 	
-	public static final String dir = System.getProperty("user.home") + "//TMMOJ";
+	public static final String dir = System.getProperty("user.home") + "\\TMMOJ";
+	public static final String inventFile = dir + "\\inventory.gme";
+	public static final String recipeFile = dir + "\\recipes.gme";
 	
 	public static void init() {
 		File file = new File(dir); // Store the directory
@@ -24,9 +27,27 @@ public class DataHandler {
 			// Create a blank player file
 			// x, y, health, xScroll
 			Object[] data = {105, 105, 200, 0};
-			writeToFile(dir + "//player.gme", false, data);
+			writeToFile(dir + "\\player.gme", false, data);
+			Object[] data2 = {};
+			writeToFile(inventFile, false, data2);
+			writeToFile(recipeFile, false, data2);
 		}
-		
+	}
+	
+	public static boolean exists(String file) {
+		File f = new File(dir); // Store the directory
+		return f.exists();
+	}
+	
+	public static void createDirectory(String dir) {
+		File file = new File(dir);
+		boolean exists = file.exists();
+		if (!exists) file.mkdir();
+	}
+	
+	public static void createFile(String file) {
+		Object[] data = {""};
+		writeToFile(file, false, data);
 	}
 	
 	public static void writeToFile(String file, boolean append, Object[] data) {
@@ -74,6 +95,8 @@ public class DataHandler {
 	public static void savePlayer(Player player) {
 		Object[] data = {player.getPosition().x, player.getPosition().y, player.getHealth(), player.getMap().getX()};
 		writeToFile(dir + "//player.gme", false, data);
+		Object[] invData = player.getInvent().getData();
+		writeToFile(inventFile, false, invData);
 	}
 
 }

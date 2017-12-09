@@ -15,7 +15,6 @@ public class GuiComponent {
     protected ArrayList<GuiComponent> componentsToAdd = new ArrayList<GuiComponent>();
     protected ArrayList<GuiComponent> componentsToRemove = new ArrayList<GuiComponent>();
     
-    private boolean isUpdating = false;
     private boolean isRendering = false;
     
     public GuiComponent(Vector pos, Vector size) {
@@ -27,24 +26,34 @@ public class GuiComponent {
         return new Rectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y);
     }
     
+    public void addAll(ArrayList<GuiComponent> c) {
+        if (isRendering) {
+            componentsToAdd.addAll(c);
+        } else components.addAll(c);
+    }
+    
+    public void removeAll(ArrayList<GuiComponent> c) {
+        if (isRendering) {
+            componentsToRemove.addAll(c);
+        } else components.removeAll(c);
+    }
+    
     public void add(GuiComponent c) {
-        if (isUpdating || isRendering) {
+        if (isRendering) {
             componentsToAdd.add(c);
         } else components.add(c);
     }
     
     public void remove(GuiComponent c) {
-        if (isUpdating || isRendering) {
+        if (isRendering) {
             componentsToRemove.add(c);
         } else components.remove(c);
     }
     
     public void update() {
         for (GuiComponent c : components) {
-            isUpdating = true;
             c.update();
         }
-        isUpdating = false;
         if (!isRendering) {
             components.addAll(componentsToAdd);
             componentsToAdd.clear();

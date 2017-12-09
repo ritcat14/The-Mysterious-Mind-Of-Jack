@@ -33,6 +33,10 @@ public class GuiLabel extends GuiComponent {
         this.text = text;
     }
     
+    public void setFont(Font font) {
+		this.font = font;
+	}
+    
     @Override
     public void render(Graphics g) {
         g.setFont(font);

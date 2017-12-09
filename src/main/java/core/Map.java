@@ -18,6 +18,7 @@ import events.EventHandler;
 import events.EventListener;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
+import events.types.MousePressedEvent;
 import core.tiles.Tile;
 
 public class Map implements EventListener {

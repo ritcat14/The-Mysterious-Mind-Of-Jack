@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Rectangle;
+
 import core.Map;
 import handler.StateHandler;
 import handler.Vector;
@@ -17,13 +19,17 @@ public class Enemy extends Mob {
 	@Override
 	public void update() {
 		Player player = StateHandler.player;
+		Vector playerPos = player.getPosition();
 		if (!player.getBounds().intersects(this.getBounds())) {
-			Vector playerPos = player.getPosition();
 			if (playerPos.x < pos.x) velocity.x -= speed;
 			if (playerPos.x > pos.x) velocity.x += speed;
 		} else {
 			velocity.clear();
 			player.doDamage(damage);
+		}
+		int distance = 80;
+		if (getBounds().intersects(new Rectangle((int)(playerPos.x - distance), (int)(playerPos.y - distance), (int)(player.getWidth() + (distance * 2)), StateHandler.HEIGHT))) {
+			jump();
 		}
 		
 		super.update();

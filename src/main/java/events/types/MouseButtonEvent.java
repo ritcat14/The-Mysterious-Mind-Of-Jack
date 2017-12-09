@@ -1,10 +1,12 @@
 package events.types;
 
+import java.awt.Point;
+
 import events.Event;
 
 public class MouseButtonEvent extends Event { 
 
-	protected int button = -1;
+	protected int button = -1;  // 1 - left, 2 - middle, 3 - right
 	protected int x = 0, y = 0;
 	
 	protected MouseButtonEvent(int button, int x, int y, Type type) {
@@ -24,6 +26,10 @@ public class MouseButtonEvent extends Event {
 
 	public int getY() {
 		return y;
+	}
+	
+	public Point getPoint() {
+		return new Point(x, y);
 	}
 	
 }

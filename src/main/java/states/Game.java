@@ -78,6 +78,9 @@ public class Game extends State {
             case KeyEvent.VK_ESCAPE:
             	StateHandler.pause();
             	return true;
+            case KeyEvent.VK_I:
+            	player.getInvent().open();
+            	break;
         }
         return false;
     }

@@ -7,7 +7,12 @@ import java.awt.Graphics;
 import core.Main;
 import entities.Player;
 import events.Event;
+import events.EventHandler;
 import events.EventListener;
+import events.Event.Type;
+import events.EventDispatcher;
+import events.types.MouseMovedEvent;
+import events.types.MousePressedEvent;
 import states.*;
 
 public class StateHandler implements EventListener {
@@ -92,6 +97,9 @@ public class StateHandler implements EventListener {
     public static void update() {
         if (currentState != null) {
         	currentState.update();
+        	if (player != null) {
+        		player.getInvent().update();
+        	}
         }
     }
     
@@ -100,12 +108,28 @@ public class StateHandler implements EventListener {
         g.setFont(new Font("Times New Java", Font.BOLD, 20));
         g.setColor(Color.YELLOW);
         g.drawString("" + Main.FPS, 10, 20);
+        if (player != null) player.getInvent().render(g);
     }
 
     @Override
     public void onEvent(Event event) {
         if (currentState != null) {
         	currentState.onEvent(event);
+        	if (player != null) {
+        		EventDispatcher dispatcher = new EventDispatcher(event);
+                dispatcher.dispatch(Type.MOUSE_PRESSED, new EventHandler() {
+        			@Override
+        			public boolean onEvent(Event event) {
+        				return player.getInvent().mousePressed((MousePressedEvent)event);
+        			}
+                });
+                dispatcher.dispatch(Type.MOUSE_MOVED, new EventHandler() {
+        			@Override
+        			public boolean onEvent(Event event) {
+        				return player.getInvent().mouseMoved((MouseMovedEvent)event);
+        			}
+                });
+        	}
         }
     }
 }

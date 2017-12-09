@@ -60,9 +60,11 @@ public class GameCanvas extends Canvas {
         
         if (Game.paused) {
         	if (!isBlurred) {
-	        	StateHandler.pausedGame.render(g);
-	        	blurred = Tools.blur(currentFrame);
-	        	isBlurred = true;
+	        	if (StateHandler.pausedGame != null) {
+		        	StateHandler.pausedGame.render(g);
+		        	blurred = Tools.blur(currentFrame);
+		        	isBlurred = true;
+	        	}
         	}
         } else isBlurred = false;
         

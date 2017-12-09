@@ -1,6 +1,7 @@
 package entities;
 
 import graphics.GuiBar;
+import graphics.Inventory;
 import handler.StateHandler;
 import handler.Vector;
 
@@ -18,6 +19,8 @@ public class Player extends Mob {
     private GuiBar healthBar, sheildBar;
     private final int EDGE_DISTANCE = 100;
     public double initialOffset;
+    
+    private Inventory invent;
 
     public Player(Map map, Vector pos, String file, double initialOffset) {
         super(map, pos, new Vector(32, 64), file);
@@ -26,6 +29,9 @@ public class Player extends Mob {
         speed = 0.08;
         healthBar = new GuiBar(new Vector(10, 10), new Vector(200, 10), Color.GREEN, health, MAX_HEALTH);
         sheildBar = new GuiBar(new Vector(10, 30), new Vector(200, 10), Color.BLUE, shield, MAX_SHIELD);
+        
+        
+        invent = new Inventory(new Vector(0, 100));
     }
     
     public void crouch() {
@@ -113,5 +119,9 @@ public class Player extends Mob {
         }
         return false;
     }
+    
+    public Inventory getInvent() {
+		return invent;
+	}
     
 }

@@ -1,5 +1,7 @@
 package events.types;
 
+import java.awt.Point;
+
 import events.Event;
 
 public class MouseMovedEvent extends Event {
@@ -18,6 +20,10 @@ public class MouseMovedEvent extends Event {
 
 	public int getY() {
 		return y;
+	}
+	
+	public Point getPoint() {
+		return new Point(x, y);
 	}
 	
 }
