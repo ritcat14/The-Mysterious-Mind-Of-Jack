@@ -132,7 +132,7 @@ public abstract class Mob extends Entity {
     
     @Override
     public void render(Graphics g) {
-    	g.drawImage(animation.getCurrentFrame(), (int)(pos.x), (int)pos.y, (int)size.x, (int)size.y, null);
+    	super.render(g);
     }
     
     public double getHealth() {

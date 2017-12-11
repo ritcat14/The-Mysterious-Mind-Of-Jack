@@ -53,6 +53,10 @@ public abstract class Entity {
     
     public void render(Graphics g) {
         g.drawImage(image, (int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y, null);
+        /*g.drawRect(getLeft().x, getLeft().y, getLeft().width, getLeft().height);
+        g.drawRect(getBottom().x, getBottom().y, getBottom().width, getBottom().height);
+        g.drawRect(getTop().x, getTop().y, getTop().width, getTop().height);
+        g.drawRect(getRight().x, getRight().y, getRight().width, getRight().height);*/
     }
     
     public double getWidth() { return size.x; }
@@ -71,9 +75,9 @@ public abstract class Entity {
     
     public Rectangle getLeft() { return new Rectangle((int)pos.x, (int)pos.y + 3, 3, (int)(size.y - 6));}
     
-    public Rectangle getBottom() { return new Rectangle((int)pos.x + 3, (int)(pos.y + (size.y - 3)), (int)(size.y - 6), 3);}
+    public Rectangle getBottom() { return new Rectangle((int)pos.x + 3, (int)(pos.y + (size.y - 3)), (int)(size.x - 6), 3);}
     
-    public Rectangle getTop() { return new Rectangle((int)pos.x + 3, (int)pos.y, (int)(size.y - 6), 3);}
+    public Rectangle getTop() { return new Rectangle((int)pos.x + 3, (int)pos.y, (int)(size.x - 6), 3);}
     
     public boolean isRemoved() { return removed; }
     
