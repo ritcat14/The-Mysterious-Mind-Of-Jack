@@ -139,7 +139,7 @@ public abstract class Mob extends Entity {
 		return health;
 	}
     
-    public void setHealth(int health) {
+    public void setHealth(double health) {
 		this.health = health;
 	}
     

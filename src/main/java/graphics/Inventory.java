@@ -68,7 +68,7 @@ public class Inventory extends GuiButton {
 		int j = 0;
 		for (int i = 0; i < ITEM_MAX; i++) {
 			InventButton b;
-			if (i >= 0 && i <= 8) b = new InventButton(new Vector((pos.x + (x * 50)) + 10, (pos.y + (y * 50)) + 10), new Color(255, 68, 71), true);
+			if (i >= 0 && i <= 8) b = new InventButton(new Vector((pos.x + (x * 50)) + 10, (pos.y + (y * 50)) + 10), true);
 			else if (i >= ITEM_MAX - 3 && i <= ITEM_MAX) b = new InventButton(new Vector((pos.x + (x * 50)) + 10, (pos.y + (y * 50)) + 10), "/gui/armour/" + (j++) + ".png", false);
 			else b = new InventButton(new Vector((pos.x + (x * 50)) + 10, (pos.y + (y * 50)) + 10), false);
 			buttons.add(b);

@@ -40,8 +40,7 @@ public class Crafting extends GuiPanel implements EventListener {
 		input1 = new InventButton(new Vector(pos.x + 15, pos.y + 180), new Vector(70, 70), false);
 		input2 = new InventButton(new Vector(pos.x + 95, pos.y + 180), new Vector(70, 70), false);
 		final Inventory invent = inv;
-		trash = new InventButton(new Vector(), new Vector(), "/gui/trash.png", false) {
-			
+		trash = new InventButton(new Vector(440, 450), new Vector(100, 100), "/gui/trash.png", false) {
 			@Override
 			public boolean mousePressed(MousePressedEvent e) {
 				if (super.mousePressed(e) ) {
@@ -49,15 +48,6 @@ public class Crafting extends GuiPanel implements EventListener {
 					return true;
 				}
 				return false;
-			}
-			
-			@Override
-			public void update() {
-				setX(440);
-				setY(450);
-				setWidth(100);
-				setHeight(100);
-				super.update();
 			}
 		};
 		craft = new GuiButton(new Vector(pos.x + 35, pos.y + 280), new Vector(110, 30), Color.BLACK, "CRAFT", new Font("Times New Java", Font.BOLD, 30)) {
@@ -76,14 +66,7 @@ public class Crafting extends GuiPanel implements EventListener {
 				return false;
 			}			
 		}.setTextOffset(5, 25);
-		errorLabel = new GuiLabel(new Vector(), new Vector(), "", Color.RED, new Font("Times New Java", Font.BOLD, 10)) {
-			@Override
-			public void update() {
-				setX(415);
-				setY(StateHandler.HEIGHT - 10);
-				super.update();
-			}
-		};
+		errorLabel = new GuiLabel(new Vector(415, StateHandler.HEIGHT - 10), new Vector(), "", Color.RED, new Font("Times New Java", Font.BOLD, 10));
 		errorLabel.setVisible(false);
 		add(errorLabel);
 		add(craft);
