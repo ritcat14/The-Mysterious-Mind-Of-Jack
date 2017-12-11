@@ -14,6 +14,7 @@ public class Item extends Entity {
 	public Item(Vector pos, int ID) {
 		super(pos, new Vector(40, 40), Tools.getImage("/items/" + ID + ".png"));
 		this.ID = ID;
+		buttonImage = image;
 	}
 
 	public void action() {
@@ -27,6 +28,11 @@ public class Item extends Entity {
 	
 	public int getID() {
 		return ID;
+	}
+	
+	@Override
+	public BufferedImage getImage() {
+		return buttonImage;
 	}
 	
 	@Override

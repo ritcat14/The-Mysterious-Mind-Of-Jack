@@ -13,7 +13,7 @@ public abstract class Mob extends Entity {
     
     protected boolean canJump = true;
     protected boolean falling = true;
-    protected int health = 200;
+    protected double health = 200.0;
     protected double gravity;
     protected double maxY;
     protected double maxX;
@@ -135,7 +135,7 @@ public abstract class Mob extends Entity {
     	g.drawImage(animation.getCurrentFrame(), (int)(pos.x), (int)pos.y, (int)size.x, (int)size.y, null);
     }
     
-    public int getHealth() {
+    public double getHealth() {
 		return health;
 	}
     
@@ -144,7 +144,7 @@ public abstract class Mob extends Entity {
 	}
     
     public void doDamage(int damage) {
-    	this.health -= (damage - shield);
+    	this.health -= (damage / shield);
     }
     
     public Map getMap() {

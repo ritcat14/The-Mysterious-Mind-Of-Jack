@@ -30,7 +30,7 @@ public class Player extends Mob {
         this.initialOffset = initialOffset;
         shield = 5;
         speed = 0.08;
-        healthBar = new GuiBar(new Vector(20, 30), new Vector(200, 10), Color.GREEN, health, MAX_HEALTH);
+        healthBar = new GuiBar(new Vector(20, 30), new Vector(200, 10), Color.GREEN, (int)health, MAX_HEALTH);
         sheildBar = new GuiBar(new Vector(20, 50), new Vector(200, 10), Color.BLUE, shield, MAX_SHIELD);
         
         h = Tools.getImage("/gui/health.png");
@@ -45,7 +45,8 @@ public class Player extends Mob {
 
     @Override
     public void update() {
-        healthBar.setValue(health);
+    	shield = invent.getDefense();
+        healthBar.setValue((int)health);
         sheildBar.setValue(shield);
         if (up) jump();
         

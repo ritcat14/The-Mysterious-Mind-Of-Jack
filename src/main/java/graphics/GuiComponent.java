@@ -15,6 +15,8 @@ public class GuiComponent {
     protected ArrayList<GuiComponent> componentsToAdd = new ArrayList<GuiComponent>();
     protected ArrayList<GuiComponent> componentsToRemove = new ArrayList<GuiComponent>();
     
+    protected boolean visible = true;
+    
     private boolean isRendering = false;
     
     public GuiComponent(Vector pos, Vector size) {
@@ -51,6 +53,7 @@ public class GuiComponent {
     }
     
     public void update() {
+    	if (!visible) return;
         for (GuiComponent c : components) {
             c.update();
         }
@@ -63,12 +66,15 @@ public class GuiComponent {
     }
     
     public void render(Graphics g) {
+    	if (!visible) return;
         for (GuiComponent c : components) {
             isRendering = true;
             c.render(g);
         }
         isRendering = false;
     }
+    
+    public boolean isVisible() { return visible; }
     
     public double getX() { return pos.x; }
     
@@ -85,5 +91,7 @@ public class GuiComponent {
     public void setWidth(double w) { this.size.x = w; }
     
     public void setHeight(double h) { this.size.y = h; }
+    
+    public void setVisible(boolean visible) { this.visible = visible; }
     
 }

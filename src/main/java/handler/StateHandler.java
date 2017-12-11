@@ -11,8 +11,7 @@ import events.EventHandler;
 import events.EventListener;
 import events.Event.Type;
 import events.EventDispatcher;
-import events.types.MouseMovedEvent;
-import events.types.MousePressedEvent;
+import events.types.*;
 import states.*;
 
 public class StateHandler implements EventListener {
@@ -123,10 +122,22 @@ public class StateHandler implements EventListener {
         				return player.getInvent().mousePressed((MousePressedEvent)event);
         			}
                 });
+                dispatcher.dispatch(Type.MOUSE_RELEASED, new EventHandler() {
+        			@Override
+        			public boolean onEvent(Event event) {
+        				return player.getInvent().mouseReleased((MouseReleasedEvent)event);
+        			}
+                });
                 dispatcher.dispatch(Type.MOUSE_MOVED, new EventHandler() {
         			@Override
         			public boolean onEvent(Event event) {
         				return player.getInvent().mouseMoved((MouseMovedEvent)event);
+        			}
+                });
+                dispatcher.dispatch(Type.MOUSE_DRAGGED, new EventHandler() {
+        			@Override
+        			public boolean onEvent(Event event) {
+        				return player.getInvent().mouseDragged((MouseDraggedEvent)event);
         			}
                 });
         	}

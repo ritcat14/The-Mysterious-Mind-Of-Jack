@@ -1,6 +1,7 @@
 package graphics;
 
 import handler.SoundHandler;
+import handler.Tools;
 import handler.Vector;
 
 import java.awt.Color;
@@ -13,9 +14,7 @@ import events.Event;
 import events.EventDispatcher;
 import events.EventHandler;
 import events.EventListener;
-import events.types.MouseMovedEvent;
-import events.types.MousePressedEvent;
-import events.types.MouseReleasedEvent;
+import events.types.*;
 
 public class GuiButton extends GuiPanel implements EventListener {
 
@@ -33,6 +32,11 @@ public class GuiButton extends GuiPanel implements EventListener {
 		this.font = font;
 	}
 
+	public GuiButton(Vector pos, Vector size, String file, String text) {
+		super(pos, size, Tools.getImage(file));
+		this.text = text;
+	}
+
 	public GuiButton(Vector pos, Vector size, Color c, String text) {
 		super(pos, size, c);
 		this.text = text;
@@ -42,9 +46,14 @@ public class GuiButton extends GuiPanel implements EventListener {
 	    this.textOffset = new Vector(x, y);
 	    return this;
 	}
+	
+	public void setText(String text) {
+		this.text = text;
+	}
 
 	@Override
 	public void render(Graphics g) {
+    	if (!visible) return;
 		super.render(g);
 		if (image != null) g.drawImage(image, (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, null);
 		g.setColor(textColour);
@@ -53,14 +62,17 @@ public class GuiButton extends GuiPanel implements EventListener {
 	}
 
 	public boolean mousePressed(MousePressedEvent e) {
+    	if (!visible) return false;
 		return (getBounds().contains(new Point(e.getX(), e.getY())));
 	}
 
 	public boolean mouseReleased(MouseReleasedEvent e) {
+    	if (!visible) return false;
 		return (getBounds().contains(new Point(e.getX(), e.getY())));
 	}
 
 	public boolean mouseMoved(MouseMovedEvent e) {
+    	if (!visible) return false;
 		if (getBounds().contains(new Point(e.getX(), e.getY()))) {
 			textColour = new Color(200, 200, 200);
 		    if (!playedSound) {
@@ -74,7 +86,13 @@ public class GuiButton extends GuiPanel implements EventListener {
 		return false;
 	}
 
+	public boolean mouseDragged(MouseDraggedEvent e) {
+    	if (!visible) return false;
+		return (getBounds().contains(new Point(e.getX(), e.getY())));
+	}
+
 	public void onEvent(Event event) {
+    	if (!visible) return;
         EventDispatcher dispatcher = new EventDispatcher(event);
         dispatcher.dispatch(Event.Type.MOUSE_PRESSED, new EventHandler() {
             public boolean onEvent(Event event) {

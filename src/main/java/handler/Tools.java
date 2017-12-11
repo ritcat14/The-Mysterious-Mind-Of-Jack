@@ -14,7 +14,9 @@ import java.util.HashMap;
 
 
 public class Tools {
-	
+
+	public static final String recipeFile = "/items/recipes.gme";
+	public static final String itemFile = "/items/items.gme";
     private static HashMap<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 	
     /* ------------------------------- Image Handling -------------------------------- */
@@ -120,7 +122,7 @@ public class Tools {
        return ints;
    }
    
-   public static int getSecs(int time) {
+   public static double getSecs(double time) {
 	   return time * 60;
    }
     

@@ -36,6 +36,7 @@ public class GuiPanel extends GuiComponent implements EventListener {
     
     @Override
     public void render(Graphics g) {
+    	if (!visible) return;
         if (colour != null) {
             g.setColor(colour);
             g.fillRect((int)pos.x, (int)pos.y, (int)size.x, (int)size.y);
@@ -52,6 +53,7 @@ public class GuiPanel extends GuiComponent implements EventListener {
 
     @Override
     public void onEvent(Event event) {
+    	if (!visible) return;
         for (GuiComponent c : components) {
             if (c instanceof EventListener) {
                 ((EventListener)c).onEvent(event);

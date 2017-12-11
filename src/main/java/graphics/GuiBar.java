@@ -25,6 +25,7 @@ public class GuiBar extends GuiPanel {
     
     @Override
     public void update() {
+    	if (!visible) return;
     	super.update();
     	colouredPanel.setWidth(width);
     	colouredPanel.update();
@@ -32,6 +33,7 @@ public class GuiBar extends GuiPanel {
     
     @Override
     public void render(Graphics g) {
+    	if (!visible) return;
     	super.render(g);
     	colouredPanel.render(g);
     }

@@ -39,6 +39,7 @@ public class GuiLabel extends GuiComponent {
     
     @Override
     public void render(Graphics g) {
+    	if (!visible) return;
         g.setFont(font);
         g.setColor(colour);
         g.drawString(text, (int)pos.x, (int)pos.y);

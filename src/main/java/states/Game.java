@@ -79,7 +79,8 @@ public class Game extends State {
             	StateHandler.pause();
             	return true;
             case KeyEvent.VK_I:
-            	player.getInvent().open();
+            	if (player.getInvent().isOpen()) player.getInvent().close();
+            	else player.getInvent().open();
             	break;
         }
         return false;

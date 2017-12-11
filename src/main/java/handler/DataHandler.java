@@ -17,7 +17,6 @@ public class DataHandler {
 	
 	public static final String dir = System.getProperty("user.home") + "\\TMMOJ";
 	public static final String inventFile = dir + "\\inventory.gme";
-	public static final String recipeFile = "/items/recipes.gme";
 	public static final String version = "1.0.1";
 	
 	public static void init() {
