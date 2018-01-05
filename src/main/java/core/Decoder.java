@@ -12,7 +12,7 @@ import core.tiles.*;
 
 public class Decoder {
     
-    private int TILE_SIZE = 64;
+    public static int TILE_SIZE = 64;
     
     private Player player;
     private ArrayList<Tile> tiles;

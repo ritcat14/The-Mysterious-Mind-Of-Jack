@@ -74,10 +74,10 @@ public abstract class Mob extends Entity {
         for (int i = 0; i < map.getTiles().size(); i++) {
             Tile t = map.getTiles().get(i);
             if (!t.isSolid()) continue;
-            if (getBounds().intersects(t.getTop()) && velocity.y > 0) {
+            if (getBottom().intersects(t.getTop()) && velocity.y > 0) {
                 velocity.y = 0;
                 return true;
-            } else falling = true;
+            }
             if (getTop().intersects(t.getBottom()) && velocity.y < 0) {
                 velocity.y = 0;
                 return true;
@@ -143,8 +143,8 @@ public abstract class Mob extends Entity {
 		this.health = health;
 	}
     
-    public void doDamage(int damage) {
-    	this.health -= (damage / shield);
+    public void doDamage(double damage) {
+    	this.health -= ((damage / shield));
     }
     
     public Map getMap() {

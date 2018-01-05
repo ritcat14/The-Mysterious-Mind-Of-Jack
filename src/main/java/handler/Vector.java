@@ -2,6 +2,8 @@ package handler;
 
 import java.awt.Point;
 
+import core.Decoder;
+
 public class Vector {
     
     public double x, y;
@@ -28,6 +30,18 @@ public class Vector {
         this.x += v2.x;
         this.y += v2.y;
         return this;
+    }
+    
+    public Vector multiply(Vector v2) {
+    	this.x *= v2.x;
+    	this.y *= v2.y;
+    	return this;
+    }
+    
+    public Vector tile(double x, double y) {
+    	this.x = Decoder.TILE_SIZE * x;
+    	this.y = Decoder.TILE_SIZE * y;
+    	return this;
     }
     
     public void clear() {

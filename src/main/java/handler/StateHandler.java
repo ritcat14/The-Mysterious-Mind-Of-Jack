@@ -83,7 +83,8 @@ public class StateHandler implements EventListener {
     	currentState = pausedGame;
     }
     
-    public static void nextChapter() {
+    public static void nextChapter(boolean first) {
+        if (!first) playerProgress++;
         chapter = playerProgress;
         changeState(States.GAME);
     }
