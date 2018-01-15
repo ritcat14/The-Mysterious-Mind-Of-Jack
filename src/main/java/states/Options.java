@@ -29,9 +29,42 @@ public class Options extends State {
                 return false;
             }
             
-        });
+     });
+		mainPanel.add(new GuiButton(new Vector(450, 470), new Vector(0, 0), Color.DARK_GRAY, "Volume", new Font("Times New Java", Font.BOLD, 22)) {
+		        	
+		            @Override
+		            public boolean mousePressed(MousePressedEvent e) {
+		                if (super.mousePressed(e)) {
+		                    StateHandler.changeState(States.START);
+		                }
+		                return false;
+		            }
+		            
+		        });
+		    
+	mainPanel.add(new GuiButton(new Vector(450, 490), new Vector(0, 0), Color.DARK_GRAY, "Place Holder", new Font("Times New Java", Font.BOLD, 22)) {
+    	
+        @Override
+        public boolean mousePressed(MousePressedEvent e) {
+            if (super.mousePressed(e)) {
+                StateHandler.changeState(States.START);
+            }
+            return false;
+        }
+        
+    });
+	mainPanel.add(new GuiButton(new Vector(450, 510), new Vector(0, 0), Color.DARK_GRAY, "Place Holder", new Font("Times New Java", Font.BOLD, 22)) {
+	    	
+	        @Override
+	        public boolean mousePressed(MousePressedEvent e) {
+	            if (super.mousePressed(e)) {
+	                StateHandler.changeState(States.START);
+	            }
+	            return false;
+	        }
+	        
+	    });
     }
-
     @Override
     public void onEvent(Event event) {
         mainPanel.onEvent(event);
