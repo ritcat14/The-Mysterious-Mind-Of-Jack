@@ -20,7 +20,6 @@ import entities.Player;
  */
 
 public class Main implements Runnable, WindowListener {
-
     public static JFrame       frame;
     private Thread       t;
     private boolean      running = false;
