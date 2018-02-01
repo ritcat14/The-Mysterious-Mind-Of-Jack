@@ -17,6 +17,7 @@ import graphics.GameCanvas;
 import graphics.GuiButton;
 import graphics.GuiLabel;
 import graphics.GuiPanel;
+import graphics.GuiRadioButton;
 import handler.DataHandler;
 import handler.StateHandler;
 import handler.StateHandler.States;
@@ -28,6 +29,7 @@ public class Pause extends State {
     
     public Pause() {
     	mainPanel = new GuiPanel(new Vector(100, 200), new Vector(400, StateHandler.HEIGHT - 800));
+    	//mainPanel.add(new GuiRadioButton(new Vector(100, 100), new Vector(50, 50), "Check me!", GuiLabel.standard));
     	mainPanel.add(new GuiLabel(new Vector(100, 280), new Vector(100, 50), "PAUSE", Color.WHITE, new Font("Times New Java", Font.BOLD, 100)));
     	
     	mainPanel.add(new GuiButton(new Vector(100, 300), new Vector(150, 25), null, "MAIN MENU", new Font("Times New Java", Font.BOLD, 25)) {

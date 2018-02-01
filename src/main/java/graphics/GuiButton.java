@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import javafx.scene.media.MediaPlayer;
 import events.Event;
@@ -30,6 +31,10 @@ public class GuiButton extends GuiPanel implements EventListener {
 		this.text = text;
 		this.textColour = Color.WHITE;
 		this.font = font;
+	}
+
+	public GuiButton(Vector pos, BufferedImage image) {
+		super(pos, image);
 	}
 
 	public GuiButton(Vector pos, Vector size, String file, String text) {
