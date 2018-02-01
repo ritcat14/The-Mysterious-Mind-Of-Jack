@@ -29,6 +29,13 @@ public class Options extends State {
                 return false;
             }
             
+            @Override
+            public void update() {
+            	setWidth(100);
+            	setTextOffset(10, 25);
+            	super.update();
+            }
+            
      });
 		mainPanel.add(new GuiButton(new Vector(450, 470), new Vector(0, 0), Color.DARK_GRAY, "Volume", new Font("Times New Java", Font.BOLD, 22)) {
 		        	

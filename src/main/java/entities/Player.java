@@ -111,6 +111,7 @@ public class Player extends Mob {
     public boolean keyPressed(KeyPressedEvent e) {
         switch(e.getKey()) {
             case KeyEvent.VK_W:
+            	System.out.println(KeyEvent.VK_W);
 	            up = true;
 	            return true;
             case KeyEvent.VK_SPACE:
