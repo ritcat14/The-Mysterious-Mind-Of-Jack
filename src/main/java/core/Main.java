@@ -85,7 +85,7 @@ public class Main implements Runnable, WindowListener {
 		while (running) {
 			long nowU = System.nanoTime();
 			deltaU += (nowU - lastTimeU) / nsu;
-			deltaF += ((nowU - lastTimeU) / nsu) / 2;
+			deltaF += ((nowU - lastTimeU) / nsu);
 			lastTimeU = nowU;
 			while (deltaU >= 1) {
 				update();
