@@ -26,9 +26,7 @@ public class DataHandler {
 		else {
 			String[] data = readFile(dir + "\\player.gme");
 			String version = data[0];
-			if (!version.equals(DataHandler.version)) {
-				initiate(file);
-			}
+			if (!version.equals(DataHandler.version)) initiate(file);
 		}
 	}
 	

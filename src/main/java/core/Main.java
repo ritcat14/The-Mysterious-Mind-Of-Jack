@@ -1,4 +1,5 @@
 package core;
+
 import graphics.GameCanvas;
 import handler.DataHandler;
 import handler.StateHandler;
@@ -20,112 +21,112 @@ import entities.Player;
  */
 
 public class Main implements Runnable, WindowListener {
-    public static JFrame       frame;
-    private Thread       t;
-    private boolean      running = false;
-    private GameCanvas   canvas;
-    private int          WIDTH   = 1200;
-    private int          HEIGHT  = WIDTH / 16 * 9;
-    public static int RENDER_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-    public static int RENDER_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
-    private StateHandler sh;
-    private int time = 0;
-    private Player player;
-    
-    public static int FPS = 0;
-    
-    public static Main m;
+	public static JFrame frame;
+	private Thread thread;
+	private boolean running = false;
+	private GameCanvas canvas;
+	private int WIDTH = 1200;
+	private int HEIGHT = WIDTH / 16 * 9;
+	public static int RENDER_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+	public static int RENDER_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+	private StateHandler sh;
+	private int time = 0;
+	private Player player;
 
-    public Main() {
-    	DataHandler.init();
-        sh = new StateHandler(WIDTH, HEIGHT);
-        canvas = new GameCanvas(sh, WIDTH, HEIGHT);
-    }
+	public static int FPS = 0;
 
-    public synchronized void start() {
-        running = true;
-        t = new Thread(this, "Main");
-        t.start();
-        StateHandler.changeState(States.START);
-    }
+	public static Main main;
 
-    public synchronized void stop() {
-        try {
-            t.join();
-        } catch (Exception e) {
-        }
-        running = false;
-    }
+	public Main() {
+		DataHandler.init();
+		sh = new StateHandler(WIDTH, HEIGHT);
+		canvas = new GameCanvas(sh, WIDTH, HEIGHT);
+	}
 
-    public void update() { // Update game logic
-    	time++;
-    	if (time >= Integer.MAX_VALUE - 1) time = 0;
-    	this.player = StateHandler.player;
-        StateHandler.update();
-        if ((time % Tools.getSecs(30) ==  0) && (player != null)) {
-        	System.out.println("Saving data");
-        	DataHandler.savePlayer(player);
-        }
-    }
+	public synchronized void start() {
+		running = true;
+		thread = new Thread(this, "Main");
+		thread.start();
+		StateHandler.changeState(States.START);
+	}
 
-    public void render() { // Draw the game
-        canvas.draw();
-    }
+	public synchronized void stop() {
+		try {
+			thread.join();
+		} catch (Exception e) {
+		}
+		running = false;
+	}
 
-    @Override
-    public void run() {
-        long lastTimeU = System.nanoTime();
-        long timer = System.currentTimeMillis();
-        final double nsu = 1000000000.0 / 60.0;
-        double deltaU = 0;
-        double deltaF = 0;
-        int frames = 0;
-        int updates = 0;
-        while (running) {
-            long nowU = System.nanoTime();
-            deltaU += (nowU - lastTimeU) / nsu;
-            deltaF += ((nowU - lastTimeU) / nsu)/2;
-            lastTimeU = nowU;
-            while (deltaU >= 1) {
-                update();
-                updates++;
-                deltaU--;
-            }
-            
-            while (deltaF >= 1) {
-                render();
-                frames++;
-                deltaF --;
-            }
-            
-            if (System.currentTimeMillis() - timer > 1000) {
-                timer += 1000;
-                frame.setTitle("FPS: " + frames + " , UPS: " + updates);
-                FPS = frames;
-                frames = 0;
-                updates = 0;
-            }
-        }
-        stop();
-    }
+	public void update() { // Update game logic
+		time++;
+		if (time >= Integer.MAX_VALUE - 1) time = 0;
+		this.player = StateHandler.player;
+		StateHandler.update();
+		if ((time % Tools.getSecs(30) == 0) && (player != null)) {
+			System.out.println("Saving data");
+			DataHandler.savePlayer(player);
+		}
+	}
 
-    public static void main(String[] args) {
-        // Main method
-        Main m = new Main(); // Create the game object
-        Main.m = m;
-        frame = new JFrame("Game");
-        frame.setResizable(false);
-        frame.setUndecorated(true);
-        frame.add(m.canvas);
- 
-        frame.pack();
-        frame.addWindowListener(m);
+	public void render() { // Draw the game
+		canvas.draw();
+	}
 
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.requestFocus();
-        m.start();
-    }
+	@Override
+	public void run() {
+		long lastTimeU = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		final double nsu = 1000000000.0 / 60.0;
+		double deltaU = 0;
+		double deltaF = 0;
+		int frames = 0;
+		int updates = 0;
+		while (running) {
+			long nowU = System.nanoTime();
+			deltaU += (nowU - lastTimeU) / nsu;
+			deltaF += ((nowU - lastTimeU) / nsu) / 2;
+			lastTimeU = nowU;
+			while (deltaU >= 1) {
+				update();
+				updates++;
+				deltaU--;
+			}
+
+			while (deltaF >= 1) {
+				render();
+				frames++;
+				deltaF--;
+			}
+
+			if (System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+				frame.setTitle("FPS: " + frames + " , UPS: " + updates);
+				FPS = frames;
+				frames = 0;
+				updates = 0;
+			}
+		}
+		stop();
+	}
+
+	public static void main(String[] args) {
+		// Main method
+		Main m = new Main(); // Create the game object
+		Main.main = m;
+		frame = new JFrame("Game");
+		frame.setResizable(false);
+		frame.setUndecorated(true);
+		frame.add(m.canvas);
+
+		frame.pack();
+		frame.addWindowListener(m);
+
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.requestFocus();
+		m.start();
+	}
 
 	@Override
 	public void windowActivated(WindowEvent arg0) {}
@@ -139,9 +140,7 @@ public class Main implements Runnable, WindowListener {
 		if (player != null && StateHandler.getState().equals(States.GAME) || StateHandler.getState().equals(States.PAUSE)) {
 			if (StateHandler.getState().equals(States.GAME)) StateHandler.pause();
 			int confirm = JOptionPane.showOptionDialog(null, "Would you like to save?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-			if (confirm == 0) {
-				DataHandler.savePlayer(player);
-			}
+			if (confirm == 0) DataHandler.savePlayer(player);
 		}
 		System.exit(0);
 	}
