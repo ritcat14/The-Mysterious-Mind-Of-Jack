@@ -38,4 +38,7 @@ public class SoundHandler {
         m = sounds.get(file);
         return m;
     }
+   public final static double getVolume() {
+	   return getVolume();
+   }
 }
