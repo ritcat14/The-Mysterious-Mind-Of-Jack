@@ -32,7 +32,7 @@ public class Tools {
 	
 	public static BufferedImage[] splitImage(BufferedImage image, int num, int width) {
 		BufferedImage[] images = new BufferedImage[num];
-		for (int i = 0; i < images.length; i++) {
+		for (int i = 0; i < num; i++) {
 			images[i] = image.getSubimage(i * width, 0, width, image.getHeight());
         }
 		return images;

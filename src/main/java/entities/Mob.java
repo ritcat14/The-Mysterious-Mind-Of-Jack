@@ -1,6 +1,5 @@
 package entities;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import core.Map;
@@ -28,18 +27,20 @@ public abstract class Mob extends Entity {
     protected BufferedImage[] images; // 0 - left, 1 - right 
     
     protected Map map;
+    
+    private boolean isLeft = true;
 
     public Mob(Map map, Vector pos, Vector size, String file) {
         super(pos, size, file);
         this.map = map;
         
-        BufferedImage[] images = Tools.splitImage(image, 4, 1150);
-        left[0] = images[0];
-        left[1] = images[1];
+        images = Tools.splitImage(image, 4, 1150);
+        left[0] = images[1];
+        left[1] = images[0];
         right[0] = images[2];
         right[1] = images[3];
         
-        animation = new Animation(left, 1);
+        animation = new Animation(left, 8);
         
         gravity = 0.04;
         maxY = 3;
@@ -94,12 +95,12 @@ public abstract class Mob extends Entity {
     }
     
     protected void fall() {
-        if (falling) {
-            velocity.y += gravity;
-            if (velocity.y > maxY) {
-                velocity.y = maxY;
-            }
-        }
+    	if (falling) {
+	    	velocity.y += gravity;
+	    	if (velocity.y > maxY) {
+	    		velocity.y = maxY;
+	    	}
+    	}
     }
     
     protected void jump() {
@@ -118,22 +119,26 @@ public abstract class Mob extends Entity {
         }
         move();
         fall();
-        if (velocity.x == 0) animation.stop();
-        else {
-        	if (!animation.isAnimating()) animation.animate();
+        if (!animation.isAnimating() && velocity.x != 0) animation.start();
+        else if (velocity.x == 0 && animation.isAnimating() || !canJump) animation.stop();
+        if (velocity.x > 0 && isLeft) {
+        	isLeft = false;
+        	animation.setImages(right);
+        } else if (velocity.x < 0 && !isLeft) {
+        	isLeft = true;
+        	animation.setImages(left);
         }
-        if (velocity.x > 0) animation.setImages(right);
-        else if (velocity.x < 0) animation.setImages(left);
-        
-        
         animation.update();
         this.image = animation.getCurrentFrame();
     }
     
-    @Override
+    /*@Override
     public void render(Graphics g) {
-    	super.render(g);
-    }
+        g.drawImage(animation.getCurrentFrame(), (int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y, null);
+        for (int i = 0; i < 4; i++) {
+            g.drawImage(images[i], i * 60, 100, (int)size.x, (int)size.y, null);
+        }
+    }*/
     
     public double getHealth() {
 		return health;
