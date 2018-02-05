@@ -62,7 +62,7 @@ public class Decoder {
         double health = Double.parseDouble(data[3]);
         double xOffset = Double.parseDouble(data[4]);
         
-        player = new Player(map, new Vector(x, y), "/player.png", xOffset);
+        player = new Player(map, new Vector(x, y), "/player/player.png", xOffset);
         player.setHealth(health);
     }
     

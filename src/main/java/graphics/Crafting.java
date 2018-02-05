@@ -136,9 +136,10 @@ public class Crafting extends GuiPanel implements EventListener {
 		int index = 3;
 		if (itemID > 10 && itemID < 26) index = 4;
 		list.add(new GuiLabel(new Vector(580, y), new Vector(), parts[2] + " - " + parts[index], Color.BLACK,new Font("Times New Java", Font.BOLD, 15)));
-		if (parts.length > 4) {
+		if (parts.length > 4 && itemID < 26) {
 			String[] recipes;
 			if (itemID > 10 && itemID < 26) recipes = parts[5].split(",");
+			else if (itemID >= 26) recipes = parts[6].split(",");
 			else recipes = parts[4].split(",");
 			for (int i = 0; i < recipes.length; i++) {
 				final int k = i;

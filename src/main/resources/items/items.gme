@@ -1,6 +1,6 @@
-1:5000:Steel:Common Resource:50x   Steel + 10x  Rock             -> Basic Helmet    ,60x   Steel + 20x  Rock             -> Basic Chest     ,40x   Steel + 20x  Rock   1         -> Basic Legs      ,100x Steel + 1x   Basic Helmet     -> Basic Helmet+   ,120x Steel + 1x   Basic Chest      -> Basic Chest+    ,80x   Steel + 1x   Basic Legs      -> Basic Legs+     ,150x Steel + 1x   Basic Helmet+    -> Hardened Helmet ,180x Steel + 1x   Basic Chest+     -> Hardened Chest  ,120x Steel + 1x   Basic Legs+      -> Hardened Legs   ,200x Steel + 2x   Hardened Helmet  -> Hardened Helmet+,240x Steel + 2x   Hardened Chest   -> Hardened Chest+ ,160x Steel + 2x   Hardened Legs    -> Hardened Legs+  ,250x Steel + 3x   Hardened Helmet+ -> Mega Helmet     ,300x Steel + 3x   Hardened Chest+  -> Mega Chest      ,200x Steel + 3x   Hardened Legs+   -> Mega Legs
+1:5000:Steel:Common Resource:50x   Steel + 10x  Rock             -> Basic Helmet    ,60x   Steel + 20x  Rock             -> Basic Chest     ,40x   Steel + 20x  Rock   1         -> Basic Legs      ,100x Steel + 1x   Basic Helmet     -> Basic Helmet+   ,120x Steel + 1x   Basic Chest      -> Basic Chest+    ,80x   Steel + 1x   Basic Legs      -> Basic Legs+     ,150x Steel + 1x   Basic Helmet+    -> Hardened Helmet ,180x Steel + 1x   Basic Chest+     -> Hardened Chest  ,120x Steel + 1x   Basic Legs+      -> Hardened Legs   ,200x Steel + 2x   Hardened Helmet  -> Hardened Helmet+,240x Steel + 2x   Hardened Chest   -> Hardened Chest+ ,160x Steel + 2x   Hardened Legs    -> Hardened Legs+  ,250x Steel + 3x   Hardened Helmet+ -> Mega Helmet     ,300x Steel + 3x   Hardened Chest+  -> Mega Chest      ,200x Steel + 3x   Hardened Legs+   -> Mega Legs,1x Steel + 15x Wood -> 1x Baseball Bat
 2:5000:Rock:Common Resource:50x  Steel + 10x  Rock     -> Helmet 1,60x  Steel + 20x  Rock     -> Chest  1,40x  Steel + 20x  Rock   1 -> Legs   1
-3:5000:Wood:Common Resource:
+3:5000:Wood:Common Resource:15x Wood + 1x Steel -> 1x Baseball Bat
 11:1:Basic Helmet:5:Armour:Made from 50x Steel and 10x Rock,100x Steel + 1x   Helmet 1 -> Helmet 2
 12:1:Basic Chest:5:Armour:Made from 60x Steel and 20x Rock,120x Steel + 1x   Chest  1 -> Chest  2
 13:1:Basic Legs:5:Armour:Made from 40x Steel and 20x Rock,80x  Steel + 1x   Legs   2 -> Legs   2
@@ -17,3 +17,4 @@
 24:1:Mega Chest:30:Armour:Made from 300x Steel and 3x Chest 4,Used in no recipe.
 25:1:Mega Legs:30:Armour:Made from 200x Steel and 3x Legs 4,Used in no recipe.
 26:1:Saber:0:10:Melee Weapon:
+27:1:Baseball Bat:15:10:Melee Weapon:Made from 15x Wood and 1x Steel
