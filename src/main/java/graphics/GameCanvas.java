@@ -23,7 +23,6 @@ public class GameCanvas extends Canvas {
 	private static BufferedImage blurred;
 	
 	public GameCanvas(StateHandler sh, int width, int height) {
-	    System.setProperty("sun.java2d.opengl", "true");
         currentFrame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         
 		setPreferredSize(new Dimension(width, height));

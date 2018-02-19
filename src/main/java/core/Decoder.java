@@ -21,7 +21,7 @@ public class Decoder {
     
     public void decode(Map map, int chapterID) {
         entities = new ArrayList<Entity>();
-        String file = "/chapters/chapter" + chapterID + "/map.gme";
+        String file = "/chapters/chapter" + chapterID + "/map.dll";
         tiles = new ArrayList<Tile>();
         String[] fileData = Tools.getData(file);
         int mapWidth = fileData[0].split(",").length;
@@ -56,7 +56,7 @@ public class Decoder {
             }
         }
         
-        String[] data = DataHandler.readFile(DataHandler.dir + "//player.gme");
+        String[] data = DataHandler.readFile(DataHandler.dir + "//player.dll");
         double x = Double.parseDouble(data[1]);
         double y = Double.parseDouble(data[2]);
         double health = Double.parseDouble(data[3]);

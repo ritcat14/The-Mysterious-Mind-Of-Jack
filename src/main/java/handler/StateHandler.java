@@ -70,6 +70,10 @@ public class StateHandler implements EventListener {
     	currentState = new Options();
     }
     
+    public static void unloadOptions() {
+    	currentState = startCopy;
+    }
+    
     public static void pause() {
     	player.pause();
     	Game.paused = true;

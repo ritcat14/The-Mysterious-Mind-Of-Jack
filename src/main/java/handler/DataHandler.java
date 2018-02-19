@@ -16,15 +16,16 @@ public class DataHandler {
 	
 	public static final String slash = (System.getProperty("os.name").startsWith("Windows")) ? "\\" : "//";
 	public static String dir = System.getProperty("user.home") + slash + "TMMOJ";
-	public static String inventFile = dir + slash + "inventory.gme";
-	public static final String version = "1.0.1";
+	public static String inventFile = dir + slash + "inventory.dll";
+	public static String propertiesFile = dir + slash + "properties.dll";
+	public static final String version = "1.1.1";
 	
 	public static void init() {
 		File file = new File(dir); // Store the directory
 		boolean exists = file.exists();
 		if (!exists) initiate(file);
 		else {
-			String[] data = readFile(dir + slash + "player.gme");
+			String[] data = readFile(dir + slash + "player.dll");
 			String version = data[0];
 			if (!version.equals(DataHandler.version)) initiate(file);
 		}
@@ -35,9 +36,11 @@ public class DataHandler {
 		// Create a blank player file
 		// x, y, health, xScroll
 		Object[] data = {version, 105, 105, 200, 0};
-		writeToFile(dir + slash + "player.gme", false, data);
+		writeToFile(dir + slash + "player.dll", false, data);
 		Object[] data2 = {"1-20-8", "2-20-9", "3-20-10"};
 		writeToFile(inventFile, false, data2);
+		Object[] propData = {"0.2:false:false"};
+		writeToFile(propertiesFile, false, propData);
 	}
 	
 	public static boolean exists(String file) {

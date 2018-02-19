@@ -60,7 +60,7 @@ public class Pause extends State {
     		@Override
     		public boolean mousePressed(MousePressedEvent e) {
     			if (super.mousePressed(e)) {
-    				
+    				StateHandler.loadOptions();
     				return true;
     			}
     			return false;

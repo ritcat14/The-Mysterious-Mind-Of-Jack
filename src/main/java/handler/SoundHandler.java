@@ -1,6 +1,7 @@
 package handler;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.scene.media.Media;
@@ -8,12 +9,17 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class SoundHandler {
+	
+	private static double volume = 0.2;
 
     private static HashMap<String, Media> sounds = new HashMap<String, Media>();
+    
+    private static ArrayList<MediaPlayer> players = new ArrayList<MediaPlayer>();
 
     public static MediaPlayer play(String fileName) {
         MediaPlayer m = new MediaPlayer(getSound(fileName));
         m.play();
+        if (!players.contains(m)) players.add(m);
         return m;
     }
 
@@ -24,9 +30,22 @@ public class SoundHandler {
                 m.seek(Duration.ZERO);
             }
         });
+        m.setVolume(volume);
         m.play();
+        if (!players.contains(m)) players.add(m);
         return m;
     }
+    
+    public static void setVolume(double volume) {
+    	SoundHandler.volume = volume;
+    	for (MediaPlayer m : players) {
+    		m.setVolume(volume);
+    	}
+    }
+    
+    public static double getVolume() {
+		return volume;
+	}
     
     public static Media getSound(String file) {
         Media m = null;
@@ -38,7 +57,4 @@ public class SoundHandler {
         m = sounds.get(file);
         return m;
     }
-   public final static double getVolume() {
-	   return getVolume();
-   }
 }

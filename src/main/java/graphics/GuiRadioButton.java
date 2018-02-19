@@ -22,7 +22,7 @@ public class GuiRadioButton extends GuiComponent implements EventListener {
 	private BufferedImage buttonChecked;
 	private BufferedImage buttonUnchecked;
 
-	public GuiRadioButton(Vector pos, Vector size, String text, Font font) {
+	public GuiRadioButton(Vector pos, Vector size, String text, Font font, Color c) {
 		super(pos, size);
 		buttonUnchecked = Tools.getImage("/gui/buttonUnchecked.png");
 		buttonChecked = Tools.getImage("/gui/buttonChecked.png");
@@ -32,7 +32,7 @@ public class GuiRadioButton extends GuiComponent implements EventListener {
 				super.update();
 			}
 		}.setTextOffset(5, 15);
-		label = new GuiLabel(pos.add(new Vector(25, 0)), new Vector(), text, Color.BLACK, font);
+		label = new GuiLabel(pos.add(new Vector(25, 0)), new Vector(), text, c, font);
 		add(label);
 		add(button);
 	}
@@ -45,11 +45,21 @@ public class GuiRadioButton extends GuiComponent implements EventListener {
 		return false;
 	}
 	
+	public boolean isChecked() {
+		return checked;
+	}
+	
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+	
 	@Override
 	public void update() {
 		super.update();
 		if (checked) button.setImage(buttonChecked);
 		else button.setImage(buttonUnchecked);
+		button.setX(pos.x - 30);
+		button.setY(pos.y - 15);
 	}
 
 	@Override

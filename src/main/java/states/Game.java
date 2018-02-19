@@ -16,7 +16,10 @@ public class Game extends State {
     
     private State currentChapter;
     
+    public static boolean acceleration = false;
+    public static boolean bloodLevel = false;
     public static boolean paused = false;
+    
     private Player player;
 
     public Game(int chapter) {
