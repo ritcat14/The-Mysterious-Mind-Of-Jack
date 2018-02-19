@@ -17,7 +17,6 @@ import graphics.GameCanvas;
 import graphics.GuiButton;
 import graphics.GuiLabel;
 import graphics.GuiPanel;
-import graphics.GuiRadioButton;
 import handler.DataHandler;
 import handler.StateHandler;
 import handler.StateHandler.States;

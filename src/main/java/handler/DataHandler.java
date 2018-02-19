@@ -18,7 +18,7 @@ public class DataHandler {
 	public static String dir = System.getProperty("user.home") + slash + "TMMOJ";
 	public static String inventFile = dir + slash + "inventory.dll";
 	public static String propertiesFile = dir + slash + "properties.dll";
-	public static final String version = "1.1.1";
+	public static final String version = "1.1.2";
 	
 	public static void init() {
 		File file = new File(dir); // Store the directory
