@@ -88,6 +88,18 @@ public class Player extends Mob {
         g.drawImage(d, (int)(sheildBar.getX() - 15), (int)sheildBar.getY(), null);
     }
     
+    public void setUp(Boolean up) {
+    	this.up = up;
+    }
+    
+    public void setLeft(Boolean left) {
+    	this.left = left;
+    }
+    
+    public void setRight(Boolean right) {
+    	this.right = right;
+    }
+    
     public boolean keyReleased(KeyReleasedEvent e) {
         switch(e.getKey()) {
             case KeyEvent.VK_W:
