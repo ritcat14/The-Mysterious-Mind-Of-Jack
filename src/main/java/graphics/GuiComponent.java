@@ -11,9 +11,9 @@ public class GuiComponent {
     protected Vector pos;
     protected Vector size;
     
-    protected ArrayList<GuiComponent> components = new ArrayList<GuiComponent>();
-    protected ArrayList<GuiComponent> componentsToAdd = new ArrayList<GuiComponent>();
-    protected ArrayList<GuiComponent> componentsToRemove = new ArrayList<GuiComponent>();
+    protected ArrayList<GuiComponent> components = new ArrayList<>();
+    protected ArrayList<GuiComponent> componentsToAdd = new ArrayList<>();
+    protected ArrayList<GuiComponent> componentsToRemove = new ArrayList<>();
     
     protected boolean visible = true;
     

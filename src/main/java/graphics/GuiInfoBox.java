@@ -14,7 +14,8 @@ public class GuiInfoBox extends GuiPanel {
 	public void setText(String text) {
 		components.clear();
 		String[] lines = text.split("`");
-		for (int i = 0; i < lines.length; i++) add(new GuiLabel(new Vector(pos.x, pos.y + (GuiLabel.standard.getSize())), new Vector(), lines[i], Color.BLACK));
+        for (String line : lines)
+            add(new GuiLabel(new Vector(pos.x, pos.y + (GuiLabel.standard.getSize())), new Vector(), line, Color.BLACK));
 	}
 
 	@Override

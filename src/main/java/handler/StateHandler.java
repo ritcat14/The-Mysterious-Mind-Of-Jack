@@ -121,30 +121,10 @@ public class StateHandler implements EventListener {
         	currentState.onEvent(event);
         	if (player != null) {
         		EventDispatcher dispatcher = new EventDispatcher(event);
-                dispatcher.dispatch(Type.MOUSE_PRESSED, new EventHandler() {
-        			@Override
-        			public boolean onEvent(Event event) {
-        				return player.getInvent().mousePressed((MousePressedEvent)event);
-        			}
-                });
-                dispatcher.dispatch(Type.MOUSE_RELEASED, new EventHandler() {
-        			@Override
-        			public boolean onEvent(Event event) {
-        				return player.getInvent().mouseReleased((MouseReleasedEvent)event);
-        			}
-                });
-                dispatcher.dispatch(Type.MOUSE_MOVED, new EventHandler() {
-        			@Override
-        			public boolean onEvent(Event event) {
-        				return player.getInvent().mouseMoved((MouseMovedEvent)event);
-        			}
-                });
-                dispatcher.dispatch(Type.MOUSE_DRAGGED, new EventHandler() {
-        			@Override
-        			public boolean onEvent(Event event) {
-        				return player.getInvent().mouseDragged((MouseDraggedEvent)event);
-        			}
-                });
+                dispatcher.dispatch(Type.MOUSE_PRESSED, event14 -> player.getInvent().mousePressed((MousePressedEvent) event14));
+                dispatcher.dispatch(Type.MOUSE_RELEASED, event13 -> player.getInvent().mouseReleased((MouseReleasedEvent) event13));
+                dispatcher.dispatch(Type.MOUSE_MOVED, event12 -> player.getInvent().mouseMoved((MouseMovedEvent) event12));
+                dispatcher.dispatch(Type.MOUSE_DRAGGED, event1 -> player.getInvent().mouseDragged((MouseDraggedEvent) event1));
         	}
         }
     }

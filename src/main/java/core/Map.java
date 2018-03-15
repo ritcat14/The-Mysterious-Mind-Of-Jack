@@ -18,7 +18,6 @@ import events.EventHandler;
 import events.EventListener;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
-import events.types.MousePressedEvent;
 import core.tiles.Tile;
 
 public class Map implements EventListener {
@@ -37,8 +36,8 @@ public class Map implements EventListener {
         tiles = decoder.getTiles();
         player = decoder.getPlayer();
         entities = decoder.getEntities();
-        entitiesToRemove = new ArrayList<Entity>();
-        entitiesToAdd = new ArrayList<Entity>();
+        entitiesToRemove = new ArrayList<>();
+        entitiesToAdd = new ArrayList<>();
         background = Tools.getImage("/chapters/chapter" + chapter + "/background.png");
         game.setPlayer(player);
         setXPosition(player.initialOffset);
@@ -103,18 +102,8 @@ public class Map implements EventListener {
     @Override
     public void onEvent(Event event) {
         EventDispatcher dispatcher = new EventDispatcher(event);
-        dispatcher.dispatch(Type.KEY_PRESSED, new EventHandler() {
-            @Override
-            public boolean onEvent(Event event) {
-                return player.keyPressed((KeyPressedEvent)event);
-            }
-        });
-        dispatcher.dispatch(Type.KEY_RELEASED, new EventHandler() {
-            @Override
-            public boolean onEvent(Event event) {
-                return player.keyReleased((KeyReleasedEvent)event);
-            }
-        });
+        dispatcher.dispatch(Type.KEY_PRESSED, event12 -> player.keyPressed((KeyPressedEvent) event12));
+        dispatcher.dispatch(Type.KEY_RELEASED, event1 -> player.keyReleased((KeyReleasedEvent) event1));
     }
     
     public ArrayList<Tile> getTiles() {

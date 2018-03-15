@@ -43,26 +43,26 @@ public class Inventory extends GuiButton {
 		super(pos, new Vector(20, 30), Color.WHITE, "I", new Font("Times New Java", Font.BOLD, 25));
 		setTextOffset(5, 23);
 		mainPanel = new GuiPanel(pos, size, Color.LIGHT_GRAY);
-		buttons = new ArrayList<GuiComponent>();
+		buttons = new ArrayList<>();
 		String[] data = null;
 		itemData = Tools.getData(Tools.itemFile);
 		recipeData = Tools.getData(Tools.recipeFile);
 		
 		crafting = new Crafting(new Vector(pos.x + 405, pos.y), itemData, recipeData, this);
 
-		ArrayList<Item> items = new ArrayList<Item>();
-		ArrayList<Integer> amounts = new ArrayList<Integer>();
-		ArrayList<Integer> buttonIndices = new ArrayList<Integer>();
+		ArrayList<Item> items = new ArrayList<>();
+		ArrayList<Integer> amounts = new ArrayList<>();
+		ArrayList<Integer> buttonIndices = new ArrayList<>();
 		
 		data = DataHandler.readFile(DataHandler.inventFile);
-		for (int i = 0; i < data.length; i++) {
-			int ID = Integer.parseInt(data[i].split("-")[0]);
-			int amount = Integer.parseInt(data[i].split("-")[1]);
-			Item item = new Item(new Vector(), ID);
-			items.add(item);
-			amounts.add(amount);
-			buttonIndices.add(Integer.parseInt(data[i].split("-")[2]));
-		}
+        for (String aData : data) {
+            int ID = Integer.parseInt(aData.split("-")[0]);
+            int amount = Integer.parseInt(aData.split("-")[1]);
+            Item item = new Item(new Vector(), ID);
+            items.add(item);
+            amounts.add(amount);
+            buttonIndices.add(Integer.parseInt(aData.split("-")[2]));
+        }
 		int x = 0;
 		int y = 0;
 		int j = 0;
@@ -388,8 +388,8 @@ public class Inventory extends GuiButton {
 	
 	public Object[] getData() {
 		Object[] data;
-		ArrayList<InventButton> buttonsWithItems = new ArrayList<InventButton>();
-		ArrayList<Integer> buttonIndices = new ArrayList<Integer>();
+		ArrayList<InventButton> buttonsWithItems = new ArrayList<>();
+		ArrayList<Integer> buttonIndices = new ArrayList<>();
 		for (GuiComponent c : buttons) {
 			if (((InventButton)c).getItem() != null) {
 				buttonsWithItems.add((InventButton)c);

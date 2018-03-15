@@ -66,13 +66,7 @@ public class Game extends State {
     @Override
     public void onEvent(Event event) {
     	EventDispatcher dispatcher = new EventDispatcher(event);
-    	dispatcher.dispatch(Type.KEY_PRESSED, new EventHandler() {
-			
-			@Override
-			public boolean onEvent(Event event) {
-				return keyPressed((KeyPressedEvent) event);
-			}
-		});
+    	dispatcher.dispatch(Type.KEY_PRESSED, event1 -> keyPressed((KeyPressedEvent) event1));
     	if (!paused) currentChapter.onEvent(event);
     }
     

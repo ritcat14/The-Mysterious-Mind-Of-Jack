@@ -12,9 +12,9 @@ public class SoundHandler {
 	
 	private static double volume = 0.2;
 
-    private static HashMap<String, Media> sounds = new HashMap<String, Media>();
+    private static HashMap<String, Media> sounds = new HashMap<>();
     
-    private static ArrayList<MediaPlayer> players = new ArrayList<MediaPlayer>();
+    private static ArrayList<MediaPlayer> players = new ArrayList<>();
 
     public static MediaPlayer play(String fileName) {
         MediaPlayer m = new MediaPlayer(getSound(fileName));
@@ -25,11 +25,7 @@ public class SoundHandler {
 
     public static MediaPlayer loop(String fileName) {
         final MediaPlayer m = new MediaPlayer(getSound(fileName));
-        m.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                m.seek(Duration.ZERO);
-            }
-        });
+        m.setOnEndOfMedia(() -> m.seek(Duration.ZERO));
         m.setVolume(volume);
         m.play();
         if (!players.contains(m)) players.add(m);

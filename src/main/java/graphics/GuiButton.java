@@ -99,20 +99,8 @@ public class GuiButton extends GuiPanel implements EventListener {
 	public void onEvent(Event event) {
     	if (!visible) return;
         EventDispatcher dispatcher = new EventDispatcher(event);
-        dispatcher.dispatch(Event.Type.MOUSE_PRESSED, new EventHandler() {
-            public boolean onEvent(Event event) {
-                return mousePressed((MousePressedEvent)event);
-            }
-        });
-        dispatcher.dispatch(Event.Type.MOUSE_RELEASED, new EventHandler() {
-            public boolean onEvent(Event event) {
-                return mouseReleased((MouseReleasedEvent)event);
-            }
-        });
-        dispatcher.dispatch(Event.Type.MOUSE_MOVED, new EventHandler() {
-            public boolean onEvent(Event event) {
-                return mouseMoved((MouseMovedEvent)event);
-            }
-        });
+        dispatcher.dispatch(Event.Type.MOUSE_PRESSED, event13 -> mousePressed((MousePressedEvent) event13));
+        dispatcher.dispatch(Event.Type.MOUSE_RELEASED, event12 -> mouseReleased((MouseReleasedEvent) event12));
+        dispatcher.dispatch(Event.Type.MOUSE_MOVED, event1 -> mouseMoved((MouseMovedEvent) event1));
 	}
 }

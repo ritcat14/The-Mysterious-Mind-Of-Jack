@@ -20,16 +20,16 @@ public class Decoder {
     public int mapXPos;
     
     public void decode(Map map, int chapterID) {
-        entities = new ArrayList<Entity>();
+        entities = new ArrayList<>();
         String file = "/chapters/chapter" + chapterID + "/map.dll";
-        tiles = new ArrayList<Tile>();
+        tiles = new ArrayList<>();
         String[] fileData = Tools.getData(file);
         int mapWidth = fileData[0].split(",").length;
         int mapHeight = fileData.length;
         int[] tileData = new int[mapWidth * mapHeight];
         int j = 0;
-        for (int i = 0; i < mapHeight; i++) {
-            String[] parts = fileData[i].split(",");
+        for (String aFileData : fileData) {
+            String[] parts = aFileData.split(",");
             for (String s : parts) {
                 tileData[j] = Integer.parseInt(s);
                 j++;

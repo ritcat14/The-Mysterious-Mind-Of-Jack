@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import entities.Item;
-import events.types.MouseDraggedEvent;
 import handler.Vector;
 
 public class InventButton extends GuiButton {

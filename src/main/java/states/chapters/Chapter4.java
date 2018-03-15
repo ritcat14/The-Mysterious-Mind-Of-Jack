@@ -1,10 +1,7 @@
 package states.chapters;
 
-import java.awt.Graphics;
-
 import core.Map;
 import core.tiles.Tile;
-import events.Event;
 import handler.Vector;
 import states.Game;
 

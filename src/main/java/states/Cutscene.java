@@ -45,11 +45,7 @@ public class Cutscene extends State {
     @Override
     public void onEvent(Event event) {
 		EventDispatcher dispatcher = new EventDispatcher(event);
-        dispatcher.dispatch(Event.Type.KEY_PRESSED, new EventHandler() {
-			public boolean onEvent(Event event) {
-				return keyPressed((KeyPressedEvent)event);
-			}
-		});
+        dispatcher.dispatch(Event.Type.KEY_PRESSED, event1 -> keyPressed((KeyPressedEvent) event1));
     }
 
     @Override

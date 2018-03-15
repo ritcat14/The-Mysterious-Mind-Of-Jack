@@ -6,11 +6,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import entities.Item;
-import events.Event;
-import events.EventDispatcher;
-import events.EventHandler;
 import events.EventListener;
-import events.Event.Type;
 import events.types.MousePressedEvent;
 import handler.StateHandler;
 import handler.Tools;
@@ -21,8 +17,8 @@ public class Crafting extends GuiPanel implements EventListener {
 	private InventButton input1, input2, craftingOutput, trash;
 	private GuiButton craft;
 	
-	private ArrayList<GuiLabel> info1 = new ArrayList<GuiLabel>();
-	private ArrayList<GuiLabel> info2 = new ArrayList<GuiLabel>();
+	private ArrayList<GuiLabel> info1 = new ArrayList<>();
+	private ArrayList<GuiLabel> info2 = new ArrayList<>();
 	
 	private GuiLabel errorLabel;
 	private int labelTimer = 5;

@@ -65,12 +65,7 @@ public class GuiRadioButton extends GuiComponent implements EventListener {
 	@Override
 	public void onEvent(Event event) {
 		EventDispatcher dispatch = new EventDispatcher(event);
-		dispatch.dispatch(Type.MOUSE_PRESSED, new EventHandler() {
-			@Override
-			public boolean onEvent(Event event) {
-				return mousePressed((MousePressedEvent) event);
-			}
-		});
+		dispatch.dispatch(Type.MOUSE_PRESSED, event1 -> mousePressed((MousePressedEvent) event1));
 	}
 	
 	@Override

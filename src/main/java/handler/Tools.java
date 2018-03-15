@@ -17,7 +17,7 @@ public class Tools {
 
 	public static final String recipeFile = "/items/recipes.dll";
 	public static final String itemFile = "/items/items.dll";
-    private static HashMap<String, BufferedImage> images = new HashMap<String, BufferedImage>();
+    private static HashMap<String, BufferedImage> images = new HashMap<>();
 	
     /* ------------------------------- Image Handling -------------------------------- */
    
