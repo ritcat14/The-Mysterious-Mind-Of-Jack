@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import entities.Item;
+import entities.items.Item;
 import events.EventListener;
 import events.types.MousePressedEvent;
 import handler.StateHandler;

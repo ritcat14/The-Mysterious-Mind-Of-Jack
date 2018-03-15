@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import entities.Item;
+import entities.items.Item;
 import handler.Vector;
 
 public class InventButton extends GuiButton {

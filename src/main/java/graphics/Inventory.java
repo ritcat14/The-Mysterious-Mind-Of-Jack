@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.sun.javafx.geom.Rectangle;
 
-import entities.Item;
+import entities.items.Item;
 import events.types.MouseDraggedEvent;
 import events.types.MouseMovedEvent;
 import events.types.MousePressedEvent;
