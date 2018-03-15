@@ -15,8 +15,7 @@ import java.util.HashMap;
 
 public class Tools {
 
-	public static final String recipeFile = "/items/recipes.dll";
-	public static final String itemFile = "/items/items.dll";
+	public static final String propertiesFile = "/items/recipes.dll";
     private static HashMap<String, BufferedImage> images = new HashMap<>();
 	
     /* ------------------------------- Image Handling -------------------------------- */
@@ -110,6 +109,10 @@ public class Tools {
             e.printStackTrace();
         }
     	return num;
+    }
+
+    public static void writeToFile(String file, Object[] data) {
+
     }
     
     /* ----------------------------- Maths & Conversions ----------------------------- */

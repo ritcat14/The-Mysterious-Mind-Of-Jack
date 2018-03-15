@@ -36,7 +36,7 @@ public class Cutscene extends State {
         switch (e.getKey()) {
             case KeyEvent.VK_SPACE:
             	switching = true;
-                StateHandler.nextChapter(true);
+                StateHandler.changeState(StateHandler.States.GAME);
                 return true;
         }
         return false;
@@ -59,7 +59,7 @@ public class Cutscene extends State {
         if (timeSec == times[frame]) {
             if (frame == frames.length - 1) {
             	switching = true;
-                StateHandler.nextChapter(true);
+                StateHandler.changeState(StateHandler.States.GAME);
             }
         frame++;
         }

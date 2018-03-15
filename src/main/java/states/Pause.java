@@ -9,7 +9,6 @@ import java.awt.event.WindowEvent;
 import core.Main;
 import events.Event;
 import events.EventDispatcher;
-import events.EventHandler;
 import events.Event.Type;
 import events.types.KeyPressedEvent;
 import events.types.MousePressedEvent;
@@ -17,7 +16,6 @@ import graphics.GameCanvas;
 import graphics.GuiButton;
 import graphics.GuiLabel;
 import graphics.GuiPanel;
-import handler.DataHandler;
 import handler.StateHandler;
 import handler.StateHandler.States;
 import handler.Vector;
@@ -35,7 +33,6 @@ public class Pause extends State {
     		@Override
     		public boolean mousePressed(MousePressedEvent e) {
     			if (super.mousePressed(e)) {
-    				DataHandler.savePlayer(StateHandler.player);
     				StateHandler.unpause();
     				StateHandler.changeState(States.START);
     				return true;

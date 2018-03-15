@@ -3,15 +3,15 @@ package entities;
 import java.awt.image.BufferedImage;
 
 import core.Map;
-import core.tiles.Tile;
 import graphics.Animation;
+import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
 
 public abstract class Mob extends Entity {
-    
-    protected boolean canJump = true;
-    protected boolean falling = true;
+
+    protected boolean onGround = false;
+
     protected double health = 200.0;
     protected double gravity;
     protected double maxY;
@@ -19,8 +19,9 @@ public abstract class Mob extends Entity {
     protected double speed;
     protected int damage;
     protected int shield;
-    protected final int MAX_SHIELD = 100;
-    protected final int MAX_HEALTH = 200;
+    protected int MAX_SHIELD = 100;
+    protected int MAX_HEALTH = 200;
+    public static int FLOOR_HEIGHT;
     
     protected Animation animation;
     protected BufferedImage[] left = new BufferedImage[2], right = new BufferedImage[2];
@@ -33,6 +34,7 @@ public abstract class Mob extends Entity {
     public Mob(Map map, Vector pos, Vector size, String file) {
         super(pos, size, file);
         this.map = map;
+        FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
         
         images = Tools.splitImage(image, 4, 1150);
         left[0] = images[1];
@@ -53,10 +55,19 @@ public abstract class Mob extends Entity {
         gravity = 0.04;
         maxY = 3;
         maxX = 1.5;
+        FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
     }
     
-    protected boolean hasHorizontalCollision() {
-        for (int i = 0; i < map.getTiles().size(); i++) {
+    boolean hasHorizontalCollision() {
+        if (pos.x < 0) {
+            pos.x = 0;
+            return true;
+        }
+        if (pos.x >= StateHandler.WIDTH) {
+            pos.x = StateHandler.WIDTH;
+            return true;
+        }
+        /*for (int i = 0; i < map.getTiles().size(); i++) {
             Tile t = map.getTiles().get(i);
             if (!t.isSolid()) continue;
             if (getLeft().intersects(t.getRight()) && velocity.x < 0) {
@@ -67,12 +78,18 @@ public abstract class Mob extends Entity {
                 velocity.x = 0;
                 return true;
             }
-        }
+        }*/
         return false;
     }
     
-    protected boolean hasVerticalCollision() {
-        for (int i = 0; i < map.getTiles().size(); i++) {
+    boolean hasVerticalCollision() {
+        boolean passed = false;
+        if (pos.y < 0) {
+            pos.y = 0;
+            passed = true;
+        }
+        if (onGround) passed = true;
+        /*for (int i = 0; i < map.getTiles().size(); i++) {
             Tile t = map.getTiles().get(i);
             if (!t.isSolid()) continue;
             if (getBottom().intersects(t.getTop()) && velocity.y > 0) {
@@ -83,8 +100,8 @@ public abstract class Mob extends Entity {
                 velocity.y = 0;
                 return true;
             }
-        }
-        return false;
+        }*/
+        return passed;
     }
     
     protected void move() {
@@ -94,8 +111,8 @@ public abstract class Mob extends Entity {
         if (!hasVerticalCollision()) pos.add(new Vector(0, velocity.y));
     }
     
-    protected void fall() {
-    	if (falling) {
+    private void fall() {
+    	if (!onGround) {
 	    	velocity.y += gravity;
 	    	if (velocity.y > maxY) {
 	    		velocity.y = maxY;
@@ -103,24 +120,25 @@ public abstract class Mob extends Entity {
     	}
     }
     
-    protected void jump() {
-        if (canJump) {
-            velocity.y -= 3.5;
-            canJump = false;
+    void jump() {
+        if (onGround) {
+            velocity.y -= 6;
+            pos.add(new Vector(0, velocity.y));
         }
     }
 
     @Override
     public void update() {
-    	canJump = (velocity.y == 0.04);
+        onGround = pos.y >= FLOOR_HEIGHT;
         if(health <= 0) {
         	health = 0;
         	remove();
         }
+        if (health > MAX_HEALTH) health = MAX_HEALTH;
         move();
         fall();
         if (!animation.isAnimating() && velocity.x != 0) animation.start();
-        else if (velocity.x == 0 && animation.isAnimating() || !canJump) animation.stop();
+        else if (velocity.x == 0 && animation.isAnimating() || !onGround) animation.stop();
         if (velocity.x > 0 && isLeft) {
         	isLeft = false;
         	animation.setImages(right);
@@ -131,7 +149,19 @@ public abstract class Mob extends Entity {
         animation.update();
         this.image = animation.getCurrentFrame();
     }
-    
+
+    public void adjustSheild(double sheild) {
+        this.shield += shield;
+    }
+
+    public void adjustHealth(double health) {
+        this.health += health;
+    }
+
+    public void adjustAttack(double attack) {
+        this.damage += attack;
+    }
+
     public double getHealth() {
 		return health;
 	}
@@ -141,11 +171,7 @@ public abstract class Mob extends Entity {
 	}
     
     public void doDamage(double damage) {
-    	this.health -= ((damage / shield));
+    	this.health += damage / shield;
     }
-    
-    public Map getMap() {
-		return map;
-	}
-    
+
 }

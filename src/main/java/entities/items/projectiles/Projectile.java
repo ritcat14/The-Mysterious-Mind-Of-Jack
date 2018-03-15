@@ -4,7 +4,6 @@ import java.util.Random;
 
 import core.Map;
 import entities.Mob;
-import entities.items.Bullet;
 import handler.StateHandler;
 import handler.Vector;
 

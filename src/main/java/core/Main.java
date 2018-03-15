@@ -1,7 +1,6 @@
 package core;
 
 import graphics.GameCanvas;
-import handler.DataHandler;
 import handler.StateHandler;
 import handler.StateHandler.States;
 import handler.Tools;
@@ -38,7 +37,6 @@ public class Main implements Runnable, WindowListener {
 	public static Main main;
 
 	public Main() {
-		DataHandler.init();
 		sh = new StateHandler(WIDTH, HEIGHT);
 		canvas = new GameCanvas(sh, WIDTH, HEIGHT);
 	}
@@ -63,10 +61,6 @@ public class Main implements Runnable, WindowListener {
 		if (time >= Integer.MAX_VALUE - 1) time = 0;
 		this.player = StateHandler.player;
 		StateHandler.update();
-		if ((time % Tools.getSecs(30) == 0) && (player != null)) {
-			System.out.println("Saving data");
-			DataHandler.savePlayer(player);
-		}
 	}
 
 	public void render() { // Draw the game
@@ -139,8 +133,6 @@ public class Main implements Runnable, WindowListener {
 		Player player = StateHandler.player;
 		if (player != null && StateHandler.getState().equals(States.GAME) || StateHandler.getState().equals(States.PAUSE)) {
 			if (StateHandler.getState().equals(States.GAME)) StateHandler.pause();
-			int confirm = JOptionPane.showOptionDialog(null, "Would you like to save?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-			if (confirm == 0) DataHandler.savePlayer(player);
 		}
 		System.exit(0);
 	}

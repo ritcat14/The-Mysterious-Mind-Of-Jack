@@ -10,7 +10,6 @@ import graphics.GuiButton;
 import graphics.GuiLabel;
 import graphics.GuiPanel;
 import graphics.GuiRadioButton;
-import handler.DataHandler;
 import handler.SoundHandler;
 import handler.StateHandler;
 import handler.Tools;
@@ -30,8 +29,8 @@ public class Options extends State {
             @Override
             public boolean mousePressed(MousePressedEvent e) {
                 if (super.mousePressed(e)) {
-                	Object[] data = {"" + SoundHandler.getVolume() + ":" + Game.bloodLevel + ":" + Game.acceleration}; 
-                	DataHandler.writeToFile(DataHandler.propertiesFile, false, data);
+                	Object[] data = {"" + SoundHandler.getVolume() + ":" + Game.bloodLevel + ":" + Game.acceleration};
+                	Tools.writeToFile(Tools.propertiesFile, data);
             	    System.setProperty("sun.java2d.opengl", "" + acceleration);
                     StateHandler.unloadOptions();
                 }
@@ -80,10 +79,10 @@ public class Options extends State {
     }
     
     public void init() {
-    	String[] data = DataHandler.readFile(DataHandler.propertiesFile)[0].split(":");
+    	/*String[] data = Tools.readFile(Tools.propertiesFile)[0].split(":");
     	SoundHandler.setVolume(Double.parseDouble(data[0]));
     	Game.bloodLevel = Boolean.parseBoolean(data[1]);
-    	Game.acceleration = Boolean.parseBoolean(data[2]);
+    	Game.acceleration = Boolean.parseBoolean(data[2]);*/
     }
     
     @Override

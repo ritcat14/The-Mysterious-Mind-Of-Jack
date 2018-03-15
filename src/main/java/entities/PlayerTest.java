@@ -15,7 +15,7 @@ public class PlayerTest {
 
 	@Test
 	public void testUpdate() {
-		Player p = new Player(new Map(new Game(1), 1), new Vector(100.0, 300.0), "/player/player.png", 0);
+		Player p = new Player(new Map(new Game()), new Vector(100.0, 300.0));
 		Double startVel = p.velocity.x;
 		Double startX = p.pos.x;
 		p.update();
@@ -58,7 +58,7 @@ public class PlayerTest {
 	
 	@Test
 	public void testKeyPressed() {
-		Player p = new Player(new Map(new Game(1), 1), new Vector(500.0, 500.0), "/player/player.png", 0);
+		Player p = new Player(new Map(new Game()), new Vector(500.0, 500.0));
 		Double startX = p.pos.x;
 		Double startY = p.pos.y;
 		

@@ -18,8 +18,7 @@ public class StateHandler implements EventListener {
     
     public static int WIDTH = 0;
     public static int HEIGHT = 0;
-    
-    private static int chapter = 0;
+
     private static int cutscene = -1;
     private static int playerProgress = 1;
     
@@ -48,7 +47,7 @@ public class StateHandler implements EventListener {
                 break;
             case GAME:
             	StateHandler.state = state;
-                currentState = new Game(chapter);
+                currentState = new Game();
                 Game g = (Game)currentState;
                 player = g.getPlayer();
                 break;
@@ -87,12 +86,6 @@ public class StateHandler implements EventListener {
     	currentState = pausedGame;
     }
     
-    public static void nextChapter(boolean first) {
-        if (!first) playerProgress++;
-        chapter = playerProgress;
-        changeState(States.GAME);
-    }
-    
     public static void nextScene() {
         cutscene = playerProgress - 1;
         changeState(States.CUTSCENE);
@@ -101,9 +94,6 @@ public class StateHandler implements EventListener {
     public static void update() {
         if (currentState != null) {
         	currentState.update();
-        	if (player != null) {
-        		player.getInvent().update();
-        	}
         }
     }
     
@@ -112,20 +102,10 @@ public class StateHandler implements EventListener {
         g.setFont(new Font("Times New Java", Font.BOLD, 20));
         g.setColor(Color.YELLOW);
         g.drawString("" + Main.FPS, 10, 20);
-        if (player != null) player.getInvent().render(g);
     }
 
     @Override
     public void onEvent(Event event) {
-        if (currentState != null) {
-        	currentState.onEvent(event);
-        	if (player != null) {
-        		EventDispatcher dispatcher = new EventDispatcher(event);
-                dispatcher.dispatch(Type.MOUSE_PRESSED, event14 -> player.getInvent().mousePressed((MousePressedEvent) event14));
-                dispatcher.dispatch(Type.MOUSE_RELEASED, event13 -> player.getInvent().mouseReleased((MouseReleasedEvent) event13));
-                dispatcher.dispatch(Type.MOUSE_MOVED, event12 -> player.getInvent().mouseMoved((MouseMovedEvent) event12));
-                dispatcher.dispatch(Type.MOUSE_DRAGGED, event1 -> player.getInvent().mouseDragged((MouseDraggedEvent) event1));
-        	}
-        }
+        if (currentState != null) currentState.onEvent(event);
     }
 }

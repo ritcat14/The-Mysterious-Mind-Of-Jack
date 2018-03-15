@@ -14,8 +14,7 @@ package entities;
 import handler.Tools;
 import handler.Vector;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
@@ -24,6 +23,7 @@ public abstract class Entity {
     protected Vector pos, size;
     protected Vector velocity = new Vector();
     protected boolean removed = false;
+    protected Color c;
     
     public Entity(Vector pos, Vector size, String file) {
         this.size = size;
@@ -48,15 +48,20 @@ public abstract class Entity {
         this.pos = pos;
         this.size = new Vector(image.getWidth(), image.getHeight());
     }
+
+    protected Entity(Vector pos, Vector size) {
+        this.pos = pos;
+        this.size = size;
+    }
     
     public abstract void update();
     
     public void render(Graphics g) {
-        g.drawImage(image, (int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y, null);
-        /*g.drawRect(getLeft().x, getLeft().y, getLeft().width, getLeft().height);
-        g.drawRect(getBottom().x, getBottom().y, getBottom().width, getBottom().height);
-        g.drawRect(getTop().x, getTop().y, getTop().width, getTop().height);
-        g.drawRect(getRight().x, getRight().y, getRight().width, getRight().height);*/
+        if (image != null) g.drawImage(image, (int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y, null);
+        else {
+            g.setColor(c);
+            g.drawRect((int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y);
+        }
     }
     
     public double getWidth() { return size.x; }
@@ -82,5 +87,13 @@ public abstract class Entity {
     public boolean isRemoved() { return removed; }
     
     public void remove() { removed = true; }
+
+    public int getX() {
+        return (int) pos.getX();
+    }
+
+    public int getY() {
+        return (int) pos.getY();
+    }
     
 }

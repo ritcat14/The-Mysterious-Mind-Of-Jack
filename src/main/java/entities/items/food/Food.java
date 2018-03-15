@@ -1,9 +1,10 @@
 package entities.items.food;
 
+import entities.Player;
 import entities.items.Item;
 import handler.Vector;
 
-public class Food extends Item {
+public abstract class Food extends Item {
 
     private double healthEffect;
     private double attackBonus;
@@ -14,6 +15,13 @@ public class Food extends Item {
         healthEffect = health;
         attackBonus = attack;
         defenseBonus  = defense;
+    }
+
+    @Override
+    public void onEvent(Player player) {
+        player.adjustHealth(healthEffect);
+        player.adjustSheild(defenseBonus);
+        player.adjustAttack(attackBonus);
     }
 
     public double getHealthEffect() {
