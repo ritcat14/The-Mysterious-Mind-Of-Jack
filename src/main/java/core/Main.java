@@ -34,6 +34,10 @@ public class Main implements Runnable, WindowListener {
 
 	public static Main main;
 
+	/*
+	Constructor for class
+	 */
+
 	public Main() {
 		sh = new StateHandler(WIDTH, HEIGHT);
 		canvas = new GameCanvas(sh, WIDTH, HEIGHT);
