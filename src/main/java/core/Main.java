@@ -105,6 +105,7 @@ public class Main implements Runnable, WindowListener {
 	}
 
 	public static void main(String[] args) {
+		System.setProperty("sun.java2d.opengl", "False");
 		// Main method
 		Main m = new Main(); // Create the game object
 		Main.main = m;
