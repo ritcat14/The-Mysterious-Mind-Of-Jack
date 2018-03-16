@@ -1,3 +1,7 @@
+/*
+This class creates a chest entity on the map which can be opened by collecting the key.
+The event method at the bottom checks whether the player has the key.
+ */
 package entities.items.other;
 
 import entities.Player;
