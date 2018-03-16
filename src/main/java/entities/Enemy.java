@@ -5,7 +5,9 @@ import java.awt.Rectangle;
 import core.Map;
 import handler.StateHandler;
 import handler.Vector;
-
+/*
+A child class about enemy of Mob
+ */
 public class Enemy extends Mob {
 	
 	protected int damage;
@@ -29,8 +31,14 @@ public class Enemy extends Mob {
 		}
 		super.update();
 	}
-	
-	public int getDamage() {
+
+    @Override
+    public void remove() {
+	    map.spawnItem(pos);
+        super.remove();
+    }
+
+    public int getDamage() {
 		return damage;
 	}
 	

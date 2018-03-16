@@ -2,6 +2,10 @@ package events.types;
 
 import events.Event;
 
+/*
+A child class detect when the mouse is dragged
+ */
+
 public class MouseDraggedEvent extends Event {
 
 	private int x = 0, y = 0;

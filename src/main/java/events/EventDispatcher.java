@@ -15,5 +15,4 @@ public class EventDispatcher {
 		if (event.getType() == type)
 			event.handled = handler.onEvent(event);
 	}
-	
 }

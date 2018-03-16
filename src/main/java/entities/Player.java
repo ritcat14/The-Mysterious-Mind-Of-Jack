@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import core.Map;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
+/*
+A child class Player from Mob
+ */
 
 public class Player extends Mob {
 	
@@ -23,14 +26,21 @@ public class Player extends Mob {
     private GuiBar healthBar, sheildBar;
     private final int EDGE_DISTANCE = 100;
     private BufferedImage h, d;
+
     private boolean easterEgg = false;
-    private boolean hasKey = false;
     private boolean activateButton = false;
     private String message = "";
     private int officeBounds = 300;
 
+    private boolean hasKey, hasWheel, hasChair, hasCell = false;
+    private BufferedImage chair, cell, wheel;
+
+    private boolean hasHead, hasChest, hasLegs = false;
+    private BufferedImage head, chest, legs;
+
+
     public Player(Map map, Vector pos) {
-        super(map, pos, new Vector(32, 64), "/player/player.png");
+        super(map, pos, new Vector(48, 96), "/player/player.png");
         shield = 5;
         speed = 0.08;
         healthBar = new GuiBar(new Vector(20, 30), new Vector(200, 10), Color.GREEN, (int)health, MAX_HEALTH);
@@ -38,6 +48,36 @@ public class Player extends Mob {
         
         h = Tools.getImage("/gui/health.png");
         d = Tools.getImage("/gui/shield.png");
+    }
+
+    public void addHead(BufferedImage head) {
+        hasHead = true;
+        this.head = head;
+    }
+
+    public void addChest(BufferedImage chest) {
+        hasChest = true;
+        this.chest = chest;
+    }
+
+    public void addLegs(BufferedImage legs) {
+        hasLegs = true;
+        this.legs = legs;
+    }
+
+    public void addWheel(BufferedImage wheel) {
+        hasWheel = true;
+        this.wheel = wheel;
+    }
+
+    public void addChair(BufferedImage chair) {
+        hasChair = true;
+        this.chair = chair;
+    }
+
+    public void addCell(BufferedImage cell) {
+        hasCell = true;
+        this.cell = cell;
     }
 
     public void addKey() {
@@ -81,19 +121,6 @@ public class Player extends Mob {
             passed = true;
         }
         passed = super.hasHorizontalCollision();
-
-        /*for (int i = 0; i < map.getTiles().size(); i++) {
-            Tile t = map.getTiles().get(i);
-            if (!t.isSolid()) continue;
-            if (getLeft().intersects(t.getRight()) && velocity.x < 0) {
-                velocity.x = 0;
-                return true;
-            }
-            if (getRight().intersects(t.getLeft()) && velocity.x > 0) {
-                velocity.x = 0;
-                return true;
-            }
-        }*/
         return passed;
     }
 
@@ -161,6 +188,16 @@ public class Player extends Mob {
         g.setColor(Color.RED);
         g.drawString(message, (int)pos.getX(), (int)pos.getY() - 15);
         message = "";
+
+        if (hasHead) g.drawImage(head, 80, 200, null);
+        if (hasChest) g.drawImage(chest, 80, 260, null);
+        if (hasLegs) g.drawImage(legs, 80, 340, null);
+
+        if (hasChair && hasCell && hasWheel) return;
+        if (hasCell) g.drawImage(cell, 20, 200, null);
+        if (hasChair) g.drawImage(chair, 20, 260, null);
+        if (hasWheel) g.drawImage(wheel, 20, 340, null);
+
     }
     
     public void setUp(Boolean up) {

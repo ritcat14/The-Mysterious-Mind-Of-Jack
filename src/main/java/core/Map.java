@@ -6,9 +6,8 @@ package core;
 
 import entities.*;
 import entities.items.Item;
-import entities.items.other.Chest;
-import entities.items.other.Hawking;
-import entities.items.other.Key;
+import entities.items.food.*;
+import entities.items.other.*;
 import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
@@ -36,6 +35,7 @@ public class Map implements EventListener {
     private boolean rendering = false;
     private double xPosition = 0;
     private int time = 0;
+    private int armourSpawned = 0;
 
     private final int ENEMY_MAX = 15;
     private int enemyCount = 0;
@@ -74,7 +74,7 @@ public class Map implements EventListener {
         }
         for (int i = 0; i < 5; i++) {
             int enemyID = Tools.getRandom(1, 3);
-            add(new Enemy(this, new Vector(Tools.getRandom(500, 2000), Mob.FLOOR_HEIGHT), new Vector(32, 64), "/player/backgroundCharacter" + enemyID + ".png", 350));
+            add(new Enemy(this, new Vector(Tools.getRandom(500, 2000), Mob.FLOOR_HEIGHT), new Vector(48, 96), "/player/backgroundCharacter" + enemyID + ".png", 350));
         }
     }
 
@@ -109,8 +109,32 @@ public class Map implements EventListener {
     }
 
     private void generateItems() {
-        entities.add(new Chest(new Vector(200, Mob.FLOOR_HEIGHT)));
+        entities.add(new Chest());
         entities.add(new Hawking());
+    }
+
+    public void spawnItem(Vector pos) {
+        Vector spawnPos = pos.add(new Vector(-50, 0));
+        int ran = Tools.getRandom(1, 5);
+        switch(ran) {
+            case 1:
+                entities.add(new Apple(spawnPos));
+                break;
+            case 2:
+                entities.add(new Banana(spawnPos));
+                break;
+            case 3:
+                entities.add(new Burger(spawnPos));
+                break;
+            case 4:
+                entities.add(new Crisps(spawnPos));
+                break;
+            case 5:
+                entities.add(new Sandwich(spawnPos));
+                break;
+        }
+        ran = Tools.getRandom(1, 10);
+
     }
     
     public void update() {
@@ -151,5 +175,4 @@ public class Map implements EventListener {
         dispatcher.dispatch(Type.KEY_PRESSED, event12 -> player.keyPressed((KeyPressedEvent) event12));
         dispatcher.dispatch(Type.KEY_RELEASED, event1 -> player.keyReleased((KeyReleasedEvent) event1));
     }
-    
 }

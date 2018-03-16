@@ -34,10 +34,18 @@ public class Main implements Runnable, WindowListener {
 
 	public static Main main;
 
+	/*
+	Constructor for class
+	 */
+
 	public Main() {
 		sh = new StateHandler(WIDTH, HEIGHT);
 		canvas = new GameCanvas(sh, WIDTH, HEIGHT);
 	}
+
+	/*
+	Method for change state of the game to start
+	 */
 
 	public synchronized void start() {
 		running = true;
@@ -46,6 +54,10 @@ public class Main implements Runnable, WindowListener {
 		StateHandler.changeState(States.START);
 	}
 
+	/*
+	Method for change state of the game to stop
+	 */
+
 	public synchronized void stop() {
 		try {
 			thread.join();
@@ -53,6 +65,7 @@ public class Main implements Runnable, WindowListener {
 		}
 		running = false;
 	}
+
 
 	public void update() { // Update game logic
 		time++;

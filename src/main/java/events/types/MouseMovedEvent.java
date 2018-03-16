@@ -3,6 +3,9 @@ package events.types;
 import java.awt.Point;
 
 import events.Event;
+/*
+A child class to detect when the mouse is moved
+ */
 
 public class MouseMovedEvent extends Event {
 
