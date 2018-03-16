@@ -20,7 +20,7 @@ In-game:
         a : Move left
         d : Move right
         e : perform action
-        mouse click : use weapon
+        left/right arrow keys : use weapon
         esc : Pause - brings up pause menu
         
 Pause menu:
