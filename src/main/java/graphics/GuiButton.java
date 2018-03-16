@@ -16,6 +16,9 @@ import events.EventDispatcher;
 import events.EventHandler;
 import events.EventListener;
 import events.types.*;
+/*
+Gui buttons listener to events on buttons
+ */
 
 public class GuiButton extends GuiPanel implements EventListener {
 

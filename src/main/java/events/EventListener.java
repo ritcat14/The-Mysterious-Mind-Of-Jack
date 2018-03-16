@@ -1,4 +1,7 @@
 package events;
+/*
+A class to listen to event
+ */
 
 public interface EventListener {
 
