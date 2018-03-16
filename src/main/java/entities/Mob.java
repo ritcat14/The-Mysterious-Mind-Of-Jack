@@ -31,6 +31,24 @@ public abstract class Mob extends Entity {
     
     private boolean isLeft = true;
 
+    public Mob(Map map, Vector pos, Vector size, String file, int spriteWidth) {
+        super(pos, size, file);
+        this.map = map;
+        FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
+
+        images = Tools.splitImage(image, 4, spriteWidth);
+        left[0] = images[1];
+        left[1] = images[0];
+        right[0] = images[2];
+        right[1] = images[3];
+
+        animation = new Animation(left, 8);
+
+        gravity = 0.04;
+        maxY = 3;
+        maxX = 1.5;
+    }
+
     public Mob(Map map, Vector pos, Vector size, String file) {
         super(pos, size, file);
         this.map = map;
@@ -57,15 +75,16 @@ public abstract class Mob extends Entity {
         maxX = 1.5;
         FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
     }
-    
-    boolean hasHorizontalCollision() {
+
+    public boolean hasHorizontalCollision() {
+        boolean passed = false;
         if (pos.x < 0) {
             pos.x = 0;
-            return true;
+            passed = true;
         }
         if (pos.x >= StateHandler.WIDTH) {
             pos.x = StateHandler.WIDTH;
-            return true;
+            passed = true;
         }
         /*for (int i = 0; i < map.getTiles().size(); i++) {
             Tile t = map.getTiles().get(i);
@@ -79,10 +98,10 @@ public abstract class Mob extends Entity {
                 return true;
             }
         }*/
-        return false;
+        return passed;
     }
     
-    boolean hasVerticalCollision() {
+    public boolean hasVerticalCollision() {
         boolean passed = false;
         if (pos.y < 0) {
             pos.y = 0;
@@ -103,7 +122,11 @@ public abstract class Mob extends Entity {
         }*/
         return passed;
     }
-    
+
+    public Map getMap() {
+        return map;
+    }
+
     protected void move() {
         if (velocity.x > maxX) velocity.x = maxX;
         if (velocity.x < -maxX) velocity.x = -maxX;
@@ -122,7 +145,7 @@ public abstract class Mob extends Entity {
     
     void jump() {
         if (onGround) {
-            velocity.y -= 6;
+            velocity.y -= 2;
             pos.add(new Vector(0, velocity.y));
         }
     }
@@ -171,7 +194,7 @@ public abstract class Mob extends Entity {
 	}
     
     public void doDamage(double damage) {
-    	this.health += damage / shield;
+    	this.health -= damage / shield;
     }
 
 }

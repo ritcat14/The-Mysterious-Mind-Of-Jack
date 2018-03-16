@@ -2,13 +2,13 @@ package entities;
 
 import entities.items.Item;
 import entities.items.other.Chest;
+import entities.items.other.Hawking;
 import graphics.GuiBar;
 import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class Player extends Mob {
     private boolean hasKey = false;
     private boolean activateButton = false;
     private String message = "";
+    private int officeBounds = 300;
 
     public Player(Map map, Vector pos) {
         super(map, pos, new Vector(32, 64), "/player/player.png");
@@ -64,7 +65,41 @@ public class Player extends Mob {
     }
 
     @Override
+    void jump() {
+        if (onGround) {
+            velocity.y -= 3.5;
+            pos.add(new Vector(0, velocity.y));
+        }
+    }
+
+    @Override
+    public boolean hasHorizontalCollision() {
+        boolean passed;
+        if (pos.x <= officeBounds && !hasKey) {
+            message = "Requires Key.";
+            pos.x = officeBounds + 1;
+            passed = true;
+        }
+        passed = super.hasHorizontalCollision();
+
+        /*for (int i = 0; i < map.getTiles().size(); i++) {
+            Tile t = map.getTiles().get(i);
+            if (!t.isSolid()) continue;
+            if (getLeft().intersects(t.getRight()) && velocity.x < 0) {
+                velocity.x = 0;
+                return true;
+            }
+            if (getRight().intersects(t.getLeft()) && velocity.x > 0) {
+                velocity.x = 0;
+                return true;
+            }
+        }*/
+        return passed;
+    }
+
+    @Override
     public void update() {
+        officeBounds = (int)(map.getX() + 300);
         healthBar.setValue((int)health);
         sheildBar.setValue(shield);
         if (up) jump();
@@ -77,15 +112,19 @@ public class Player extends Mob {
         
         if (velocity.x > -speed && velocity.x < speed) velocity.x = 0;
         
-        if (pos.x + size.x > StateHandler.WIDTH - EDGE_DISTANCE) {
+        if (pos.x + size.x > StateHandler.WIDTH - EDGE_DISTANCE && velocity.getX() > 0) {
         	if (map.getX() + (-velocity.x) + map.getImage().getWidth() > StateHandler.WIDTH) {
-        	    if (velocity.x > 0) map.setXPosition(-velocity.x);
+        	    pos.x = StateHandler.WIDTH - EDGE_DISTANCE -size.x - 1;
+        	    map.setXPosition(-velocity.getX());
             }
         }
         
         if (pos.x < EDGE_DISTANCE) {
             if (map.getX() + (-velocity.x) < 0) {
-                if (velocity.x < 0) map.setXPosition(-velocity.x);
+                if (velocity.x < 0) {
+                    pos.x = EDGE_DISTANCE + 1;
+                    map.setXPosition(-velocity.getX());
+                }
             }
         }
 
@@ -100,6 +139,7 @@ public class Player extends Mob {
                     if (!((Chest)i).isOpen()) message = "Press E (requires key).";
                     if (!activateButton) continue;
                 }
+                if (i instanceof Hawking && !activateButton) continue;
                 i.onEvent(this);
             }
         }

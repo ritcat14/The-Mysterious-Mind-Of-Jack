@@ -36,7 +36,6 @@ public class Cutscene extends State {
         String[] parts = data.split(":");
         frames = Tools.splitImage("/scenes/" + parts[0] + ".png", Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
         this.times = Tools.StringArrayToIntArray(parts[3].split(","));
-        for (int i : times) System.out.println(i);
     }
     
     private boolean keyPressed(KeyPressedEvent e) {

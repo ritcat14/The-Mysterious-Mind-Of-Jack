@@ -23,6 +23,11 @@ public abstract class Item extends Entity implements ItemEvent {
         this.ID = ID;
     }
 
+    protected Item(Vector pos, Vector size, int ID) {
+        super(pos, size);
+        this.ID = ID;
+    }
+
     protected Item(Vector pos) {
         super(pos, new Vector(40, 40));
         ID = 0;

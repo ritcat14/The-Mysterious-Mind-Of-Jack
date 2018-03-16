@@ -4,9 +4,10 @@ This class generates, updates, and renders the map, player, entities, and enemie
 
 package core;
 
-import entities.Mob;
+import entities.*;
 import entities.items.Item;
 import entities.items.other.Chest;
+import entities.items.other.Hawking;
 import entities.items.other.Key;
 import handler.StateHandler;
 import handler.Tools;
@@ -17,8 +18,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import entities.Entity;
-import entities.Player;
 import events.Event;
 import events.Event.Type;
 import events.EventDispatcher;
@@ -38,6 +37,11 @@ public class Map implements EventListener {
     private double xPosition = 0;
     private int time = 0;
 
+    private final int ENEMY_MAX = 15;
+    private int enemyCount = 0;
+    private int enemiesSpawned = 0;
+    private boolean canSpawn = true;
+
     private int width;
     
     public Map(Game game) {
@@ -53,11 +57,27 @@ public class Map implements EventListener {
     }
     
     public void setXPosition(double x) {
-    	for (Entity e : entities) e.setPosition(e.getPosition().add(new Vector(x, 0)));
+    	for (Entity e : entities) {
+    	    if (e instanceof Player) continue;
+    	    e.setPosition(e.getPosition().add(new Vector(x, 0)));
+        }
     	xPosition += x;
-    	
     }
-    
+
+    private void spawnEnemies() {
+        enemyCount += 5;
+        enemiesSpawned += 5;
+        if (enemiesSpawned > ENEMY_MAX) {
+            canSpawn = false;
+            add(new Boss(this));
+            return;
+        }
+        for (int i = 0; i < 5; i++) {
+            int enemyID = Tools.getRandom(1, 3);
+            add(new Enemy(this, new Vector(Tools.getRandom(500, 2000), Mob.FLOOR_HEIGHT), new Vector(32, 64), "/player/backgroundCharacter" + enemyID + ".png", 350));
+        }
+    }
+
     public void add(Entity e) { entitiesToAdd.add(e); }
     
     public void remove(Entity e) {
@@ -90,15 +110,19 @@ public class Map implements EventListener {
 
     private void generateItems() {
         entities.add(new Chest(new Vector(200, Mob.FLOOR_HEIGHT)));
-        entities.add(new Key(new Vector(500, Mob.FLOOR_HEIGHT)));
+        entities.add(new Hawking());
     }
     
     public void update() {
         player.update();
         for (Entity e : entities) {
         	e.update();
-        	if (e.isRemoved()) entitiesToRemove.add(e);
+        	if (e.isRemoved()) {
+        	    if (e instanceof Enemy) enemyCount--;
+        	    entitiesToRemove.add(e);
+            }
         }
+        if (enemyCount == 0 && canSpawn) spawnEnemies();
         if (!rendering) clean();
     }
     

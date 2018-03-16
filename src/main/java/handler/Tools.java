@@ -11,12 +11,14 @@ import javax.imageio.ImageIO;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class Tools {
 
 	public static final String propertiesFile = "/items/recipes.dll";
     private static HashMap<String, BufferedImage> images = new HashMap<>();
+    private static Random random = new Random();
 	
     /* ------------------------------- Image Handling -------------------------------- */
    
@@ -136,6 +138,10 @@ public class Tools {
 	   }else{
 	      return (double) Math.floor(value * scale) / scale;
 	   }
+   }
+
+   public static int getRandom(int min, int max) {
+       return random.nextInt(max-min) + min;
    }
     
 }
