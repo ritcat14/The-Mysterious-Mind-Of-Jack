@@ -20,9 +20,18 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="library" name="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER" level="application" />
     <orderEntry type="module-library">
-      <library name="junit4">
+      <library>
         <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jfxrt.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/junit-4.12.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
