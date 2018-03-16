@@ -13,6 +13,10 @@ import java.awt.image.BufferedImage;
 
 import events.Keyboard;
 import events.Mouse;
+/*
+A class of the game canvas
+ */
+
 
 public class GameCanvas extends Canvas {
 

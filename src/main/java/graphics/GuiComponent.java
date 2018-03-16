@@ -5,6 +5,9 @@ import handler.Vector;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+/*
+A class consisted of Gui components
+ */
 
 public class GuiComponent {
     

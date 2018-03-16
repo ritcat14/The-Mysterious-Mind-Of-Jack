@@ -14,6 +14,10 @@ import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
 
+/*
+Start class to handle start state
+ */
+
 public class Start extends State {
     
     private GuiPanel mainPanel;

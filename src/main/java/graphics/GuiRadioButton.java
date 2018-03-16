@@ -13,6 +13,9 @@ import events.EventListener;
 import events.types.MousePressedEvent;
 import handler.Tools;
 import handler.Vector;
+/*
+Button to open chat box
+ */
 
 public class GuiRadioButton extends GuiComponent implements EventListener {
 	

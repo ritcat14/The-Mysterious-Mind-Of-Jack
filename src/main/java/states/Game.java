@@ -12,6 +12,10 @@ import events.EventDispatcher;
 import events.types.KeyPressedEvent;
 import handler.StateHandler;
 
+/*
+General class of the states
+ */
+
 public class Game extends State {
     
     public static boolean acceleration = false;

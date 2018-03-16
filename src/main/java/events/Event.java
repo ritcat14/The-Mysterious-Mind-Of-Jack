@@ -1,4 +1,7 @@
 package events;
+/*
+A class event to identify and detect events
+ */
 
 public class Event {
 	

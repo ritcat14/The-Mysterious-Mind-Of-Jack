@@ -3,6 +3,9 @@ package events.types;
 import java.awt.Point;
 
 import events.Event;
+/*
+A child class to detect mouse button
+ */
 
 public class MouseButtonEvent extends Event { 
 

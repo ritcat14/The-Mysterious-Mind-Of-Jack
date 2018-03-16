@@ -3,6 +3,9 @@ package entities;
 import core.Map;
 import handler.StateHandler;
 import handler.Vector;
+/*
+A child class called Boss which generates an entity which will be the final enemy.
+ */
 
 import java.awt.*;
 

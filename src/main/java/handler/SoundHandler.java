@@ -7,6 +7,9 @@ import java.util.HashMap;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+/*
+A handler class for sound
+ */
 
 public class SoundHandler {
 	

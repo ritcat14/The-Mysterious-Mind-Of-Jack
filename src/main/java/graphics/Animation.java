@@ -1,6 +1,9 @@
 package graphics;
 
 import java.awt.image.BufferedImage;
+/*
+A class of Animation to handle animation
+ */
 
 public class Animation {
 	

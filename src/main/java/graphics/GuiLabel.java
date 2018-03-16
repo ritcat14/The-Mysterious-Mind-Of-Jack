@@ -5,7 +5,9 @@ import handler.Vector;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-
+/*
+Text label for Gui
+ */
 public class GuiLabel extends GuiComponent {
 
     private String text;
