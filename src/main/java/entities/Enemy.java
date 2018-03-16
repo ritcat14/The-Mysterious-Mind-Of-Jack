@@ -29,8 +29,14 @@ public class Enemy extends Mob {
 		}
 		super.update();
 	}
-	
-	public int getDamage() {
+
+    @Override
+    public void remove() {
+	    map.spawnItem(pos);
+        super.remove();
+    }
+
+    public int getDamage() {
 		return damage;
 	}
 	

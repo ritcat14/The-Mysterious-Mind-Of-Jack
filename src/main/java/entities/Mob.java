@@ -86,18 +86,6 @@ public abstract class Mob extends Entity {
             pos.x = StateHandler.WIDTH;
             passed = true;
         }
-        /*for (int i = 0; i < map.getTiles().size(); i++) {
-            Tile t = map.getTiles().get(i);
-            if (!t.isSolid()) continue;
-            if (getLeft().intersects(t.getRight()) && velocity.x < 0) {
-                velocity.x = 0;
-                return true;
-            }
-            if (getRight().intersects(t.getLeft()) && velocity.x > 0) {
-                velocity.x = 0;
-                return true;
-            }
-        }*/
         return passed;
     }
     
@@ -108,18 +96,6 @@ public abstract class Mob extends Entity {
             passed = true;
         }
         if (onGround) passed = true;
-        /*for (int i = 0; i < map.getTiles().size(); i++) {
-            Tile t = map.getTiles().get(i);
-            if (!t.isSolid()) continue;
-            if (getBottom().intersects(t.getTop()) && velocity.y > 0) {
-                velocity.y = 0;
-                return true;
-            }
-            if (getTop().intersects(t.getBottom()) && velocity.y < 0) {
-                velocity.y = 0;
-                return true;
-            }
-        }*/
         return passed;
     }
 

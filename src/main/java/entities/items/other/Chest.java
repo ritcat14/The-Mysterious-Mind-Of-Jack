@@ -4,6 +4,7 @@ The event method at the bottom checks whether the player has the key.
  */
 package entities.items.other;
 
+import entities.Mob;
 import entities.Player;
 import entities.items.Item;
 import entities.items.food.Pill;
@@ -15,8 +16,8 @@ public class Chest extends Item {
     private boolean open = false;
     private boolean setImage = false;
 
-    public Chest(Vector pos) {
-        super(pos);
+    public Chest() {
+        super(new Vector(200, Mob.FLOOR_HEIGHT));
         image = Tools.getImage("/items/chest-locked.png");
     }
 
@@ -36,6 +37,6 @@ public class Chest extends Item {
     @Override
     public void onEvent(Player player) {
         if (player.hasKey()) open = true;
-        player.spawn(new Pill(new Vector(pos.getX(), pos.getY())));
+        player.spawn(new Pill(new Vector(pos.getX() - 50, pos.getY())));
     }
 }
