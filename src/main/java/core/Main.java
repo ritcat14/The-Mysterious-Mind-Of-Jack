@@ -1,3 +1,8 @@
+/*
+ * The main game class. Starts all the essential parts of the code, sets up fps counter, and starts threads.
+ *
+ */
+
 package core;
 
 import graphics.GameCanvas;
@@ -13,11 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import entities.Player;
-
-/*
- * The main game class. This is where the application begins.
- * 
- */
 
 public class Main implements Runnable, WindowListener {
 	public static JFrame frame;
