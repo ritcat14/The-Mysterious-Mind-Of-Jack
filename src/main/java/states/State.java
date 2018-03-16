@@ -3,6 +3,9 @@ package states;
 import java.awt.Graphics;
 
 import events.EventListener;
+/*
+To render and update state of game
+ */
 
 public abstract class State implements EventListener {
     

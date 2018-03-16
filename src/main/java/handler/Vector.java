@@ -1,6 +1,9 @@
 package handler;
 
 import java.awt.Point;
+/*
+for storing coordinates
+ */
 
 public class Vector {
     

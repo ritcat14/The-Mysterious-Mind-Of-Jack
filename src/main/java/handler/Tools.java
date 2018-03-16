@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Random;
 
+/*
+A class to listen events and maps
+ */
 
 public class Tools {
 

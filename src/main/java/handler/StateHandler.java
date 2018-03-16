@@ -13,6 +13,9 @@ import events.Event.Type;
 import events.EventDispatcher;
 import events.types.*;
 import states.*;
+/*
+A class to handle the state of game
+ */
 
 public class StateHandler implements EventListener {
     

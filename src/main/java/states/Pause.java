@@ -20,6 +20,10 @@ import handler.StateHandler;
 import handler.StateHandler.States;
 import handler.Vector;
 
+/*
+Pause class to handle pause state
+ */
+
 public class Pause extends State {
 	
 	private GuiPanel mainPanel;

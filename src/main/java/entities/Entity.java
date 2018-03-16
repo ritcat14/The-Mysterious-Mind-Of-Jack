@@ -16,6 +16,9 @@ import handler.Vector;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+/*
+Superclass Entity
+ */
 
 public abstract class Entity {
     

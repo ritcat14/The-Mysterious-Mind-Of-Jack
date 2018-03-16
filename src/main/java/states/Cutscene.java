@@ -14,6 +14,9 @@ import events.EventDispatcher;
 import events.EventHandler;
 import events.types.KeyPressedEvent;
 import javafx.scene.media.MediaPlayer;
+/*
+Cutscene class to handle loading screen for the game
+ */
 
 public class Cutscene extends State {
     

@@ -1,4 +1,7 @@
 package events;
+/*
+A class to dispatch event to other classes listening to
+ */
 
 public class EventDispatcher {
 
@@ -15,5 +18,4 @@ public class EventDispatcher {
 		if (event.getType() == type)
 			event.handled = handler.onEvent(event);
 	}
-	
 }

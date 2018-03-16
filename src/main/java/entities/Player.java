@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import core.Map;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
+/*
+A child class Player from Mob
+ */
 
 public class Player extends Mob {
 	
@@ -200,14 +203,10 @@ public class Player extends Mob {
     public void setUp(Boolean up) {
     	this.up = up;
     }
-    
-    public void setLeft(Boolean left) {
-    	this.left = left;
-    }
-    
-    public void setRight(Boolean right) {
-    	this.right = right;
-    }
+
+    public boolean getPlayerLeft() { return this.left;}
+
+    public boolean getPlayerRight() { return this.right;}
     
     public boolean keyReleased(KeyReleasedEvent e) {
         switch(e.getKey()) {
