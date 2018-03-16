@@ -1,3 +1,7 @@
+/*
+This class generates, updates, and renders the map, player, entities, and enemies.
+ */
+
 package core;
 
 import entities.Mob;
@@ -36,14 +40,14 @@ public class Map implements EventListener {
 
     private int width;
     
-    public Map(Game game) { // The ID of the chapter is required for accessing the map data
+    public Map(Game game) {
         entities = new ArrayList<>();
         entitiesToRemove = new ArrayList<>();
         entitiesToAdd = new ArrayList<>();
         background = Tools.getImage("/chapter/background.png");
         backgroundEgg = Tools.getImage("/chapter/background-egg.png");
         backgroundEgg2 = Tools.getImage("/chapter/background-egg2.png");
-        game.setPlayer(player = new Player(this, new Vector(100, 0)));
+        game.setPlayer(player = new Player(this, new Vector(500, StateHandler.HEIGHT - 100)));
         width = background.getWidth();
         generateItems();
     }

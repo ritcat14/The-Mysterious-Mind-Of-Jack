@@ -1,3 +1,6 @@
+/*
+This class is used for when the player shoots.
+ */
 package entities.items.projectiles;
 
 import java.awt.image.BufferedImage;

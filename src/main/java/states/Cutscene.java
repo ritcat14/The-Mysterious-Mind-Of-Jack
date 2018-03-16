@@ -1,5 +1,6 @@
 package states;
 
+import handler.SoundHandler;
 import handler.StateHandler;
 import handler.Tools;
 
@@ -12,6 +13,7 @@ import events.Event;
 import events.EventDispatcher;
 import events.EventHandler;
 import events.types.KeyPressedEvent;
+import javafx.scene.media.MediaPlayer;
 
 public class Cutscene extends State {
     
@@ -21,6 +23,10 @@ public class Cutscene extends State {
     private int timeSec = 0;
     private int[] times;
     private int frame = 0;
+
+    private MediaPlayer player;
+    private int soundID = 1;
+    private boolean playedSound = false;
     
     private boolean switching = false;
     
@@ -30,12 +36,14 @@ public class Cutscene extends State {
         String[] parts = data.split(":");
         frames = Tools.splitImage("/scenes/" + parts[0] + ".png", Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
         this.times = Tools.StringArrayToIntArray(parts[3].split(","));
+        for (int i : times) System.out.println(i);
     }
     
     private boolean keyPressed(KeyPressedEvent e) {
         switch (e.getKey()) {
             case KeyEvent.VK_SPACE:
             	switching = true;
+            	stop();
                 StateHandler.changeState(StateHandler.States.GAME);
                 return true;
         }
@@ -50,24 +58,37 @@ public class Cutscene extends State {
 
     @Override
     public void update() {
+        if (!playedSound) {
+            if (player != null) player.stop();
+            player = SoundHandler.play("intro " + soundID);
+            soundID++;
+            playedSound = true;
+        }
     	if (switching) return;
         time++;
-        if (time % Tools.getSecs(1) == 0) timeSec++;
+        if (time % 60 == 0) timeSec++;
         
         currentFrame = frames[frame];
         
         if (timeSec == times[frame]) {
             if (frame == frames.length - 1) {
             	switching = true;
+            	if (player != null) player.stop();
                 StateHandler.changeState(StateHandler.States.GAME);
             }
-        frame++;
+            frame++;
+            timeSec = 0;
+            playedSound = false;
         }
+    }
+
+    public void stop() {
+        if (player!= null) player.stop();
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(currentFrame, 0, 0, null);
+        g.drawImage(currentFrame, 0, 0, StateHandler.WIDTH, StateHandler.HEIGHT, null);
         g.setColor(Color.WHITE);
         g.drawString("Press Space to skip", StateHandler.WIDTH - 150, StateHandler.HEIGHT - 50);
     }
