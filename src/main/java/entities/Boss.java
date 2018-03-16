@@ -3,7 +3,7 @@ package entities;
 import core.Map;
 import handler.Vector;
 /*
-A child class called Boss of Mob
+A child class called Boss which generates an entity which will be the final enemy.
  */
 
 public class Boss extends Mob {
