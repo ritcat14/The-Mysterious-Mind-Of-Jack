@@ -26,8 +26,6 @@ public class Main implements Runnable, WindowListener {
 	private GameCanvas canvas;
 	private int WIDTH = 1200;
 	private int HEIGHT = WIDTH / 16 * 9;
-	public static int RENDER_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static int RENDER_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 	private StateHandler sh;
 	private int time = 0;
 	private Player player;

@@ -19,7 +19,7 @@ public class Start extends State {
     private GuiPanel mainPanel;
     
     public Start() {
-        SoundHandler.loop("intro");
+        //SoundHandler.loop("intro");
         mainPanel = new GuiPanel(new Vector(100, 50), new Vector(StateHandler.WIDTH - 200, StateHandler.HEIGHT - 100), Tools.getImage("/gui/start.png"));
         mainPanel.add(new GuiLabel(new Vector(150, 200), new Vector(150, 50), "MAIN MENU", Color.WHITE, new Font("Times New Java", Font.PLAIN, 50)));
         mainPanel.add(new GuiButton(new Vector(230, 300), new Vector(90, 25), null, "START", new Font("Times New Java", Font.PLAIN, 25)) {
@@ -56,7 +56,7 @@ public class Start extends State {
         		return false;
         	}
         	
-        }.setTextOffset(5, 23);;
+        }.setTextOffset(5, 23);
         
         mainPanel.add(exit);
         
