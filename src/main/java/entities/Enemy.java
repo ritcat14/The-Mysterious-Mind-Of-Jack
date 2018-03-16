@@ -45,5 +45,4 @@ public class Enemy extends Mob {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
-
 }
