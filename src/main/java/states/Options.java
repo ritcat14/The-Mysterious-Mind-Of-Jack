@@ -14,6 +14,9 @@ import handler.SoundHandler;
 import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
+/*
+Options class for the state of game
+ */
 
 public class Options extends State {
     private GuiPanel mainPanel;
