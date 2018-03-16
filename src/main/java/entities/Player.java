@@ -203,14 +203,10 @@ public class Player extends Mob {
     public void setUp(Boolean up) {
     	this.up = up;
     }
-    
-    public void setLeft(Boolean left) {
-    	this.left = left;
-    }
-    
-    public void setRight(Boolean right) {
-    	this.right = right;
-    }
+
+    public boolean getPlayerLeft() { return this.left;}
+
+    public boolean getPlayerRight() { return this.right;}
     
     public boolean keyReleased(KeyReleasedEvent e) {
         switch(e.getKey()) {
