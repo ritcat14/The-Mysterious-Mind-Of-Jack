@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import core.Map;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
+/*
+A child class Player from Mob
+ */
 
 public class Player extends Mob {
 	

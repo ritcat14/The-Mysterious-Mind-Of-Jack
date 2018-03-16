@@ -5,7 +5,9 @@ import java.awt.Rectangle;
 import core.Map;
 import handler.StateHandler;
 import handler.Vector;
-
+/*
+A child class about enemy of Mob
+ */
 public class Enemy extends Mob {
 	
 	protected int damage;

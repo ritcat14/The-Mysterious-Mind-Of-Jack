@@ -66,9 +66,6 @@ public class Main implements Runnable, WindowListener {
 		running = false;
 	}
 
-	/*
-
-	 */
 
 	public void update() { // Update game logic
 		time++;

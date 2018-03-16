@@ -7,7 +7,9 @@ import graphics.Animation;
 import handler.StateHandler;
 import handler.Tools;
 import handler.Vector;
-
+/*
+A child class Mob from Entity
+ */
 public abstract class Mob extends Entity {
 
     protected boolean onGround = false;
