@@ -47,7 +47,7 @@ public class Map implements EventListener {
         background = Tools.getImage("/chapter/background.png");
         backgroundEgg = Tools.getImage("/chapter/background-egg.png");
         backgroundEgg2 = Tools.getImage("/chapter/background-egg2.png");
-        game.setPlayer(player = new Player(this, new Vector(100, 0)));
+        game.setPlayer(player = new Player(this, new Vector(500, StateHandler.HEIGHT - 100)));
         width = background.getWidth();
         generateItems();
     }
