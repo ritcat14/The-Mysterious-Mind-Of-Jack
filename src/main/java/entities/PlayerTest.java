@@ -1,9 +1,9 @@
 /*
 package entities;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import core.Map;
 import events.Event;
