@@ -28,7 +28,7 @@ public class StateHandler implements EventListener {
     public static State startCopy;
     
     public static enum States {
-        START, GAME, PAUSE, OPTIONS, CUTSCENE;        
+        START, GAME, PAUSE, CUTSCENE, GAMEOVER;
     }
     
     private static State currentState;

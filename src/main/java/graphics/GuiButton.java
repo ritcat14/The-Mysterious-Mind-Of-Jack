@@ -60,10 +60,10 @@ public class GuiButton extends GuiPanel implements EventListener {
 	public void render(Graphics g) {
     	if (!visible) return;
 		super.render(g);
-		if (image != null) g.drawImage(image, (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, null);
+		if (image != null) g.drawImage(image, (int)pos.getX(), (int)pos.getY(), (int)size.getX(), (int)size.getY(), null);
 		g.setColor(textColour);
 		g.setFont(font);
-		g.drawString(text, (int)(pos.x + textOffset.x), (int)(pos.y + textOffset.y));
+		g.drawString(text, (int)(pos.getX() + textOffset.getX()), (int)(pos.getY() + textOffset.getY()));
 	}
 
 	public boolean mousePressed(MousePressedEvent e) {

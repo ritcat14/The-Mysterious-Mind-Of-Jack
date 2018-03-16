@@ -6,7 +6,6 @@
  * @param height - the height of the entity
  * @param image - the image (skin) of the entitiy
  * @param file - the file location of the image of the entity
- * 
  */
 
 package entities;
@@ -57,16 +56,16 @@ public abstract class Entity {
     public abstract void update();
     
     public void render(Graphics g) {
-        if (image != null) g.drawImage(image, (int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y, null);
+        if (image != null) g.drawImage(image, (int)(pos.getX()), (int)(pos.getY()), (int)size.getX(), (int)size.getY(), null);
         else {
             g.setColor(c);
-            g.drawRect((int)(pos.x), (int)(pos.y), (int)size.x, (int)size.y);
+            g.drawRect((int)(pos.getX()), (int)(pos.getY()), (int)size.getY(), (int)size.getY());
         }
     }
     
-    public double getWidth() { return size.x; }
+    public double getWidth() { return size.getX(); }
     
-    public double getHeight() { return size.y; }
+    public double getHeight() { return size.getY(); }
     
     public Vector getPosition() { return pos; }
     
@@ -74,15 +73,15 @@ public abstract class Entity {
     
     public void setPosition(Vector pos) { this.pos = pos; }
     
-    public Rectangle getBounds() { return new Rectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y); } // Used primarily for collision detection
+    public Rectangle getBounds() { return new Rectangle((int)pos.getX(), (int)pos.getY(), (int)size.getX(), (int)size.getY()); } // Used primarily for collision detection
     
-    public Rectangle getRight() { return new Rectangle((int)(pos.x + (size.x - 3)), (int)(pos.y + 3), 3, (int)(size.y - 6));}
+    public Rectangle getRight() { return new Rectangle((int)(pos.getX() + (size.getX() - 3)), (int)(pos.getY() + 3), 3, (int)(size.getY() - 6));}
     
-    public Rectangle getLeft() { return new Rectangle((int)pos.x, (int)pos.y + 3, 3, (int)(size.y - 6));}
+    public Rectangle getLeft() { return new Rectangle((int)pos.getX(), (int)pos.getY() + 3, 3, (int)(size.getY() - 6));}
     
-    public Rectangle getBottom() { return new Rectangle((int)pos.x + 3, (int)(pos.y + (size.y - 3)), (int)(size.x - 6), 3);}
+    public Rectangle getBottom() { return new Rectangle((int)pos.getX() + 3, (int)(pos.getY() + (size.getY() - 3)), (int)(size.getX() - 6), 3);}
     
-    public Rectangle getTop() { return new Rectangle((int)pos.x + 3, (int)pos.y, (int)(size.x - 6), 3);}
+    public Rectangle getTop() { return new Rectangle((int)pos.getX() + 3, (int)pos.getY(), (int)(size.getX() - 6), 3);}
     
     public boolean isRemoved() { return removed; }
     

@@ -39,10 +39,10 @@ public class GuiPanel extends GuiComponent implements EventListener {
     	if (!visible) return;
         if (colour != null) {
             g.setColor(colour);
-            g.fillRect((int)pos.x, (int)pos.y, (int)size.x, (int)size.y);
+            g.fillRect((int)pos.getX(), (int)pos.getY(), (int)size.getX(), (int)size.getY());
         }
         if (image != null) {
-            g.drawImage(image, (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, null);
+            g.drawImage(image, (int)pos.getX(), (int)pos.getY(), (int)size.getX(), (int)size.getY(), null);
         }
         super.render(g);
     }

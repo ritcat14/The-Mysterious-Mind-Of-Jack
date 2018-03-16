@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public class Vector {
     
-    public double x, y;
+    private double x, y;
     
     public Vector(double x, double y) {
         this.x = x;
@@ -48,4 +48,21 @@ public class Vector {
     public double getY() {
         return y;
     }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void adjustX(double x) {
+        this.x += x;
+    }
+
+    public void adjustY(double y) {
+        this.y += y;
+    }
+
 }

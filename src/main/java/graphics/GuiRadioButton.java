@@ -26,7 +26,7 @@ public class GuiRadioButton extends GuiComponent implements EventListener {
 		super(pos, size);
 		buttonUnchecked = Tools.getImage("/gui/buttonUnchecked.png");
 		buttonChecked = Tools.getImage("/gui/buttonChecked.png");
-		button = new GuiButton(new Vector(pos.x, pos.y - 15), buttonUnchecked) {
+		button = new GuiButton(new Vector(pos.getX(), pos.getY() - 15), buttonUnchecked) {
 			@Override
 			public void update() {
 				super.update();
@@ -58,8 +58,8 @@ public class GuiRadioButton extends GuiComponent implements EventListener {
 		super.update();
 		if (checked) button.setImage(buttonChecked);
 		else button.setImage(buttonUnchecked);
-		button.setX(pos.x - 30);
-		button.setY(pos.y - 15);
+		button.setX(pos.getX() - 30);
+		button.setY(pos.getY() - 15);
 	}
 
 	@Override

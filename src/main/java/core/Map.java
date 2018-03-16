@@ -35,15 +35,11 @@ public class Map implements EventListener {
     private boolean rendering = false;
     private double xPosition = 0;
     private int time = 0;
-    private int armourSpawned = 0;
 
-    private final int ENEMY_MAX = 15;
+    private final int ENEMY_MAX = 6;
     private int enemyCount = 0;
-    private int enemiesSpawned = 0;
     private boolean canSpawn = true;
 
-    private int width;
-    
     public Map(Game game) {
         entities = new ArrayList<>();
         entitiesToRemove = new ArrayList<>();
@@ -51,9 +47,9 @@ public class Map implements EventListener {
         background = Tools.getImage("/chapter/background.png");
         backgroundEgg = Tools.getImage("/chapter/background-egg.png");
         backgroundEgg2 = Tools.getImage("/chapter/background-egg2.png");
-        game.setPlayer(player = new Player(this, new Vector(500, StateHandler.HEIGHT - 100)));
-        width = background.getWidth();
+        game.setPlayer(player = new Player(this, new Vector(500, StateHandler.HEIGHT - 200)));
         generateItems();
+        spawnEnemies();
     }
     
     public void setXPosition(double x) {
@@ -65,16 +61,17 @@ public class Map implements EventListener {
     }
 
     private void spawnEnemies() {
-        enemyCount += 5;
-        enemiesSpawned += 5;
-        if (enemiesSpawned > ENEMY_MAX) {
-            canSpawn = false;
+        System.out.println(enemyCount);
+        if (enemyCount > ENEMY_MAX) {
+            System.out.println("Boss spawned");
             add(new Boss(this));
+            canSpawn = false;
             return;
         }
-        for (int i = 0; i < 5; i++) {
+        enemyCount += 3;
+        for (int i = 0; i < 3; i++) {
             int enemyID = Tools.getRandom(1, 3);
-            add(new Enemy(this, new Vector(Tools.getRandom(500, 2000), Mob.FLOOR_HEIGHT), new Vector(48, 96), "/player/backgroundCharacter" + enemyID + ".png", 350));
+            add(new Enemy(this, new Vector(Tools.getRandom(500, 2000), Mob.FLOOR_HEIGHT - 100), new Vector(48, 96), "/player/backgroundCharacter" + enemyID + ".png", 350, (enemyCount / 3) * 100));
         }
     }
 
@@ -90,6 +87,10 @@ public class Map implements EventListener {
 
     public BufferedImage getImage() {
         return background;
+    }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
     }
 
     private void clean() {
@@ -109,28 +110,28 @@ public class Map implements EventListener {
     }
 
     private void generateItems() {
-        entities.add(new Chest());
-        entities.add(new Hawking());
+        entitiesToAdd.add(new Chest());
+        entitiesToAdd.add(new Hawking());
     }
 
     public void spawnItem(Vector pos) {
-        Vector spawnPos = pos.add(new Vector(-50, 0));
+        Vector spawnPos = pos.add(new Vector(24, -100));
         int ran = Tools.getRandom(1, 5);
         switch(ran) {
             case 1:
-                entities.add(new Apple(spawnPos));
+                entitiesToAdd.add(new Apple(spawnPos));
                 break;
             case 2:
-                entities.add(new Banana(spawnPos));
+                entitiesToAdd.add(new Banana(spawnPos));
                 break;
             case 3:
-                entities.add(new Burger(spawnPos));
+                entitiesToAdd.add(new Burger(spawnPos));
                 break;
             case 4:
-                entities.add(new Crisps(spawnPos));
+                entitiesToAdd.add(new Crisps(spawnPos));
                 break;
             case 5:
-                entities.add(new Sandwich(spawnPos));
+                entitiesToAdd.add(new Sandwich(spawnPos));
                 break;
         }
         ran = Tools.getRandom(1, 10);
@@ -138,15 +139,15 @@ public class Map implements EventListener {
     }
     
     public void update() {
+        time++;
         player.update();
         for (Entity e : entities) {
         	e.update();
         	if (e.isRemoved()) {
-        	    if (e instanceof Enemy) enemyCount--;
         	    entitiesToRemove.add(e);
             }
         }
-        if (enemyCount == 0 && canSpawn) spawnEnemies();
+        if (time % 600 == 0 && canSpawn) spawnEnemies();
         if (!rendering) clean();
     }
     
@@ -162,7 +163,7 @@ public class Map implements EventListener {
             if (e.isRemoved()) entitiesToRemove.add(e);
             Vector pos = e.getPosition();
             double width = e.getWidth();
-            if (pos.x + width < 0 || pos.x > StateHandler.WIDTH) continue;
+            if (pos.getX() + width < 0 || pos.getY() > StateHandler.WIDTH) continue;
         	e.render(g);
         }
         player.render(g);

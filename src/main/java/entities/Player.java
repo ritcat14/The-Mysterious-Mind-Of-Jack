@@ -3,6 +3,7 @@ package entities;
 import entities.items.Item;
 import entities.items.other.Chest;
 import entities.items.other.Hawking;
+import entities.items.weapons.Weapon;
 import graphics.GuiBar;
 import handler.StateHandler;
 import handler.Tools;
@@ -24,10 +25,13 @@ public class Player extends Mob {
     private final int EDGE_DISTANCE = 100;
     private BufferedImage h, d;
 
+    private Weapon weapon;
+
     private boolean easterEgg = false;
     private boolean activateButton = false;
     private String message = "";
     private int officeBounds = 300;
+    private boolean shootLeft, shootRight;
 
     private boolean hasKey, hasWheel, hasChair, hasCell = false;
     private BufferedImage chair, cell, wheel;
@@ -45,6 +49,9 @@ public class Player extends Mob {
         
         h = Tools.getImage("/gui/health.png");
         d = Tools.getImage("/gui/shield.png");
+
+        weapon = new Weapon(map, new Vector(pos.getX() + size.getX() + 10, pos.getY() + (size.getY() / 2)), 9, 0, 30, 0);
+
     }
 
     public void addHead(BufferedImage head) {
@@ -102,19 +109,11 @@ public class Player extends Mob {
     }
 
     @Override
-    void jump() {
-        if (onGround) {
-            velocity.y -= 3.5;
-            pos.add(new Vector(0, velocity.y));
-        }
-    }
-
-    @Override
     public boolean hasHorizontalCollision() {
         boolean passed;
-        if (pos.x <= officeBounds && !hasKey) {
+        if (pos.getX() <= officeBounds && !hasKey) {
             message = "Requires Key.";
-            pos.x = officeBounds + 1;
+            pos.setX(officeBounds + 1);
             passed = true;
         }
         passed = super.hasHorizontalCollision();
@@ -126,32 +125,37 @@ public class Player extends Mob {
         officeBounds = (int)(map.getX() + 300);
         healthBar.setValue((int)health);
         sheildBar.setValue(shield);
+
+        if (shootLeft) weapon.shoot(1);
+        if (shootRight) weapon.shoot(0);
+        weapon.setPosition(new Vector(pos.getX() + size.getX() + 10, pos.getY() + (size.getY() / 2)));
+        weapon.update();
+
         if (up) jump();
         
-        if (left) velocity.x -= speed;
-        else if (velocity.x < 0) velocity.x += speed;
+        if (left) velocity.adjustX(-speed);
+        else if (velocity.getX() < 0) velocity.adjustX(speed);
         
-        if (right) velocity.x += speed;
-        else if (velocity.x > 0) velocity.x -= speed;
+        if (right) velocity.adjustX(speed);
+        else if (velocity.getX() > 0) velocity.adjustX(-speed);
         
-        if (velocity.x > -speed && velocity.x < speed) velocity.x = 0;
+        if (velocity.getX() > -speed && velocity.getX() < speed) velocity.setX(0);
         
-        if (pos.x + size.x > StateHandler.WIDTH - EDGE_DISTANCE && velocity.getX() > 0) {
-        	if (map.getX() + (-velocity.x) + map.getImage().getWidth() > StateHandler.WIDTH) {
-        	    pos.x = StateHandler.WIDTH - EDGE_DISTANCE -size.x - 1;
+        if (pos.getX() + size.getX() > StateHandler.WIDTH - EDGE_DISTANCE && velocity.getX() > 0) {
+        	if (map.getX() + (-velocity.getX()) + map.getImage().getWidth() > StateHandler.WIDTH) {
+        	    pos.setX(StateHandler.WIDTH - EDGE_DISTANCE -size.getX() - 1);
         	    map.setXPosition(-velocity.getX());
             }
         }
         
-        if (pos.x < EDGE_DISTANCE) {
-            if (map.getX() + (-velocity.x) < 0) {
-                if (velocity.x < 0) {
-                    pos.x = EDGE_DISTANCE + 1;
+        if (pos.getX() < EDGE_DISTANCE) {
+            if (map.getX() + (-velocity.getX()) < 0) {
+                if (velocity.getX() < 0) {
+                    pos.setX(EDGE_DISTANCE + 1);
                     map.setXPosition(-velocity.getX());
                 }
             }
         }
-
         super.update();
         healthBar.update();
         sheildBar.update();
@@ -185,6 +189,7 @@ public class Player extends Mob {
         g.setColor(Color.RED);
         g.drawString(message, (int)pos.getX(), (int)pos.getY() - 15);
         message = "";
+        weapon.render(g);
 
         if (hasHead) g.drawImage(head, 80, 200, null);
         if (hasChest) g.drawImage(chest, 80, 260, null);
@@ -194,7 +199,6 @@ public class Player extends Mob {
         if (hasCell) g.drawImage(cell, 20, 200, null);
         if (hasChair) g.drawImage(chair, 20, 260, null);
         if (hasWheel) g.drawImage(wheel, 20, 340, null);
-
     }
     
     public void setUp(Boolean up) {
@@ -228,6 +232,12 @@ public class Player extends Mob {
             case KeyEvent.VK_E:
                 activateButton = false;
                 return true;
+            case KeyEvent.VK_LEFT:
+                shootLeft = false;
+                return true;
+            case KeyEvent.VK_RIGHT:
+                shootRight = false;
+                return true;
         }
         return false;
     }
@@ -250,6 +260,12 @@ public class Player extends Mob {
 	            return true;
             case KeyEvent.VK_E:
                 activateButton = true;
+                return true;
+            case KeyEvent.VK_LEFT:
+                shootLeft = true;
+                return true;
+            case KeyEvent.VK_RIGHT:
+                shootRight = true;
                 return true;
         }
         return false;

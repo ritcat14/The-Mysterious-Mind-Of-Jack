@@ -34,7 +34,7 @@ public abstract class Mob extends Entity {
     public Mob(Map map, Vector pos, Vector size, String file, int spriteWidth) {
         super(pos, size, file);
         this.map = map;
-        FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
+        FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
 
         images = Tools.splitImage(image, 4, spriteWidth);
         left[0] = images[1];
@@ -52,7 +52,7 @@ public abstract class Mob extends Entity {
     public Mob(Map map, Vector pos, Vector size, String file) {
         super(pos, size, file);
         this.map = map;
-        FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
+        FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
         
         images = Tools.splitImage(image, 4, 1150);
         left[0] = images[1];
@@ -73,17 +73,26 @@ public abstract class Mob extends Entity {
         gravity = 0.04;
         maxY = 3;
         maxX = 1.5;
-        FLOOR_HEIGHT = (int)(StateHandler.HEIGHT - size.y - 20);
+        FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
+    }
+
+    public Mob(Map map, Vector pos, BufferedImage image) {
+        super(pos, image);
+        this.map = map;
+        gravity = 0.04;
+        maxY = 3;
+        maxX = 1.5;
+        FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
     }
 
     public boolean hasHorizontalCollision() {
         boolean passed = false;
-        if (pos.x < 0) {
-            pos.x = 0;
+        if (pos.getX() < 0) {
+            pos.setX(0);
             passed = true;
         }
-        if (pos.x >= StateHandler.WIDTH) {
-            pos.x = StateHandler.WIDTH;
+        if (pos.getX() >= StateHandler.WIDTH) {
+            pos.setX(StateHandler.WIDTH);
             passed = true;
         }
         return passed;
@@ -91,8 +100,8 @@ public abstract class Mob extends Entity {
     
     public boolean hasVerticalCollision() {
         boolean passed = false;
-        if (pos.y < 0) {
-            pos.y = 0;
+        if (pos.getY() < 0) {
+            pos.setY(0);
             passed = true;
         }
         if (onGround) passed = true;
@@ -104,44 +113,45 @@ public abstract class Mob extends Entity {
     }
 
     protected void move() {
-        if (velocity.x > maxX) velocity.x = maxX;
-        if (velocity.x < -maxX) velocity.x = -maxX;
-        if (!hasHorizontalCollision()) pos.add(new Vector(velocity.x, 0));
-        if (!hasVerticalCollision()) pos.add(new Vector(0, velocity.y));
+        if (velocity.getX() > maxX) velocity.setX(maxX);
+        if (velocity.getX() < -maxX) velocity.setX(-maxX);
+        if (!hasHorizontalCollision()) pos.add(new Vector(velocity.getX(), 0));
+        if (!hasVerticalCollision()) pos.add(new Vector(0, velocity.getY()));
     }
     
     private void fall() {
     	if (!onGround) {
-	    	velocity.y += gravity;
-	    	if (velocity.y > maxY) {
-	    		velocity.y = maxY;
+	    	velocity.adjustY(gravity);
+	    	if (velocity.getY() > maxY) {
+	    		velocity.setY(maxY);
 	    	}
     	}
     }
     
     void jump() {
         if (onGround) {
-            velocity.y -= 2;
-            pos.add(new Vector(0, velocity.y));
+            velocity.adjustY(-2);
+            pos.add(new Vector(0, velocity.getY()));
         }
     }
 
     @Override
     public void update() {
-        onGround = pos.y >= FLOOR_HEIGHT;
+        onGround = pos.getY() + size.getY() >= FLOOR_HEIGHT;
         if(health <= 0) {
         	health = 0;
         	remove();
         }
         if (health > MAX_HEALTH) health = MAX_HEALTH;
+        if (shield > MAX_SHIELD) shield = MAX_SHIELD;
         move();
         fall();
-        if (!animation.isAnimating() && velocity.x != 0) animation.start();
-        else if (velocity.x == 0 && animation.isAnimating() || !onGround) animation.stop();
-        if (velocity.x > 0 && isLeft) {
+        if (!animation.isAnimating() && velocity.getX() != 0) animation.start();
+        else if (velocity.getX() == 0 && animation.isAnimating() || !onGround) animation.stop();
+        if (velocity.getX() > 0 && isLeft) {
         	isLeft = false;
         	animation.setImages(right);
-        } else if (velocity.x < 0 && !isLeft) {
+        } else if (velocity.getX() < 0 && !isLeft) {
         	isLeft = true;
         	animation.setImages(left);
         }

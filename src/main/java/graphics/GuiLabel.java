@@ -42,7 +42,7 @@ public class GuiLabel extends GuiComponent {
     	if (!visible) return;
         g.setFont(font);
         g.setColor(colour);
-        g.drawString(text, (int)pos.x, (int)pos.y);
+        g.drawString(text, (int)pos.getX(), (int)pos.getY());
         super.render(g);
     }
     

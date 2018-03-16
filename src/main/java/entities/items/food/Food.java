@@ -7,6 +7,8 @@ import entities.Player;
 import entities.items.Item;
 import handler.Vector;
 
+import java.util.Random;
+
 public abstract class Food extends Item {
 
     private double healthEffect;
@@ -22,9 +24,11 @@ public abstract class Food extends Item {
 
     @Override
     public void onEvent(Player player) {
-        player.adjustHealth(healthEffect);
-        player.adjustSheild(defenseBonus);
-        player.adjustAttack(attackBonus);
+        int multiplier = (new Random().nextBoolean() ? 1 : -1);
+        player.adjustHealth(multiplier * healthEffect);
+        player.adjustSheild(multiplier * defenseBonus);
+        player.adjustAttack(multiplier * attackBonus);
+        remove();
     }
 
     public double getHealthEffect() {

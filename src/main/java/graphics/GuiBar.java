@@ -16,7 +16,7 @@ public class GuiBar extends GuiPanel {
         super(pos, size, Color.GRAY);
         incrementalDecrease = desiredWidth / maxValue;
         this.width = value * incrementalDecrease;
-        colouredPanel = new GuiPanel(pos, new Vector(width, size.y), col);
+        colouredPanel = new GuiPanel(pos, new Vector(width, size.getY()), col);
     }
     
     public void setValue(int val) {

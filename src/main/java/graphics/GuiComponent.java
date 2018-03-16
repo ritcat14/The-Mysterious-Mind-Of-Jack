@@ -25,7 +25,7 @@ public class GuiComponent {
     }
     
     public Rectangle getBounds() {
-        return new Rectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y);
+        return new Rectangle((int)pos.getX(), (int)pos.getY(), (int)size.getX(), (int)size.getY());
     }
     
     public void addAll(ArrayList<GuiComponent> c) {
@@ -76,21 +76,21 @@ public class GuiComponent {
     
     public boolean isVisible() { return visible; }
     
-    public double getX() { return pos.x; }
+    public double getX() { return pos.getX(); }
     
-    public double getY() { return pos.y; }
+    public double getY() { return pos.getY(); }
     
-    public double getWidth() { return size.x; }
+    public double getWidth() { return size.getX(); }
     
-    public double getHeight() { return size.y; }
+    public double getHeight() { return size.getY(); }
     
-    public void setX(double x) { this.pos.x = x; }
+    public void setX(double x) { this.pos.setX(x); }
     
-    public void setY(double y) { this.pos.y = y; }
+    public void setY(double y) { this.pos.setY(y); }
     
-    public void setWidth(double w) { this.size.x = w; }
+    public void setWidth(double w) { this.size.setX(w); }
     
-    public void setHeight(double h) { this.size.y = h; }
+    public void setHeight(double h) { this.size.setY(h); }
     
     public void setVisible(boolean visible) { this.visible = visible; }
     
