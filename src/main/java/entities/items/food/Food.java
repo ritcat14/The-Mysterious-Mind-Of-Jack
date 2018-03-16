@@ -1,3 +1,6 @@
+/*
+This class extends the item class and is a super class to the Apple, Burger, Crisp, and Pill classes.
+ */
 package entities.items.food;
 
 import entities.Player;

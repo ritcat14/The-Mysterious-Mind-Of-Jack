@@ -1,3 +1,7 @@
+/*
+This class generates, updates, and renders the map, player, entities, and enemies.
+ */
+
 package core;
 
 import entities.Mob;
@@ -36,7 +40,7 @@ public class Map implements EventListener {
 
     private int width;
     
-    public Map(Game game) { // The ID of the chapter is required for accessing the map data
+    public Map(Game game) {
         entities = new ArrayList<>();
         entitiesToRemove = new ArrayList<>();
         entitiesToAdd = new ArrayList<>();

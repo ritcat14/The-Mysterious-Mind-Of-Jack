@@ -1,3 +1,6 @@
+/*
+This class is for a key entity which can be picked up by the player and is used to open the chest entity.
+ */
 package entities.items.other;
 
 import entities.Player;
