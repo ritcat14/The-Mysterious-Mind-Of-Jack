@@ -1,4 +1,7 @@
 package events;
+/*
+A class to dispatch event to other classes listening to
+ */
 
 public class EventDispatcher {
 

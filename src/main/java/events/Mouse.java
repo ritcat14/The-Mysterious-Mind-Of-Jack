@@ -10,6 +10,10 @@ import events.types.MouseDraggedEvent;
 import events.types.MouseMovedEvent;
 import events.types.MousePressedEvent;
 import events.types.MouseReleasedEvent;
+/*
+A class acts as listener for mouse
+ */
+
 
 public class Mouse implements MouseListener, MouseMotionListener {
 	private static int mouseX = -1, mouseY = -1, mouseB = -1;

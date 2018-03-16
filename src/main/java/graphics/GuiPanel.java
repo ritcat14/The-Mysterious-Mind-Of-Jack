@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 
 import events.Event;
 import events.EventListener;
+/*
+Panel for Gui
+ */
 
 public class GuiPanel extends GuiComponent implements EventListener {
 

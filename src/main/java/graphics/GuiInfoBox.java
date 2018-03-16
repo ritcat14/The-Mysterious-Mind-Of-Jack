@@ -3,6 +3,9 @@ package graphics;
 import java.awt.Color;
 
 import handler.Vector;
+/*
+A class display Gui Box with the info
+ */
 
 public class GuiInfoBox extends GuiPanel {
 

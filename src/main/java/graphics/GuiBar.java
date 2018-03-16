@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import handler.Vector;
+/*
+CHild class of GuiPanel
+ */
 
 public class GuiBar extends GuiPanel {
     

@@ -6,6 +6,10 @@ import java.awt.event.KeyListener;
 import events.types.KeyPressedEvent;
 import events.types.KeyReleasedEvent;
 
+/*
+A class acts as listener for keyboard
+ */
+
 public class Keyboard implements KeyListener {
   
    public EventListener eventListener = null;
