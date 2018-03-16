@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import handler.Vector;
 /*
-A class display Gui Box with the info
+A class display Gui Box with the information
  */
 
 public class GuiInfoBox extends GuiPanel {
