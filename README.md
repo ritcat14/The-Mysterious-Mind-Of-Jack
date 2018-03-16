@@ -8,3 +8,23 @@ The objective of the game is to collect items which will help you to defeat enem
 There are many easter eggs along the way for the player to find. 
 
 Good Luck!
+
+Start menu:
+    Start : Click this to start playing!
+    Options : Click to make tweaks to the game, such as volume and allowing hardware acceleration
+    Exit : Click here to close the game
+    
+In-game:
+    Controls:
+        w / space : Jump
+        a : Move left
+        d : Move right
+        e : perform action
+        mouse click : use weapon
+        esc : Pause - brings up pause menu
+        
+Pause menu:
+    Main menu : click to return to the main menu
+    Return : go back to the game
+    Options : gives you the options menu
+    Exit : closes the game completely
