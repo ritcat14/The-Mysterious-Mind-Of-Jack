@@ -33,4 +33,23 @@ class PlayerTest {
         testPlayer.keyReleased(new KeyReleasedEvent(68, Event.Type.KEY_RELEASED));
         assertTrue(!testPlayer.getPlayerRight());
     }
+    @Test
+    void testJump() {
+        testPlayer.keyPressed(new KeyPressedEvent(87, Event.Type.KEY_PRESSED));
+        assertTrue(testPlayer.getPlayerUp());
+        testPlayer.keyReleased(new KeyReleasedEvent(87, Event.Type.KEY_RELEASED));
+        assertTrue(!testPlayer.getPlayerUp());
+    }
+
+    @Test
+    void testInvalidButton() {
+        testPlayer.keyPressed(new KeyPressedEvent(81, Event.Type.KEY_PRESSED));
+        assertTrue(!testPlayer.getPlayerRight());
+        assertTrue(!testPlayer.getPlayerUp());
+        assertTrue(!testPlayer.getPlayerLeft());
+        testPlayer.keyReleased(new KeyReleasedEvent(81, Event.Type.KEY_RELEASED));
+        assertTrue(!testPlayer.getPlayerRight());
+        assertTrue(!testPlayer.getPlayerUp());
+        assertTrue(!testPlayer.getPlayerLeft());
+    }
 }
