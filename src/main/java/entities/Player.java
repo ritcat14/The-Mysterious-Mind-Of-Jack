@@ -211,7 +211,9 @@ public class Player extends Mob {
     public boolean getPlayerLeft() { return this.left;}
 
     public boolean getPlayerRight() { return this.right;}
-    
+
+    public boolean getPlayerUp() { return this.up;}
+
     public boolean keyReleased(KeyReleasedEvent e) {
         switch(e.getKey()) {
             case KeyEvent.VK_W:
