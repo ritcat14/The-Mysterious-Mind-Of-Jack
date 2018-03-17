@@ -1,0 +1,30 @@
+Thanks for playing!
+
+Designed for group coursework
+as part of a software engineering project
+for The University of Portsmouth
+
+
+GRAPHICS
+Julius Le
+Kris Rice
+Joe Snowden
+
+
+GAME DEVELOPMENT
+Kris Rice
+Julius Le
+Joe Snowden
+Samson Millward
+
+
+SOUND
+Kris Rice
+
+
+WITH THANKS TO
+Mouloud Diram
+Jason McDaid
+
+
+In Loving Memory of Stephen Hawking

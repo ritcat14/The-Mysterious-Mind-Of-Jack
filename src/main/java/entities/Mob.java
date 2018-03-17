@@ -20,22 +20,26 @@ public abstract class Mob extends Entity {
     protected double maxX;
     protected double speed;
     protected int damage;
-    protected int shield;
+    protected int shield = 1;
     protected int MAX_SHIELD = 100;
     protected int MAX_HEALTH = 200;
     public static int FLOOR_HEIGHT;
     
     protected Animation animation;
     protected BufferedImage[] left = new BufferedImage[2], right = new BufferedImage[2];
-    protected BufferedImage[] images; // 0 - left, 1 - right 
+    protected BufferedImage[] images; // 0 - left, 1 - right
+
+    protected int dir = 1;
     
     protected Map map;
     
     private boolean isLeft = true;
 
-    public Mob(Map map, Vector pos, Vector size, String file, int spriteWidth) {
+    public Mob(Map map, Vector pos, Vector size, String file, int spriteWidth, double health) {
         super(pos, size, file);
         this.map = map;
+        this.health = health;
+        this.MAX_HEALTH = (int)health;
         FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
 
         images = Tools.splitImage(image, 4, spriteWidth);
@@ -56,7 +60,7 @@ public abstract class Mob extends Entity {
         this.map = map;
         FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
         
-        images = Tools.splitImage(image, 4, 1150);
+        images = Tools.splitImage(image, 4, 1250);
         left[0] = images[1];
         left[1] = images[0];
         right[0] = images[2];
@@ -78,8 +82,8 @@ public abstract class Mob extends Entity {
         FLOOR_HEIGHT = (StateHandler.HEIGHT - 20);
     }
 
-    public Mob(Map map, Vector pos, BufferedImage image) {
-        super(pos, image);
+    public Mob(Map map, Vector pos, Vector size, BufferedImage image) {
+        super(pos, size, image);
         this.map = map;
         gravity = 0.04;
         maxY = 3;
@@ -153,9 +157,11 @@ public abstract class Mob extends Entity {
         if (velocity.getX() > 0 && isLeft) {
         	isLeft = false;
         	animation.setImages(right);
+        	dir = 0;
         } else if (velocity.getX() < 0 && !isLeft) {
         	isLeft = true;
         	animation.setImages(left);
+        	dir = 1;
         }
         animation.update();
         this.image = animation.getCurrentFrame();

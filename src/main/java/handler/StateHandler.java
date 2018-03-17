@@ -31,7 +31,7 @@ public class StateHandler implements EventListener {
     public static State startCopy;
     
     public static enum States {
-        START, GAME, PAUSE, CUTSCENE, GAMEOVER;
+        START, GAME, PAUSE, CUTSCENE, GAMEOVER, GAMEWON;
     }
     
     private static State currentState;
@@ -58,6 +58,13 @@ public class StateHandler implements EventListener {
             	StateHandler.state = state;
 	            currentState = new Cutscene(cutscene);
 	            break;
+            case GAMEOVER:
+                StateHandler.state = state;
+                currentState = new GameOver();
+                break;
+            case GAMEWON:
+                StateHandler.state = state;
+                currentState = new GameWon();
 			default:
 				break;
         }

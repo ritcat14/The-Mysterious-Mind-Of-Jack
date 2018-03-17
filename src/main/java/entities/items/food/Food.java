@@ -25,7 +25,7 @@ public abstract class Food extends Item {
     @Override
     public void onEvent(Player player) {
         int multiplier = (new Random().nextBoolean() ? 1 : -1);
-        player.adjustHealth(multiplier * healthEffect);
+        player.adjustHealth(healthEffect);
         player.adjustSheild(multiplier * defenseBonus);
         player.adjustAttack(multiplier * attackBonus);
         remove();

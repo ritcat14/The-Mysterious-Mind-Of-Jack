@@ -97,5 +97,12 @@ public abstract class Entity {
     public int getY() {
         return (int) pos.getY();
     }
-    
+
+    public void setX(double x) { pos.setX(x); }
+
+    public void setY(double y) { pos.setY(y); }
+
+    public void setVelocity(Vector velocity) { this.velocity = velocity; }
+
+    public Vector getVelocity() { return velocity; }
 }

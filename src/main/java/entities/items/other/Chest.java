@@ -8,6 +8,8 @@ import entities.Mob;
 import entities.Player;
 import entities.items.Item;
 import entities.items.food.Pill;
+import entities.items.weapons.Gun;
+import entities.items.weapons.Spitball;
 import handler.Tools;
 import handler.Vector;
 
@@ -17,7 +19,7 @@ public class Chest extends Item {
     private boolean setImage = false;
 
     public Chest() {
-        super(new Vector(200, Mob.FLOOR_HEIGHT));
+        super(new Vector(200, Mob.FLOOR_HEIGHT - 40));
         image = Tools.getImage("/items/chest-locked.png");
     }
 
@@ -38,5 +40,6 @@ public class Chest extends Item {
     public void onEvent(Player player) {
         if (player.hasKey()) open = true;
         player.spawn(new Pill(new Vector(pos.getX() - 50, pos.getY())));
+        player.spawn(new Gun(player.getMap(), new Vector(pos.getX() - 100, pos.getY()), 200));
     }
 }

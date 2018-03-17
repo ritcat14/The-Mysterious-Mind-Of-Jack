@@ -48,6 +48,7 @@ public class Tools {
 		else {
 	        try {
 	            image = ImageIO.read(Tools.class.getResourceAsStream(file));
+	            images.put(file, image);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

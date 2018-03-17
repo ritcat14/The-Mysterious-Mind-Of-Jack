@@ -13,7 +13,7 @@ public class Hawking extends Item {
 
     @Override
     public void onEvent(Player player) {
-        player.getMap().add(new Key(new Vector(600, Mob.FLOOR_HEIGHT)));
+        player.getMap().add(new Key(new Vector(600, Mob.FLOOR_HEIGHT - 40)));
         remove();
     }
 }

@@ -42,6 +42,10 @@ public class Player extends Mob {
     private boolean hasHead, hasChest, hasLegs = false;
     private BufferedImage head, chest, legs;
 
+    private boolean hasGun = false;
+    private BufferedImage gun;
+
+    private Companion companion;
 
     public Player(Map map, Vector pos) {
         super(map, pos, new Vector(48, 96), "/player/player.png");
@@ -54,7 +58,12 @@ public class Player extends Mob {
         d = Tools.getImage("/gui/shield.png");
 
         weapon = new Weapon(map, new Vector(pos.getX() + size.getX() + 10, pos.getY() + (size.getY() / 2)), 9, 0, 30, 0);
+    }
 
+    public void setWeapon(Weapon weapon) {
+        if (hasGun) return;
+        this.weapon = weapon;
+        //TODO: set up player sprite change
     }
 
     public void addHead(BufferedImage head) {
@@ -87,6 +96,11 @@ public class Player extends Mob {
         this.cell = cell;
     }
 
+    public void addGun(BufferedImage gun) {
+        hasGun = true;
+        this.gun = gun;
+    }
+
     public void addKey() {
         hasKey = true;
     }
@@ -111,12 +125,26 @@ public class Player extends Mob {
         shield = 200;
     }
 
+    public void spawnCompanion(Boss boss) {
+        if (!hasKey) return;
+        companion = new Companion(map, boss);
+        map.add(companion);
+    }
+
     @Override
     public boolean hasHorizontalCollision() {
         boolean passed;
         if (pos.getX() <= officeBounds && !hasKey) {
             message = "Requires Key.";
             pos.setX(officeBounds + 1);
+            passed = true;
+        }
+        if (pos.getY() < StateHandler.HEIGHT - 430) {
+            velocity.setY(-velocity.getY());
+            passed = true;
+        }
+        if (pos.getX() + size.getX() > StateHandler.WIDTH) {
+            pos.setX(StateHandler.WIDTH - 1);
             passed = true;
         }
         passed = super.hasHorizontalCollision();
@@ -129,9 +157,14 @@ public class Player extends Mob {
         healthBar.setValue((int)health);
         sheildBar.setValue(shield);
 
-        if (shootLeft) weapon.shoot(1);
-        if (shootRight) weapon.shoot(0);
-        weapon.setPosition(new Vector(pos.getX() + size.getX() + 10, pos.getY() + (size.getY() / 2)));
+       if (map.getBoss() != null) {
+            if (!hasKey) message = "Activate Poster";
+            else spawnCompanion(map.getBoss());
+        }
+
+        if ((shootLeft || shootRight)) weapon.shoot(shootLeft ? 1 : 0);
+        if (dir == 0) weapon.setPosition(new Vector(pos.getX() + size.getX() - 20, (pos.getY() + (size.getY() / 2)) - 20));
+        else weapon.setPosition(new Vector(pos.getX() - 10, (pos.getY() + (size.getY() / 2)) - 10));
         weapon.update();
 
         if (up) jump();
@@ -174,6 +207,7 @@ public class Player extends Mob {
                 i.onEvent(this);
             }
         }
+        if (health == 0) StateHandler.changeState(StateHandler.States.GAMEOVER);
     }
     
     public void pause() {
@@ -185,6 +219,7 @@ public class Player extends Mob {
     @Override
     public void render(Graphics g) {
         super.render(g);
+        weapon.render(g);
         healthBar.render(g);
         g.drawImage(h, (int)(healthBar.getX() - 15), (int)healthBar.getY(), null);
         sheildBar.render(g);
@@ -192,16 +227,18 @@ public class Player extends Mob {
         g.setColor(Color.RED);
         g.drawString(message, (int)pos.getX(), (int)pos.getY() - 15);
         message = "";
-        weapon.render(g);
 
-        if (hasHead) g.drawImage(head, 80, 200, null);
-        if (hasChest) g.drawImage(chest, 80, 260, null);
-        if (hasLegs) g.drawImage(legs, 80, 340, null);
+        if (easterEgg) g.drawImage(Tools.getImage("/items/51.png"), 10, 100, null);
+        if (hasGun) g.drawImage(gun, 60, 100, null);
 
-        if (hasChair && hasCell && hasWheel) return;
-        if (hasCell) g.drawImage(cell, 20, 200, null);
-        if (hasChair) g.drawImage(chair, 20, 260, null);
-        if (hasWheel) g.drawImage(wheel, 20, 340, null);
+        if (hasHead) g.drawImage(head, 60, 150, null);
+        if (hasChest) g.drawImage(chest, 60, 200, null);
+        if (hasLegs) g.drawImage(legs, 60, 250, null);
+
+        if (hasCell) g.drawImage(cell, 10, 150, null);
+        if (hasChair) g.drawImage(chair, 10, 200, null);
+        if (hasWheel) g.drawImage(wheel, 10, 250, null);
+
     }
     
     public void setUp(Boolean up) {
@@ -213,6 +250,34 @@ public class Player extends Mob {
     public boolean getPlayerRight() { return this.right;}
 
     public boolean getPlayerUp() { return this.up;}
+
+    public boolean hasChest() {
+        return hasChest;
+    }
+
+    public boolean hasHead() {
+        return hasHead;
+    }
+
+    public boolean hasLegs() {
+        return hasLegs;
+    }
+
+    public boolean hasCell() {
+        return hasCell;
+    }
+
+    public boolean hasChair() {
+        return hasChair;
+    }
+
+    public boolean hasWheel() {
+        return hasWheel;
+    }
+
+    public boolean hasGun() {
+        return hasGun;
+    }
 
     public boolean keyReleased(KeyReleasedEvent e) {
         switch(e.getKey()) {

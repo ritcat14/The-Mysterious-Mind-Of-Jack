@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import handler.Vector;
-/*
-CHild class of GuiPanel
- */
 
 public class GuiBar extends GuiPanel {
     
@@ -21,11 +18,18 @@ public class GuiBar extends GuiPanel {
         this.width = value * incrementalDecrease;
         colouredPanel = new GuiPanel(pos, new Vector(width, size.getY()), col);
     }
-    
+
+    /**
+     *
+     * @param val
+     */
     public void setValue(int val) {
         this.width = incrementalDecrease * val;
     }
-    
+
+    /**
+     *
+     */
     @Override
     public void update() {
     	if (!visible) return;
@@ -33,7 +37,11 @@ public class GuiBar extends GuiPanel {
     	colouredPanel.setWidth(width);
     	colouredPanel.update();
     }
-    
+
+    /**
+     *
+     * @param g
+     */
     @Override
     public void render(Graphics g) {
     	if (!visible) return;

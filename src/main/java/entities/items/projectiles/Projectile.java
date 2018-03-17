@@ -4,6 +4,7 @@ import core.Map;
 import entities.Mob;
 import handler.Vector;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Projectile extends Mob {
@@ -12,9 +13,13 @@ public class Projectile extends Mob {
 	private double speed, range, damage;
 	private double dir = 0;
 
-	public Projectile(Map map, Vector pos, BufferedImage image, int dir, double speed, double range, double damage) {
-		super(map, pos, image);
+	public Projectile(Map map, Vector pos, Vector size,  BufferedImage image, int dir, double speed, double range, double damage) {
+		super(map, pos, size, image);
 		originalPosition = pos;
+		this.range = range;
+		this.speed = speed;
+		this.dir = dir;
+		this.damage = damage;
 	}
 
 	public double getDamage() {

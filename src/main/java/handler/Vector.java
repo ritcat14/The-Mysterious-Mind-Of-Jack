@@ -18,6 +18,12 @@ public class Vector {
         this.x = 0;
         this.y = 0;
     }
+
+    public Vector flip() {
+        this.x = -x;
+        this.y = -y;
+        return this;
+    }
     
     public boolean equals(Vector v2) {
         return (v2.x == x && v2.y == y);

@@ -1,8 +1,13 @@
 package entities;
 
 import core.Map;
+import entities.items.Item;
 import handler.StateHandler;
 import handler.Vector;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 /*
 A child class about enemy of Mob
  */
@@ -11,12 +16,15 @@ public class Enemy extends Mob {
 	protected int damage;
 	private int time = 0;
 	private boolean hit = false;
+	private double incrementalDecrease;
+	private double desiredWidth;
 
 	public Enemy(Map map, Vector pos, Vector size, String file, int spriteWidth, double health) {
-		super(map, pos, size, file, spriteWidth);
+		super(map, pos, size, file, spriteWidth, health);
+		desiredWidth = size.getX();
 		speed = 0.01;
 		damage = 10;
-		this.health = health;
+		incrementalDecrease = desiredWidth / health;
 	}
 	
 	@Override
@@ -24,7 +32,7 @@ public class Enemy extends Mob {
 		time++;
 		if (time == Integer.MAX_VALUE) time = 0;
 
-		if (time % 600 == 0) hit = false;
+		if (time % 120 == 0) hit = false;
 
 		Player player = StateHandler.player;
 		Vector playerPos = player.getPosition();
@@ -38,7 +46,7 @@ public class Enemy extends Mob {
 		super.update();
 	}
 
-    @Override
+	@Override
     public void remove() {
 	    map.spawnItem(pos);
         super.remove();
@@ -47,9 +55,16 @@ public class Enemy extends Mob {
 	@Override
 	public void doDamage(double damage) {
 		if (!hit) {
-			super.doDamage(damage);
 			hit = true;
+			super.doDamage(damage);
 		}
+	}
+
+	@Override
+	public void render(Graphics g) {
+		super.render(g);
+		g.setColor(Color.GREEN);
+		g.fillRect((int)pos.getX(), (int)pos.getY() - 10, (int)(health * incrementalDecrease), 10);
 	}
 
 	public int getDamage() {

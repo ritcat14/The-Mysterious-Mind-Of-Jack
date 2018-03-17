@@ -4,8 +4,7 @@ import handler.SoundHandler;
 import handler.StateHandler;
 import handler.Tools;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -91,8 +90,9 @@ public class Cutscene extends State {
     @Override
     public void render(Graphics g) {
         g.drawImage(currentFrame, 0, 0, StateHandler.WIDTH, StateHandler.HEIGHT, null);
-        g.setColor(Color.WHITE);
-        g.drawString("Press Space to skip", StateHandler.WIDTH - 150, StateHandler.HEIGHT - 50);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Times New Java", Font.BOLD, 20));
+        g.drawString("Press Space to skip", StateHandler.WIDTH - 200, StateHandler.HEIGHT - 50);
     }
     
 }
