@@ -12,7 +12,7 @@ import java.awt.*;
 public class Boss extends Enemy {
 
     public Boss(Map map) {
-        super(map, new Vector(500, Mob.FLOOR_HEIGHT - 150), new Vector(64, 128), "/player/bully.png", 350, 500000);
+        super(map, new Vector(500, Mob.FLOOR_HEIGHT - 150), new Vector(64, 128), "/player/bully.png", 350, 5000);
     }
 
     @Override

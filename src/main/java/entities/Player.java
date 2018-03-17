@@ -157,7 +157,7 @@ public class Player extends Mob {
         healthBar.setValue((int)health);
         sheildBar.setValue(shield);
 
-       if (map.getBoss() != null) {
+       if (map.getBoss() != null && companion == null) {
             if (!hasKey) message = "Activate Poster";
             else spawnCompanion(map.getBoss());
         }

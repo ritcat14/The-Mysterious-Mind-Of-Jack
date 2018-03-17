@@ -1,39 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="The-Mysterious-Mind-Of-Jack:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f0c1846d-3acc-4de6-b755-ec3044f884b4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/entities/Companion.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/entities/items/weapons/Bat.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/entities/items/weapons/Gun.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/entities/items/weapons/Spitball.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/entities/items/weapons/Sword.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/states/GameOver.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/states/GameWon.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/credits.txt" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/MainTest.java" afterPath="$PROJECT_DIR$/src/main/java/core/MainTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Map.java" afterPath="$PROJECT_DIR$/src/main/java/core/Map.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entities/Boss.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Boss.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Enemy.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Enemy.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Entity.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Entity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Mob.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Mob.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entities/Player.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Player.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/PlayerTest.java" afterPath="$PROJECT_DIR$/src/main/java/entities/PlayerTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/items/Item.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/Item.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/items/food/Food.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/food/Food.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/items/other/Chest.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/other/Chest.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/items/other/Hawking.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/other/Hawking.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/items/projectiles/Projectile.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/projectiles/Projectile.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/items/weapons/Weapon.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/weapons/Weapon.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graphics/GuiBar.java" afterPath="$PROJECT_DIR$/src/main/java/graphics/GuiBar.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/handler/StateHandler.java" afterPath="$PROJECT_DIR$/src/main/java/handler/StateHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/handler/Tools.java" afterPath="$PROJECT_DIR$/src/main/java/handler/Tools.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/handler/Vector.java" afterPath="$PROJECT_DIR$/src/main/java/handler/Vector.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/states/Cutscene.java" afterPath="$PROJECT_DIR$/src/main/java/states/Cutscene.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/chapter/background.png" afterPath="$PROJECT_DIR$/src/main/resources/chapter/background.png" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/items/11.png" afterPath="$PROJECT_DIR$/src/main/resources/items/11.png" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/player/player.png" afterPath="$PROJECT_DIR$/src/main/resources/player/player.png" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/classes/" />
@@ -59,25 +35,25 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="123" column="21" lean-forward="true" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="21" />
+            <state relative-caret-position="421">
+              <caret line="175" column="63" lean-forward="true" selection-start-line="175" selection-start-column="63" selection-end-line="175" selection-end-column="63" />
               <folding>
-                <element signature="e#7226#7227#0" expanded="true" />
-                <element signature="e#7251#7252#0" expanded="true" />
-                <element signature="e#7453#7454#0" expanded="true" />
-                <element signature="e#7484#7485#0" expanded="true" />
-                <element signature="e#7516#7517#0" expanded="true" />
-                <element signature="e#7546#7547#0" expanded="true" />
-                <element signature="e#7578#7579#0" expanded="true" />
-                <element signature="e#7608#7609#0" expanded="true" />
-                <element signature="e#7640#7641#0" expanded="true" />
-                <element signature="e#7670#7671#0" expanded="true" />
-                <element signature="e#7703#7704#0" expanded="true" />
-                <element signature="e#7734#7735#0" expanded="true" />
-                <element signature="e#7767#7768#0" expanded="true" />
-                <element signature="e#7798#7799#0" expanded="true" />
-                <element signature="e#7829#7830#0" expanded="true" />
-                <element signature="e#7858#7859#0" expanded="true" />
+                <element signature="e#7247#7248#0" expanded="true" />
+                <element signature="e#7272#7273#0" expanded="true" />
+                <element signature="e#7474#7475#0" expanded="true" />
+                <element signature="e#7505#7506#0" expanded="true" />
+                <element signature="e#7537#7538#0" expanded="true" />
+                <element signature="e#7567#7568#0" expanded="true" />
+                <element signature="e#7599#7600#0" expanded="true" />
+                <element signature="e#7629#7630#0" expanded="true" />
+                <element signature="e#7661#7662#0" expanded="true" />
+                <element signature="e#7691#7692#0" expanded="true" />
+                <element signature="e#7724#7725#0" expanded="true" />
+                <element signature="e#7755#7756#0" expanded="true" />
+                <element signature="e#7788#7789#0" expanded="true" />
+                <element signature="e#7819#7820#0" expanded="true" />
+                <element signature="e#7850#7851#0" expanded="true" />
+                <element signature="e#7879#7880#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -117,21 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Boss.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Boss.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Boss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state relative-caret-position="272">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Map.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Map.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/core/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="131" column="0" lean-forward="true" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+            <state relative-caret-position="716">
+              <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
               <folding>
                 <element signature="e#2309#2310#0" expanded="true" />
                 <element signature="e#2336#2337#0" expanded="true" />
@@ -151,8 +127,8 @@
       <file leaf-file-name="Companion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Companion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+            <state relative-caret-position="170">
+              <caret line="10" column="126" lean-forward="true" selection-start-line="10" selection-start-column="126" selection-end-line="10" selection-end-column="126" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -164,7 +140,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Mob.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="378">
-              <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
+              <caret line="45" column="28" lean-forward="false" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -174,7 +150,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Enemy.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+              <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
               <folding>
                 <element signature="e#1544#1545#0" expanded="true" />
                 <element signature="e#1564#1565#0" expanded="true" />
@@ -245,11 +221,11 @@
         <option value="$PROJECT_DIR$/src/main/java/entities/items/weapons/Weapon.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Enemy.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Mob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Boss.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Hawking.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Companion.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/Map.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Boss.java" />
       </list>
     </option>
   </component>
@@ -260,8 +236,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="545" />
-    <option name="y" value="-8" />
+    <option name="x" value="138" />
+    <option name="y" value="-19" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
@@ -355,6 +331,10 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="liveEdit" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/ritca/Documents/The-Mysterious-Mind-Of-Jack/src/main/java/entities/Enemy.java" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="the-mysterious-mind-of-jack" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -481,7 +461,7 @@
       <workItem from="1521243542543" duration="489000" />
       <workItem from="1521244222970" duration="257000" />
       <workItem from="1521247392722" duration="338000" />
-      <workItem from="1521287711360" duration="20155000" />
+      <workItem from="1521287711360" duration="21606000" />
     </task>
     <task id="LOCAL-00001" summary="Improvements + Content&#10;&#10;Added more game content, fixed bugs (jumping, spawning)">
       <created>1521243619435</created>
@@ -518,11 +498,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521248303051</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Content Update&#10;&#10;Added in enemies and fixed enemy collision. Added in all item spawning. Objective of game is to kill boss. Added in side quest and finished easter egg.">
+      <created>1521320011545</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1521320011545</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21705000" />
+    <option name="totallyTimeSpent" value="23156000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -568,7 +555,8 @@
     <MESSAGE value="Improvements + Content&#10;&#10;Added more game content, fixed bugs (jumping, spawning)" />
     <MESSAGE value="updated .gitignore" />
     <MESSAGE value="removed target folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed target folder" />
+    <MESSAGE value="Content Update&#10;&#10;Added in enemies and fixed enemy collision. Added in all item spawning. Objective of game is to kill boss. Added in side quest and finished easter egg." />
+    <option name="LAST_COMMIT_MESSAGE" value="Content Update&#10;&#10;Added in enemies and fixed enemy collision. Added in all item spawning. Objective of game is to kill boss. Added in side quest and finished easter egg." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -968,18 +956,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Boss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entities/Mob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
-          <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
+          <caret line="45" column="28" lean-forward="false" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -987,7 +967,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/entities/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+          <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
           <folding>
             <element signature="e#1544#1545#0" expanded="true" />
             <element signature="e#1564#1565#0" expanded="true" />
@@ -997,45 +977,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Companion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="123" column="21" lean-forward="true" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="21" />
-          <folding>
-            <element signature="e#7226#7227#0" expanded="true" />
-            <element signature="e#7251#7252#0" expanded="true" />
-            <element signature="e#7453#7454#0" expanded="true" />
-            <element signature="e#7484#7485#0" expanded="true" />
-            <element signature="e#7516#7517#0" expanded="true" />
-            <element signature="e#7546#7547#0" expanded="true" />
-            <element signature="e#7578#7579#0" expanded="true" />
-            <element signature="e#7608#7609#0" expanded="true" />
-            <element signature="e#7640#7641#0" expanded="true" />
-            <element signature="e#7670#7671#0" expanded="true" />
-            <element signature="e#7703#7704#0" expanded="true" />
-            <element signature="e#7734#7735#0" expanded="true" />
-            <element signature="e#7767#7768#0" expanded="true" />
-            <element signature="e#7798#7799#0" expanded="true" />
-            <element signature="e#7829#7830#0" expanded="true" />
-            <element signature="e#7858#7859#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/core/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="131" column="0" lean-forward="true" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        <state relative-caret-position="716">
+          <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
           <folding>
             <element signature="e#2309#2310#0" expanded="true" />
             <element signature="e#2336#2337#0" expanded="true" />
@@ -1048,6 +993,49 @@
             <element signature="e#3692#3693#0" expanded="true" />
             <element signature="e#3722#3723#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Companion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="126" lean-forward="true" selection-start-line="10" selection-start-column="126" selection-end-line="10" selection-end-column="126" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="175" column="63" lean-forward="true" selection-start-line="175" selection-start-column="63" selection-end-line="175" selection-end-column="63" />
+          <folding>
+            <element signature="e#7247#7248#0" expanded="true" />
+            <element signature="e#7272#7273#0" expanded="true" />
+            <element signature="e#7474#7475#0" expanded="true" />
+            <element signature="e#7505#7506#0" expanded="true" />
+            <element signature="e#7537#7538#0" expanded="true" />
+            <element signature="e#7567#7568#0" expanded="true" />
+            <element signature="e#7599#7600#0" expanded="true" />
+            <element signature="e#7629#7630#0" expanded="true" />
+            <element signature="e#7661#7662#0" expanded="true" />
+            <element signature="e#7691#7692#0" expanded="true" />
+            <element signature="e#7724#7725#0" expanded="true" />
+            <element signature="e#7755#7756#0" expanded="true" />
+            <element signature="e#7788#7789#0" expanded="true" />
+            <element signature="e#7819#7820#0" expanded="true" />
+            <element signature="e#7850#7851#0" expanded="true" />
+            <element signature="e#7879#7880#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Boss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
