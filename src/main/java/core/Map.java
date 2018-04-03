@@ -12,7 +12,6 @@ import entities.items.armour.Legs;
 import entities.items.food.*;
 import entities.items.other.*;
 import entities.items.weapons.Bat;
-import entities.items.weapons.Spitball;
 import entities.items.weapons.Sword;
 import handler.StateHandler;
 import handler.Tools;
@@ -181,11 +180,7 @@ public class Map implements EventListener {
         if (chance >= 1 && chance <= 10) entitiesToAdd.add(new Sword(this, spawnPos, enemyCount * 10));
         else {
             chance = (Tools.getRandom(1, 100));
-            if (chance >= 1 && chance <= 8) entitiesToAdd.add(new Spitball(this, spawnPos, enemyCount * 20));
-            else {
-                chance = (Tools.getRandom(1, 100));
-                if (chance >= 1 && chance <= 6) entitiesToAdd.add(new Bat(this, spawnPos, enemyCount * 30));
-            }
+            if (chance >= 1 && chance <= 6) entitiesToAdd.add(new Bat(this, spawnPos, enemyCount * 30));
         }
     }
 

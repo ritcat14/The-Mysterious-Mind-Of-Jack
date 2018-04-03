@@ -9,7 +9,6 @@ import entities.Player;
 import entities.items.Item;
 import entities.items.food.Pill;
 import entities.items.weapons.Gun;
-import entities.items.weapons.Spitball;
 import handler.Tools;
 import handler.Vector;
 

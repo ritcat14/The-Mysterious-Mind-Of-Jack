@@ -4,6 +4,7 @@ import entities.items.Item;
 import entities.items.other.Chest;
 import entities.items.other.Hawking;
 import entities.items.weapons.Weapon;
+import graphics.Animation;
 import graphics.GuiBar;
 import handler.StateHandler;
 import handler.Tools;
@@ -48,24 +49,38 @@ public class Player extends Mob {
     private Companion companion;
 
     public Player(Map map, Vector pos) {
-        super(map, pos, new Vector(48, 96), "/player/player.png");
+        super(map, pos, new Vector(48, 96), "/player/player9.png");
         shield = 5;
         speed = 0.08;
         healthBar = new GuiBar(new Vector(20, 30), new Vector(200, 10), Color.GREEN, (int)health, MAX_HEALTH);
         sheildBar = new GuiBar(new Vector(20, 50), new Vector(200, 10), Color.BLUE, shield, MAX_SHIELD);
-        
+
+        BufferedImage image1 = Tools.getImage("/player/player10.png");
+        BufferedImage image2 = Tools.getImage("/player/player12.png");
+
         h = Tools.getImage("/gui/health.png");
         d = Tools.getImage("/gui/shield.png");
 
-        weapon = new Weapon(map, new Vector(pos.getX() + size.getX() + 10, pos.getY() + (size.getY() / 2)), 9, 0, 30, 0);
+        setWeapon(new Weapon(map, new Vector(pos.getX() + size.getX() + 10, pos.getY() + (size.getY() / 2)), 9, 0, 30, 0), 9);
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(Weapon weapon, int ID) {
         if (hasGun) return;
         this.weapon = weapon;
-        //TODO: set up player sprite change
+
+        images = Tools.splitImage(Tools.getImage("/player/player" + ID + ".png"), 4, 1250);
+        super.left[0] = images[1];
+        super.left[1] = images[0];
+        super.right[0] = images[2];
+        super.right[1] = images[3];
+
+        animation = new Animation(super.left, 8);
     }
 
+    /**
+     * Tells the user they have head armour
+     * @param head - The image of the armour piece
+     */
     public void addHead(BufferedImage head) {
         hasHead = true;
         this.head = head;

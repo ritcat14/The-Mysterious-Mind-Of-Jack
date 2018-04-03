@@ -24,7 +24,7 @@ public class Gun extends Item {
 
     @Override
     public void onEvent(Player player) {
-        player.setWeapon(new Weapon(map, pos, new Vector(10, 10), ID, range, damage, shotSpeed));
+        player.setWeapon(new Weapon(map, pos, new Vector(10, 10), ID, range, damage, shotSpeed), ID);
         remove();
     }
 }

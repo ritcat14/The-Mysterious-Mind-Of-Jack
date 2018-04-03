@@ -24,7 +24,7 @@ public class Sword extends Item {
 
     @Override
     public void onEvent(Player player) {
-        player.setWeapon(new Weapon(map, pos, ID, range, damage, shotSpeed));
+        player.setWeapon(new Weapon(map, pos, ID, range, damage, shotSpeed), ID);
         remove();
     }
 }
